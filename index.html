@@ -1,16 +1,369 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="he">
+<html lang="he" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
-    <title>האתר של איריס</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ספר המתכונים - החברים של עמית (עיצוב וינטג')</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Varela+Round&family=Amatic+SC:wght@400;700&family=Klee+One:wght@400;600&family=Frank+Ruhl+Libre:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- SortableJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    <p>ברוכים הבאים לאתר ה-food הראשון שלי.</p>
-    <p>היום אני מכינה עוגת גבינה.</p>
-    <a href="https://www.ynet.co.il/food/article/r1111111">עוגת גבינה</a>
+
+    <div class="toolbar">
+        <h2 style="margin: 0; color: var(--dark-blue); font-family: var(--font-title);">החברים של עמית</h2>
+        <div style="flex: 1;"></div>
+        <button class="btn btn-outline" onclick="window.print()">
+            <i data-lucide="printer"></i> הדפסה
+        </button>
+        <button class="btn btn-primary" onclick="generatePDF()">
+            <i data-lucide="download"></i> הורדה ל-PDF
+        </button>
+    </div>
+
+    <div class="sidebar">
+        <div class="setting-group">
+            <span class="setting-label">גודל גופן טקסט</span>
+            <input type="range" min="10" max="24" value="14" id="fontSizeRange" oninput="updateFontSize(this.value)">
+        </div>
+        <div class="setting-group">
+            <span class="setting-label">סוג גופן</span>
+            <select id="fontFamilySelect" onchange="updateFontFamily(this.value)">
+                <option value="'Frank Ruhl Libre', serif">דפוס קלאסי (ברירת מחדל)</option>
+                <option value="'Klee One', cursive">כתב יד עדין</option>
+                <option value="'Amatic SC', cursive">כתב יד אמנותי</option>
+                <option value="'Assistant', sans-serif">כתב נקי</option>
+            </select>
+        </div>
+        <hr style="width: 100%; border: 0.5px solid #eee;">
+        <span class="setting-label">סדר מתכונים (גררי לשינוי)</span>
+        <div id="sortablePages" style="display: flex; flex-direction: column; gap: 8px;">
+            <!-- Sortable items will be injected here -->
+        </div>
+    </div>
+
+    <div class="preview-area" id="book-container">
+        <!-- Cover Page -->
+        <div class="page cover-page" id="page-cover">
+            <div class="page-border"></div>
+            <div class="icons-bg"></div>
+            <div class="cover-title">עגלת קפה<br>החברים של עמית</div>
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800"
+                alt="Coffee Cart" class="cover-image" id="coverImage">
+            <div class="cover-subtitle">ספר מתכונים</div>
+            <div class="cover-memorial">לזכרו של סמ"ר עמית פרידמן</div>
+        </div>
+
+        <!-- Recipe Pages will be injected here -->
+    </div>
+
+    <script>
+        // Recipe Data
+        const recipes = [
+            {
+                title: "עוגת גבינה אפויה",
+                author: "ליאורה סולטן יעבץ",
+                ingredients: "500 גרם גבינת שמנת\n500 גרם גבינה לבנה 5% או 9%\n4 ביצים\n1 פחית חלב מרוכז ממותק\n200 גרם ביסקוויטים או עוגיות חמאה\n100 גרם חמאה מומסת\n2 גביעי שמנת חמוצה (400 גרם סה״כ)\n4 כפות אבקת סוכר",
+                instructions: "בסיס הביסקוויטים:\n1. ממיסים את החמאה.\n2. מרסקים היטב את הביסקוויטים/העוגיות ומערבבים עם החמאה עד שהפירורים לחים ואחידים.\n3. משטחים ומהדקים לתחתית של תבנית עגולה בינונית.\n\n4. טורפים את גבינת השמנת, הגבינה הלבנה, הביצים והחלב המרוכז עד שהבלילה חלקה.\n5. יוצקים מעל שכבת הבסיס ומהדקים בעדינות.\n6. מחממים תנור ל־150 מעלות. מניחים בתחתית התנור קערה עם מים רותחים.\n7. אופים כשעה וחצי עד שהעוגה יציבה.\n8. הציפוי: מערבבים שמנת חמוצה עם אבקת סוכר. כשהעוגה יוצאת חמה, מורחים בעדינות את הציפוי מעל."
+            },
+            {
+                title: "עוגת שמרים שוקולד",
+                author: "סיוון",
+                ingredients: "3 כוסות קמח\nכף ורבע שמרים יבשים\nרבע כוס סוכר\nאחד סוכר וניל\nכוס מים פושרים\nביצה\nחצי כוס שמן\nממרח שוקולד\n\nלסירופ:\nכוס סוכר\nחצי כוס מים\nכמה טיפות לימון",
+                instructions: "1. לשים בקערה קמח, סוכר, סוכר וניל ושמרים ולערבב.\n2. להוסיף מים ולאחר מכאן את הביצה.\n3. להוסיף את השמן וללוש עד שהבצק רך אלסטי וטיפה דביק. **יש ללוש 10 דק לפחות.\n4. להעביר לבצק לקערה משומנת.\n5. לכסות ולהתפיח כשעה ורבע.\n6. לחלק את הבצק לשניים.\n7. לרדד למרובע ולמרוח שוקולד.\n8. לגלגל לרולדה, לחתוך לאורך ולעשות בורג.\n9. להניח בתבנית לכסות לעוד רבע שעה.\n10. להבריש בביצה ולאפות ב-170 מעלות עד שמזהיב.\n11. להבריש בסירופ קר."
+            },
+            {
+                title: "עוגת שוקולד שקדים ללא גלוטן",
+                author: "צפרא",
+                ingredients: "5 ביצים\n7 כפות סוכר\n200 גרם שוקולד מריר\n120 גרם חמאה\n200 גר שקדים טחונים",
+                instructions: "1. מקציפים 5 חלבונים עם 7 כפות סוכר.\n2. בקערה מערבבים 5 חלמונים עם 7 כפות סוכר.\n3. ממיסים 200 גרם שוקולד מריר עם 120 גרם חמאה.\n4. להוסיף 200 גרם שקדים טחונים.\n5. לערבב הכל יחד ולתנור."
+            },
+            {
+                title: "עוגת שוקולד",
+                author: "גלי דעבול",
+                ingredients: "כוס שוקולית\nכוס קמח\nכוס סוכר\nכוס שמן\n4 ביצים\n1 אבקת אפיה\n3/4 גביע שמנת מתוקה\n\nלציפוי:\nרבע גביע שמנת מתוקה\nשוקולד מריר",
+                instructions: "1. לערבב הכל טוב טוב במטרפה.\n2. לשפוך לתבנית או 2 אינגליש קייק.\n3. כשהעוגה מוכנה להמיס במיקרוגל חבילת שוקולד מריר והשמנת שנשארה, לשפוך על העוגה."
+            },
+            {
+                title: "עוגת גבינה",
+                author: "צביה האוז",
+                ingredients: "תבנית 26\n3/4 כוס סוכר\n1+3/4 כוסות קמח תופח\n2 חלמונים\n100 גרם מרגרינה\nכפית תמצית וניל\n\nמילוי:\n1/2 ק\"ג גבינה 5%\n100 מ\"ל שמנת חמוצה\n1/2 כוס סוכר\n3 חלמונים\nכף קמח\nכף פודינג וניל\n\nקצף:\n5 חלבונים\n1/2 כוס סוכר",
+                instructions: "1. מערבבים חומרי בצק, משטחים ואופים 10 דקות.\n2. מערבבים חומרי מילוי.\n3. מקציפים חלבונים עם סוכר.\n4. מקפלים 3/4 קצף לגבינה ושופכים על התחתית.\n5. אופים 30 דקות ב-180 מעלות עד שמזהיב.\n6. משטחים קצף נותר ואופים עוד 10 דקות.\n7. מצננים בתנור כבוי."
+            },
+            {
+                title: "עוגת תפוחים",
+                author: "לימור גור",
+                ingredients: "4-5 תפוחי גרנד סמיט\n3/4 כוס סוכר\nחצי כוס שמן\n3 ביצים L\n1 כוס קמת תופח\nקורט מלח\nכפית קינמון",
+                instructions: "1. לערבב הכל פרט לתפוחים לתערובת אחידה.\n2. לשמן תבנית ולפזר סוכר חום.\n3. לסדר שכבות תפוחים עם סוכר חום וקינמון.\n4. לשפוך מעל את התערובת ולנער.\n5. לאפות 40 דקות."
+            },
+            {
+                title: "עוגיות שוקולד צ'יפס",
+                author: "צביה האוז",
+                ingredients: "200 גרם חמאה\nכוס סוכר לבן\n1/2 כוס סוכר חום\n2 ביצים\nקורט מלח\n2 כפיות תמצית וניל\n1/4 2 כוסות קמח תופח\nחב' שוקולד צ'יפס",
+                instructions: "1. מערבבים הכל, שוקולד בסוף.\n2. מניחים תלוליות במרחק בתבנית.\n3. אופים 180 מעלות כ-15 דקות."
+            },
+            {
+                title: "עוגיות שקדים",
+                author: "צביה האוז",
+                ingredients: "חב' נטורינה/חמאה\nחב' סוכר וניל\n1/4 כוס סוכר חום\n2 כוסות קמח תופח\n2 כפות מייפל\n100 גר' שקדים טחונים",
+                instructions: "1. מערבבים הכל.\n2. מגלגלים, פוחסים ומסמנים במזלג.\n3. אופים 180 מעלות כ-20 דקות (לא להשחים)."
+            },
+            {
+                title: "עוגת שוקולד",
+                author: "חני ריינס",
+                ingredients: "4 ביצים\n1 כוס מים/שמנת\n1/2 כוס שמן\n1 אבקת אפייה\n1 סוכר וניל\n1.5 כוסות סוכר\n4 כפות שוקולית\n4 כפות קקאו\nשוקולד מומס\n2.5 כוסות קמח\n\nציפוי:\nשמנת מתוקה\n2 שוקולד מריר",
+                instructions: "1. לערבב ביצים, נוזלים ושמן.\n2. להוסיף שאר רכיבים ולערבב.\n3. להוסיף כוס מים רותחים בסוף.\n4. לאפות ב-180 מעלות כ-40 דקות.\n5. לחורר בעוד חם ולצפות."
+            },
+            {
+                title: "עוגת מייפל",
+                author: "לירון פורטל",
+                ingredients: "4 ביצים\n1 כוס סוכר\n1 כוס שמן\n1 כוס מיץ תפוזים\n2 כוסות קמח תופח\n1 כוס קוקוס\n2 אבקת אפייה\n1 פודינג וניל\n100 גרם אגוזים\n1 כוס סירופ מייפל",
+                instructions: "1. להקציף ביצים וסוכר 10 דקות.\n2. להוסיף שמן ומיץ באיטיות.\n3. להוסיף יבשים ולערבב.\n4. לפזר אגוזים ולאפות 40 דקות.\n5. לשפוך מייפל מיד ביציאה."
+            },
+            {
+                title: "עוגת מייפל פרווה",
+                author: "נטלי בוגנה",
+                ingredients: "3 ביצים\n1 כוס שמן\n1 כוס מיץ תפוזים\n1.5 כוס סוכר\n1 אבקת אפייה\n1 סוכר וניל\nכפית תמצית וניל\n2 כוסות קמח",
+                instructions: "1. לערבב הכל בקערה אחת.\n2. לפזר שקדים או אגוזים.\n3. לאפות 175 מעלות כ-40 דקות.\n4. לשפוך מייפל בסוף."
+            },
+            {
+                title: "אלפחורס",
+                author: "לאה מונרוב",
+                ingredients: "200 גרם חמאה\nכוס סוכר\n3 ביצים\n1 סוכר וניל\n1 אבקת אפייה\n500 גר' קורנפלור\n1 כוס קמח\nריבת חלב\nקוקוס",
+                instructions: "1. ממיסים חמאה (40 שנ'), מוסיפים סוכר ומערבבים.\n2. מוסיפים ביצים אחת אחת.\n3. מוסיפים וניל, אבקת אפייה וקורנפלור בהדרגה.\n4. מרדדים וקורצים עיגולים.\n5. אופים 180 מעלות כ-10 דקות.\n6. מצננים, מורחים ריבת חלב ומגלגלים בקוקוס."
+            },
+            {
+                title: "אלפחורס (המתכון שקים דוקרקר ז\"ל אהבה)",
+                author: "חן",
+                ingredients: "200 גרם חמאה רכה\n100 גרם אבקת סוכר\n4 חלמונים L\n1 1/3 כוסות קורנפלור\n1.5 כוסות קמח לבן\n1 כפית אבקת אפייה\n1/4 כפית סודה לשתייה\n\nמלית:\nריבת חלב\nקוקוס",
+                instructions: "1. מעבדים חמאה ואבקת סוכר. מוסיפים חלמונים אחד אחד.\n2. מסננים יבשים למיקסר ומעבדים לבצק אחיד.\n3. מצננים במקרר שעה-שעתיים.\n4. מרדדים (0.5 ס\"מ), קורצים ואופים 10 דקות ב-160 מעלות.\n5. סוגרים סנדוויץ' עם ריבת חלב ומגלגלים בקוקוס."
+            },
+            {
+                title: "עוגיות שוקולד צ'יפס",
+                author: "שרית",
+                ingredients: "2 כוסות קמח\n3/4 כוס קקאו\n1 כפית סודה לשתייה\n1/2 כפית מלח\n250 גר' חמאה\n2 כוסות סוכר\n2 ביצים\n2 כפיות תמצית וניל\n1+2/3 כוסות שוקולד צ'יפס",
+                instructions: "1. מערבבים יבשים (קמח, קקאו, סודה, מלח).\n2. מערבלים חמאה וסוכר, מוסיפים ביצים ווניל.\n3. מוסיפים יבשים בהדרגה ואז שוקולד צ'יפס.\n4. מכינים כדורים ואופים ב-180 מעלות 8-9 דקות.\n5. טיפ: ניתן להוסיף קוביית שוקולד קינדר לכל כדור."
+            },
+            {
+                title: "עוגת תפוזים",
+                author: "שרית",
+                ingredients: "3 ביצים גדולות\n1+1/4 כוס סוכר\n3/4 כוס שמן\n1 כוס מיץ תפוזים\nגרדת תפוז\n1 סוכר וניל\n1 אבקת אפיה\n2 כוסות קמח",
+                instructions: "1. מקציפים ביצים וסוכר 8 דקות למסה תפוחה.\n2. מוסיפים שמן בהדרגה.\n3. מוסיפים מיץ, גרידה ויבשים.\n4. אופים ב-180 מעלות 40-50 דקות.\n5. מפזרים אבקת סוכר בסוף."
+            },
+            {
+                title: "מלבי",
+                author: "אילנית זרגרי",
+                ingredients: "1 שמנת מתוקה\n1 ליטר חלב\n85 גר' קורנפלור\n3 כפות מי ורדים\n100 גר' סוכר\n\nלהגשה:\nרוטב מלבי\nפיסטוקים/קוקוס",
+                instructions: "1. מערבבים כוס וחצי חלב עם קורנפלור ומי ורדים.\n2. מרתיחים סיר עם שאר החלב, שמנת וסוכר.\n3. מוסיפים את תערובת הקורנפלור וטורפים עד שמסמיך.\n4. מוזגים לכוסות ומכסים (למניעת קרום).\n5. מצננים במקרר ומגישים עם תוספות."
+            },
+            {
+                title: "סמבוסק גבינה בולגרית",
+                author: "אינגה מיכאלי",
+                ingredients: "500 גרם קמח\nכף שמרים יבשים\n2 כפות סוכר\nכפית אבקת אפיה\nכף חומץ\nכפית מלח\n3 כפות שמן\n300 מ\"ל מים חמימים\n\nמילוי:\n250 גרם בולגרית\n150 גרם צהובה\n1 ביצה\nכף קמח",
+                instructions: "1. לשים חומרי בצק 8 דקות (אין צורך בהתפחה!).\n2. מנוחה 4 דקות.\n3. ממלאים, סוגרים ומורחים ביצה.\n4. אופים ב-200 מעלות (טורבו) כ-10 דקות."
+            },
+            {
+                title: "סמבוסק גבינה",
+                author: "בתיה",
+                ingredients: "500 גר' קמח\n1 כוס מים רותחים\n200 גרם נטורינה מומסת\nכפית מלח\nכפית אבקת אפיה\n\nמילוי:\n200 גר' בולגרית\nחצי קוטג'\n1 חלמון",
+                instructions: "1. מערבבים חומרי בצק בכף.\n2. מצננים שעה במקרר.\n3. מרדדים (0.5 ס\"מ), קורצים עיגולים וממלאים.\n4. סוגרים, מורחים ביצה ושומשום.\n5. אופים ב-180 מעלות עד שישחים."
+            },
+            {
+                title: "חיתוכי ריבה",
+                author: "אוסנת",
+                ingredients: "280 גרם קמח\n1 שקית אבקת אפייה (10 גרם)\n1 שקית סוכר וניל\n½ כוס סוכר\n1 ביצה\n200 גרם חמאה (רכה)\nריבה אהובה (למשל: תות, משמש, פירות יער)",
+                instructions: "1. בקערה גדולה מערבבים את כל החומרים היבשים: קמח, אבקת אפייה, סוכר וניל וסוכר.\n2. מוסיפים את הביצה והחמאה הרכה ולשים עד לקבלת בצק אחיד.\n3. שומרים חופן קטן מהבצק בצד לגרידה בהמשך.\n4. את שאר הבצק משטחים בתבנית מרובעת/מלבנית בגודל בינוני כך שיכסה את התחתית באופן אחיד.\n5. מורחים שכבה נדיבה של ריבה מעל הבצק.\n6. מגרדים את חופן הבצק ששמרנו בצד מעל הריבה בפומפייה גסה.\n7. אופים בתנור שחומם מראש ל-170 מעלות כ-25–30 דקות, עד שהבצק מזהיב מעט.\n8. מצננים, חותכים לריבועים."
+            }
+        ];
+
+        // Core App Logic
+        function init() {
+            renderRecipes();
+            initSortable();
+            lucide.createIcons();
+
+            // Link to the generated image if available, else use a placeholder
+            // Check for amit_coffee_cart_cover.png or similar
+            const coverImg = document.getElementById('coverImage');
+            // I will try to update this path once I know the filename
+        }
+
+        function renderRecipes() {
+            const container = document.getElementById('book-container');
+            const sortableUI = document.getElementById('sortablePages');
+
+            recipes.forEach((recipe, index) => {
+                // Create A4 Page
+                const page = document.createElement('div');
+                page.className = 'page recipe-page';
+                page.id = `recipe-${index}`;
+                page.innerHTML = `
+                    <div class="page-border"></div>
+                    <div class="icons-bg"></div>
+                    <div class="recipe-controls" style="position:absolute; top:12mm; left:12mm; z-index:100; display:flex; gap:5px;">
+                        <button class="btn btn-outline btn-sm" onclick="toggleHalfPage(${index})" title="שנה גודל (מלא/חצי)">
+                            <i data-lucide="ratio"></i>
+                        </button>
+                    </div>
+                    <div class="recipe-header">
+                        <h1 class="recipe-title">${recipe.title}</h1>
+                        <div class="recipe-author">נאפה באהבה על ידי: ${recipe.author}</div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="ingredients-box">
+                            <span class="box-title">מצרכים</span>
+                            <div>${recipe.ingredients.replace(/\n/g, '<br>')}</div>
+                        </div>
+                        <div class="instructions-box">
+                            <span class="box-title">אופן ההכנה</span>
+                            <div>${recipe.instructions.trim()}</div>
+                        </div>
+                    </div>
+                    <div class="recipe-image-placeholder" onclick="this.querySelector('input').click()">
+                        <div class="img-controls" onclick="event.stopPropagation()">
+                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'left', ${index})" title="ימין"><i data-lucide="align-right"></i></button>
+                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'center', ${index})" title="מרכז"><i data-lucide="align-center"></i></button>
+                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'right', ${index})" title="שמאל"><i data-lucide="align-left"></i></button>
+                        </div>
+                        <i data-lucide="image"></i>
+                        <span>לחצי להוספת תמונה</span>
+                        <input type="file" style="display:none" onchange="handleImage(this, ${index})" onclick="event.stopPropagation()">
+                    </div>
+                `;
+                container.appendChild(page);
+
+                // Create Sortable Item
+                const item = document.createElement('div');
+                item.className = 'btn btn-outline';
+                item.style.fontSize = '12px';
+                item.innerHTML = `<i data-lucide="grip-vertical"></i> ${recipe.title}`;
+                item.dataset.id = `recipe-${index}`;
+                sortableUI.appendChild(item);
+            });
+        }
+
+        function initSortable() {
+            Sortable.create(document.getElementById('sortablePages'), {
+                animation: 150,
+                onEnd: function (evt) {
+                    const pages = document.querySelectorAll('.recipe-page');
+                    const order = Array.from(evt.from.children).map(el => el.dataset.id);
+
+                    const container = document.getElementById('book-container');
+                    order.forEach(id => {
+                        const page = document.getElementById(id);
+                        container.appendChild(page);
+                    });
+                }
+            });
+        }
+
+        function updateFontSize(val) {
+            document.querySelectorAll('.ingredients-box, .instructions-box').forEach(box => {
+                box.style.fontSize = val + 'pt';
+            });
+        }
+
+        function updateFontFamily(val) {
+            document.querySelectorAll('.ingredients-box, .instructions-box').forEach(box => {
+                box.style.fontFamily = val;
+            });
+        }
+
+        function handleImage(input, index) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const page = document.getElementById(`recipe-${index}`);
+                    const placeholder = page.querySelector('.recipe-image-placeholder');
+
+                    // Remove existing image if any to prevent stacking
+                    const existingImg = placeholder.querySelector('.uploaded-image');
+                    if (existingImg) existingImg.remove();
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'uploaded-image';
+                    // Ensure the image covers everything but keeps input accessible via parent click
+                    img.style.cssText = "width:100%; height:100%; object-fit:cover; border-radius:8px; position:absolute; top:0; left:0; z-index:0;";
+                    // Hide icon/text by covering, or just append on top? 
+                    // Z-index 0 is fine if text is not z-indexed higher. Text is flow content.
+                    // Actually, let's make image bg white to cover text
+                    img.style.backgroundColor = "white";
+
+                    placeholder.appendChild(img);
+                    // Ensure icon/text are hidden or covered.
+                    // Let's just create an img that is absolute and z-index 1.
+                    img.style.zIndex = "1";
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+
+        async function generatePDF() {
+            const element = document.getElementById('book-container');
+            const opt = {
+                margin: 0,
+                filename: 'ספר המתכונים - החברים של עמית.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Temporarily hide toolbar and sidebar scrollbars
+            document.body.style.overflow = 'hidden';
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        function alignImage(btn, dir, index) {
+            // Stop propagation is handled in HTML, but good to be safe
+            // event.stopPropagation();
+
+            const page = document.getElementById(`recipe-${index}`);
+            const placeholder = page.querySelector('.recipe-image-placeholder');
+
+            if (dir === 'left') {
+                placeholder.style.left = '10mm';
+                placeholder.style.transform = 'none';
+                placeholder.style.right = 'auto';
+            } else if (dir === 'right') {
+                placeholder.style.right = '10mm';
+                placeholder.style.left = 'auto';
+                placeholder.style.transform = 'none';
+            } else {
+                // center
+                placeholder.style.left = '50%';
+                placeholder.style.right = 'auto';
+                placeholder.style.transform = 'translateX(-50%)';
+            }
+        }
+
+        function toggleHalfPage(index) {
+            const page = document.getElementById(`recipe-${index}`);
+            page.classList.toggle('half');
+            // Re-render icons since we might have added new ones or changed layout
+            lucide.createIcons();
+        }
+
+        window.onload = init;
+    </script>
 </body>
 
 </html>

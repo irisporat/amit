@@ -1,0 +1,394 @@
+:root {
+    --primary-blue: #64b5f6;
+    /* Darker than a2d2ff */
+    --dark-blue: #1976d2;
+    --text-black: #2c1810;
+    /* Dark brown/black */
+    --beige-bg: #f4e4bc;
+    /* Parchment look */
+    --paper-texture: #fff9e6;
+    --wavy-border: #4fc3f7;
+    --font-main: 'Assistant', sans-serif;
+    --font-title: 'Frank Ruhl Libre', serif;
+    --font-handwriting: 'Klee One', cursive;
+    /* or Amatic SC */
+    --a4-width: 210mm;
+    --a4-height: 297mm;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+body {
+    margin: 0;
+    background-color: #f0f2f5;
+    font-family: var(--font-main);
+    color: var(--text-black);
+    overflow-x: hidden;
+}
+
+/* UI Toolbar */
+.toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 60px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    gap: 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--dark-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #ddd;
+}
+
+.btn-outline:hover {
+    background: #f5f5f5;
+}
+
+/* Preview Container */
+.preview-area {
+    margin-top: 80px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 100px;
+}
+
+/* A4 Page Styling */
+.page {
+    width: var(--a4-width);
+    height: var(--a4-height);
+    background: var(--beige-bg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    padding: 20mm;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    /* Add a subtle paper texture grain if possible, or just solid color for now */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+}
+
+.page::before {
+    content: '';
+    position: absolute;
+    top: 10mm;
+    left: 10mm;
+    right: 10mm;
+    bottom: 10mm;
+    border: 3px double var(--primary-blue);
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Better wavy border using SVG background */
+.page-border {
+    position: absolute;
+    top: 5mm;
+    left: 5mm;
+    right: 5mm;
+    bottom: 5mm;
+    pointer-events: none;
+    z-index: 5;
+    /* Using the darker blue for the waves */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q 20 0, 40 20 T 80 20' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-x top,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q 20 0, 40 20 T 80 20' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-x bottom,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='80' viewBox='0 0 40 80'%3E%3Cpath d='M20 0 Q 0 20, 20 40 T 20 80' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-y left,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='80' viewBox='0 0 40 80'%3E%3Cpath d='M20 0 Q 0 20, 20 40 T 20 80' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-y right;
+    opacity: 0.6;
+}
+
+/* Cover Page Styling */
+.cover-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--beige-bg);
+}
+
+.cover-title {
+    font-size: 48pt;
+    margin-bottom: 10mm;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+}
+
+.cover-subtitle {
+    font-size: 24pt;
+    margin-bottom: 20mm;
+    color: var(--text-black);
+}
+
+.cover-image {
+    width: 140mm;
+    height: 90mm;
+    background: #eee;
+    border-radius: 15px;
+    margin-bottom: 20mm;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cover-memorial {
+    font-size: 18pt;
+    font-weight: 300;
+}
+
+/* Recipe Page Styling */
+.recipe-header {
+    text-align: center;
+    margin-bottom: 8mm;
+    position: relative;
+}
+
+.recipe-header::after {
+    content: '♦';
+    /* Simple decorative element */
+    display: block;
+    font-size: 20px;
+    color: var(--primary-blue);
+    margin-top: 5px;
+}
+
+.recipe-title {
+    font-size: 36pt;
+    color: var(--text-black);
+    margin: 0;
+    font-family: var(--font-title);
+    font-weight: 700;
+}
+
+.recipe-author {
+    font-size: 14pt;
+    color: #5d4037;
+    margin-top: 2mm;
+    font-family: var(--font-main);
+    font-style: italic;
+}
+
+.recipe-content {
+    display: flex;
+    gap: 8mm;
+    height: calc(100% - 60mm);
+}
+
+.ingredients-box div,
+.instructions-box div {
+    margin-top: 0;
+    line-height: 1.6;
+}
+
+.instructions-box div {
+    white-space: pre-wrap;
+}
+
+.ingredients-box {
+    flex: 0 0 70mm;
+    background: #fffbf0;
+    /* Lighter than page */
+    padding: 6mm;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    border: 1px solid #e0c9a6;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+    z-index: 10;
+}
+
+.instructions-box {
+    flex: 1;
+    background: #fffbf0;
+    padding: 6mm;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    border: 1px solid #e0c9a6;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+    z-index: 10;
+}
+
+.box-title {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 4mm;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 1mm;
+    display: block;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+}
+
+.recipe-image-placeholder {
+    position: absolute;
+    bottom: 15mm;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80mm;
+    height: 50mm;
+    background: rgba(162, 210, 255, 0.1);
+    border: 2px dashed var(--primary-blue);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-blue);
+    cursor: pointer;
+    z-index: 20;
+    /* Ensure image is above text boxes */
+    transition: all 0.3s ease;
+}
+
+/* Image Controls */
+.img-controls {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 4px;
+    display: none;
+    /* Show on hover */
+    gap: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+}
+
+.recipe-image-placeholder:hover .img-controls {
+    display: flex;
+}
+
+
+/* Baking Icons Background */
+.icons-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(var(--dark-blue) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+}
+
+/* Customization Sidebar */
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    bottom: 0;
+    width: 300px;
+    background: white;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 900;
+    overflow-y: auto;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.setting-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+/* Half Page Support */
+.page.half {
+    height: calc(var(--a4-height) / 2);
+    page-break-after: auto;
+    border-bottom: 2px dashed var(--primary-blue);
+}
+
+.page.half:nth-of-type(even) {
+    page-break-after: always;
+    border-bottom: none;
+}
+
+.btn-sm {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* Icon styling */
+.lucide {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2px;
+}
+
+/* Print Settings */
+@media print {
+
+    .toolbar,
+    .sidebar,
+    .recipe-image-placeholder {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        margin: 0;
+    }
+
+    .preview-area {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page {
+        box-shadow: none;
+        margin: 0;
+        page-break-after: always;
+        transform: none !important;
+    }
+}
