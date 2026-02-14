@@ -1,394 +1,280 @@
 :root {
-    --primary-blue: #64b5f6;
-    /* Darker than a2d2ff */
-    --dark-blue: #1976d2;
+    --primary-blue: #0047AB;
+    /* Cobalt/Royal Blue */
+    --accent-bronze: #8d6e63;
+    /* Sepia/Bronze */
+    --dark-blue: #0047AB;
     --text-black: #2c1810;
-    /* Dark brown/black */
-    --beige-bg: #f4e4bc;
-    /* Parchment look */
-    --paper-texture: #fff9e6;
-    --wavy-border: #4fc3f7;
+    --beige-bg: #fdf6e3;
+    --box-bg: #fffff0;
     --font-main: 'Assistant', sans-serif;
     --font-title: 'Frank Ruhl Libre', serif;
     --font-handwriting: 'Klee One', cursive;
-    /* or Amatic SC */
     --a4-width: 210mm;
     --a4-height: 297mm;
 }
 
 * {
     box-sizing: border-box;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     margin: 0;
+    background-color: #121212;
+    /* Dark theme background for list view per example? Or keep blue? Let's go with dark BG for list as requested via "example site" loop, but clean. */
     background-color: #f0f2f5;
+    /* Actually let's keep it clean web app style */
     font-family: var(--font-main);
     color: var(--text-black);
     overflow-x: hidden;
 }
 
-/* UI Toolbar */
-.toolbar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 60px;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    z-index: 1000;
-    gap: 20px;
+/* View Switcher Logic */
+.view {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
 }
 
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: var(--font-main);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s;
+.view.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.btn-primary {
-    background: var(--dark-blue);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* App Header */
+.app-header {
+    background: var(--primary-blue);
     color: white;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-.btn-primary:hover {
-    opacity: 0.9;
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid #ddd;
-}
-
-.btn-outline:hover {
-    background: #f5f5f5;
-}
-
-/* Preview Container */
-.preview-area {
-    margin-top: 80px;
-    padding: 20px;
+/* Mobile First (List View) */
+.recipe-grid {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    padding-bottom: 100px;
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* A4 Page Styling */
+.recipe-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100px;
+}
+
+.card-img {
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    flex: 1;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Desktop Grid View */
+@media (min-width: 900px) {
+    .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 in a row */
+        gap: 25px;
+        padding: 40px;
+    }
+
+    .recipe-card {
+        flex-direction: column;
+        height: 320px;
+        /* Larger cards */
+        align-items: flex-start;
+    }
+
+    .card-img {
+        width: 100%;
+        height: 200px;
+        /* Big image on top */
+    }
+
+    .card-info {
+        width: 100%;
+        padding: 15px;
+        justify-content: flex-start;
+    }
+
+    .card-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .card-arrow {
+        display: none;
+        /* No arrow needed for card style */
+    }
+}
+
+/* Close Button */
+.close-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.close-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Single Recipe Styling (A4 Adaptation) */
 .page {
     width: var(--a4-width);
-    height: var(--a4-height);
-    background: var(--beige-bg);
+    min-height: var(--a4-height);
+    background-color: var(--beige-bg);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     position: relative;
     padding: 20mm;
+    margin: 20px auto;
     overflow: hidden;
-    flex-shrink: 0;
-    transition: transform 0.3s;
-    /* Add a subtle paper texture grain if possible, or just solid color for now */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+    /* Texture */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
 }
 
 .page::before {
-    content: '';
-    position: absolute;
-    top: 10mm;
-    left: 10mm;
-    right: 10mm;
-    bottom: 10mm;
-    border: 3px double var(--primary-blue);
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: 10;
+    display: none;
 }
 
-/* Better wavy border using SVG background */
-.page-border {
-    position: absolute;
-    top: 5mm;
-    left: 5mm;
-    right: 5mm;
-    bottom: 5mm;
-    pointer-events: none;
-    z-index: 5;
-    /* Using the darker blue for the waves */
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q 20 0, 40 20 T 80 20' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-x top,
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q 20 0, 40 20 T 80 20' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-x bottom,
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='80' viewBox='0 0 40 80'%3E%3Cpath d='M20 0 Q 0 20, 20 40 T 20 80' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-y left,
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='80' viewBox='0 0 40 80'%3E%3Cpath d='M20 0 Q 0 20, 20 40 T 20 80' fill='none' stroke='%2364b5f6' stroke-width='2'/%3E%3C/svg%3E") repeat-y right;
-    opacity: 0.6;
+/* Responsive Fixes */
+@media (max-width: 850px) {
+    .page {
+        width: 100%;
+        margin: 0;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 20px;
+        /* Reduced padding for mobile */
+    }
+
+    .page::before {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .recipe-content {
+        flex-direction: column;
+    }
+
+    .ingredients-box {
+        flex: none;
+        width: 100%;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
 }
 
-/* Cover Page Styling */
-.cover-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: var(--beige-bg);
-}
-
-.cover-title {
-    font-size: 48pt;
-    margin-bottom: 10mm;
-    color: var(--dark-blue);
-    font-family: var(--font-title);
-}
-
-.cover-subtitle {
-    font-size: 24pt;
-    margin-bottom: 20mm;
-    color: var(--text-black);
-}
-
-.cover-image {
-    width: 140mm;
-    height: 90mm;
-    background: #eee;
-    border-radius: 15px;
-    margin-bottom: 20mm;
-    object-fit: cover;
-    border: 5px solid white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.cover-memorial {
-    font-size: 18pt;
-    font-weight: 300;
-}
-
-/* Recipe Page Styling */
+/* Reuse existing box styles */
 .recipe-header {
     text-align: center;
     margin-bottom: 8mm;
     position: relative;
+    z-index: 10;
 }
 
-.recipe-header::after {
-    content: '♦';
-    /* Simple decorative element */
-    display: block;
-    font-size: 20px;
-    color: var(--primary-blue);
-    margin-top: 5px;
-}
+
 
 .recipe-title {
-    font-size: 36pt;
-    color: var(--text-black);
-    margin: 0;
+    font-size: 32pt;
+    /* Slightly smaller for responsive */
+    color: var(--dark-blue);
     font-family: var(--font-title);
     font-weight: 700;
+    margin: 0;
 }
 
 .recipe-author {
     font-size: 14pt;
-    color: #5d4037;
+    color: var(--text-black);
+    font-family: var(--font-handwriting);
     margin-top: 2mm;
-    font-family: var(--font-main);
     font-style: italic;
 }
 
 .recipe-content {
     display: flex;
-    gap: 8mm;
-    height: calc(100% - 60mm);
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.ingredients-box,
+.instructions-box {
+    background: var(--box-bg);
+    padding: 20px;
+    border-radius: 8px;
+    font-family: var(--font-main);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--accent-bronze);
 }
 
 .ingredients-box div,
 .instructions-box div {
-    margin-top: 0;
     line-height: 1.6;
-}
-
-.instructions-box div {
-    white-space: pre-wrap;
-}
-
-.ingredients-box {
-    flex: 0 0 70mm;
-    background: #fffbf0;
-    /* Lighter than page */
-    padding: 6mm;
-    border-radius: 4px;
-    font-family: var(--font-main);
-    border: 1px solid #e0c9a6;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
-    z-index: 10;
-}
-
-.instructions-box {
-    flex: 1;
-    background: #fffbf0;
-    padding: 6mm;
-    border-radius: 4px;
-    font-family: var(--font-main);
-    border: 1px solid #e0c9a6;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
-    z-index: 10;
+    font-size: 1.1rem;
 }
 
 .box-title {
-    font-size: 18pt;
-    font-weight: bold;
-    margin-bottom: 4mm;
-    border-bottom: 2px solid var(--primary-blue);
-    padding-bottom: 1mm;
-    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--accent-bronze);
+    display: inline-block;
     color: var(--dark-blue);
+    /* Consistent logic */
     font-family: var(--font-title);
-}
-
-.recipe-image-placeholder {
-    position: absolute;
-    bottom: 15mm;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80mm;
-    height: 50mm;
-    background: rgba(162, 210, 255, 0.1);
-    border: 2px dashed var(--primary-blue);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--dark-blue);
-    cursor: pointer;
-    z-index: 20;
-    /* Ensure image is above text boxes */
-    transition: all 0.3s ease;
-}
-
-/* Image Controls */
-.img-controls {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 4px;
-    display: none;
-    /* Show on hover */
-    gap: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 30;
-}
-
-.recipe-image-placeholder:hover .img-controls {
-    display: flex;
-}
-
-
-/* Baking Icons Background */
-.icons-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 1;
-    background: radial-gradient(var(--dark-blue) 0.5px, transparent 0.5px);
-    background-size: 20px 20px;
-}
-
-/* Customization Sidebar */
-.sidebar {
-    position: fixed;
-    right: 0;
-    top: 60px;
-    bottom: 0;
-    width: 300px;
-    background: white;
-    border-left: 1px solid #ddd;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    z-index: 900;
-    overflow-y: auto;
-}
-
-.setting-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.setting-label {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-input[type="range"] {
-    width: 100%;
-}
-
-/* Half Page Support */
-.page.half {
-    height: calc(var(--a4-height) / 2);
-    page-break-after: auto;
-    border-bottom: 2px dashed var(--primary-blue);
-}
-
-.page.half:nth-of-type(even) {
-    page-break-after: always;
-    border-bottom: none;
-}
-
-.btn-sm {
-    padding: 4px 8px;
-    font-size: 12px;
-}
-
-/* Icon styling */
-.lucide {
-    width: 18px;
-    height: 18px;
-    stroke-width: 2px;
-}
-
-/* Print Settings */
-@media print {
-
-    .toolbar,
-    .sidebar,
-    .recipe-image-placeholder {
-        display: none !important;
-    }
-
-    body {
-        background: white;
-        margin: 0;
-    }
-
-    .preview-area {
-        margin: 0;
-        padding: 0;
-    }
-
-    .page {
-        box-shadow: none;
-        margin: 0;
-        page-break-after: always;
-        transform: none !important;
-    }
 }

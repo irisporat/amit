@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ספר המתכונים - החברים של עמית (עיצוב וינטג')</title>
+    <title>ספר המתכונים - החברים של עמית</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,53 +22,36 @@
 
 <body>
 
-    <div class="toolbar">
-        <h2 style="margin: 0; color: var(--dark-blue); font-family: var(--font-title);">החברים של עמית</h2>
-        <div style="flex: 1;"></div>
-        <button class="btn btn-outline" onclick="window.print()">
-            <i data-lucide="printer"></i> הדפסה
-        </button>
-        <button class="btn btn-primary" onclick="generatePDF()">
-            <i data-lucide="download"></i> הורדה ל-PDF
-        </button>
-    </div>
 
-    <div class="sidebar">
-        <div class="setting-group">
-            <span class="setting-label">גודל גופן טקסט</span>
-            <input type="range" min="10" max="24" value="14" id="fontSizeRange" oninput="updateFontSize(this.value)">
-        </div>
-        <div class="setting-group">
-            <span class="setting-label">סוג גופן</span>
-            <select id="fontFamilySelect" onchange="updateFontFamily(this.value)">
-                <option value="'Frank Ruhl Libre', serif">דפוס קלאסי (ברירת מחדל)</option>
-                <option value="'Klee One', cursive">כתב יד עדין</option>
-                <option value="'Amatic SC', cursive">כתב יד אמנותי</option>
-                <option value="'Assistant', sans-serif">כתב נקי</option>
-            </select>
-        </div>
-        <hr style="width: 100%; border: 0.5px solid #eee;">
-        <span class="setting-label">סדר מתכונים (גררי לשינוי)</span>
-        <div id="sortablePages" style="display: flex; flex-direction: column; gap: 8px;">
-            <!-- Sortable items will be injected here -->
-        </div>
-    </div>
 
-    <div class="preview-area" id="book-container">
-        <!-- Cover Page -->
-        <div class="page cover-page" id="page-cover">
-            <div class="page-border"></div>
-            <div class="icons-bg"></div>
-            <div class="cover-title">עגלת קפה<br>החברים של עמית</div>
-            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800"
-                alt="Coffee Cart" class="cover-image" id="coverImage">
-            <div class="cover-subtitle">ספר מתכונים</div>
-            <div class="cover-memorial">לזכרו של סמ"ר עמית פרידמן</div>
+    <!-- View Switcher -->
+    <main id="app-container">
+
+        <!-- Home View: Recipe List -->
+        <div id="home-view" class="view active">
+            <header class="app-header">
+                <div class="logo">
+                    <h1 style="margin:0; font-family: var(--font-title); color: white;">החברים של עמית</h1>
+                    <span style="font-size: 0.9rem; opacity: 0.9;">ספר מתכונים לזכרו</span>
+                </div>
+            </header>
+
+            <div class="recipe-grid" id="recipe-list-container">
+                <!-- Recipe Cards Injected Here -->
+            </div>
         </div>
 
-        <!-- Recipe Pages will be injected here -->
-    </div>
+        <!-- Recipe Detail View -->
+        <div id="recipe-view" class="view">
+            <button class="close-btn" onclick="showHome()">
+                <i data-lucide="x"></i>
+            </button>
+            <div id="single-recipe-container" class="preview-area">
+                <!-- Single Recipe Injected Here -->
+            </div>
+        </div>
 
+    </main>
     <script>
         // Recipe Data
         const recipes = [
@@ -185,38 +168,67 @@
                 author: "אוסנת",
                 ingredients: "280 גרם קמח\n1 שקית אבקת אפייה (10 גרם)\n1 שקית סוכר וניל\n½ כוס סוכר\n1 ביצה\n200 גרם חמאה (רכה)\nריבה אהובה (למשל: תות, משמש, פירות יער)",
                 instructions: "1. בקערה גדולה מערבבים את כל החומרים היבשים: קמח, אבקת אפייה, סוכר וניל וסוכר.\n2. מוסיפים את הביצה והחמאה הרכה ולשים עד לקבלת בצק אחיד.\n3. שומרים חופן קטן מהבצק בצד לגרידה בהמשך.\n4. את שאר הבצק משטחים בתבנית מרובעת/מלבנית בגודל בינוני כך שיכסה את התחתית באופן אחיד.\n5. מורחים שכבה נדיבה של ריבה מעל הבצק.\n6. מגרדים את חופן הבצק ששמרנו בצד מעל הריבה בפומפייה גסה.\n7. אופים בתנור שחומם מראש ל-170 מעלות כ-25–30 דקות, עד שהבצק מזהיב מעט.\n8. מצננים, חותכים לריבועים."
+            },
+            {
+                title: "עוגת מייפל",
+                author: "בטי לוי",
+                ingredients: "4 ביצים\n1 כוס (200 גרם) סוכר\n1 כוס (240 מ\"ל) שמן\n1 כוס (240 מ\"ל) מיץ תפוזים\n2 כוסות (280 גרם) קמח תופח\n1 כוס (100 גרם) קוקוס טחון\n2 שקיקים (20 גרם) אבקת אפייה\n1 חפיסה (80 גרם) אבקת אינסטנט פודינג וניל\n100 גרם אגוזי מלך או פקאן, קצוצים גס\n1 כוס (240 מ\"ל) סירופ מייפל",
+                instructions: "1. מחממים את התנור ל-180 מעלות. משמנים את התבנית.\n2. שמים בקערת המיקסר את הביצים והסוכר ומקציפים במהירות גבוהה כ-10 דקות, לבלילה תפוחה. מורידים למהירות נמוכה, יוצקים לאט את השמן ואת מיץ התפוזים ומקציפים עד שהם נטמעים בבלילה.\n3. מוסיפים לאט את הקמח, הקוקוס, אבקת האפייה ואבקת הפודינג ומקציפים לעיסה אחידה. עוצרים. יוצקים לתבניות. מפזרים מעל את האגוזים.\n4. אופים כ-40 דקות, עד שהעוגות מזהיבות. מוציאים ויוצקים מיד על העוגות את סירופ המייפל."
             }
         ];
 
         // Core App Logic
         function init() {
-            renderRecipes();
-            initSortable();
+            renderHome();
             lucide.createIcons();
-
-            // Link to the generated image if available, else use a placeholder
-            // Check for amit_coffee_cart_cover.png or similar
-            const coverImg = document.getElementById('coverImage');
-            // I will try to update this path once I know the filename
         }
 
-        function renderRecipes() {
-            const container = document.getElementById('book-container');
-            const sortableUI = document.getElementById('sortablePages');
+        function renderHome() {
+            const listContainer = document.getElementById('recipe-list-container');
+            listContainer.innerHTML = ''; // Clear
 
             recipes.forEach((recipe, index) => {
-                // Create A4 Page
-                const page = document.createElement('div');
-                page.className = 'page recipe-page';
-                page.id = `recipe-${index}`;
-                page.innerHTML = `
-                    <div class="page-border"></div>
-                    <div class="icons-bg"></div>
-                    <div class="recipe-controls" style="position:absolute; top:12mm; left:12mm; z-index:100; display:flex; gap:5px;">
-                        <button class="btn btn-outline btn-sm" onclick="toggleHalfPage(${index})" title="שנה גודל (מלא/חצי)">
-                            <i data-lucide="ratio"></i>
-                        </button>
+                const card = document.createElement('div');
+                card.className = 'recipe-card';
+                card.onclick = () => showRecipe(index);
+
+                // Construct safe filename for local image (remove invalid chars for Windows filenames)
+                const safeTitle = recipe.title.replace(/[<>:"/\\|?*]/g, '');
+                const safeAuthor = recipe.author.replace(/[<>:"/\\|?*]/g, '');
+                const localImgPath = `images/${safeTitle} - ${safeAuthor}.jpg`;
+
+                // Placeholder fallback logic
+                let fallbackUrl = 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80'; // Default Cake
+                if (recipe.title.includes('שוקולד')) fallbackUrl = 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80';
+                if (recipe.title.includes('גבינה')) fallbackUrl = 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80';
+                if (recipe.title.includes('תפוח')) fallbackUrl = 'https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=300&q=80';
+                if (recipe.title.includes('עוגיות')) fallbackUrl = 'https://images.unsplash.com/photo-1499636138143-bd649043ea52?auto=format&fit=crop&w=300&q=80';
+                if (recipe.title.includes('סמבוסק')) fallbackUrl = 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=300&q=80';
+                if (recipe.title.includes('אלפחורס')) fallbackUrl = 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300&q=80';
+
+                card.innerHTML = `
+                    <img src="${localImgPath}" 
+                         onerror="this.onerror=null; this.src='${fallbackUrl}';" 
+                         alt="${recipe.title}" class="card-img">
+                    <div class="card-info">
+                        <h3>${recipe.title}</h3>
+                        <p>${recipe.author}</p>
                     </div>
+                    <i data-lucide="chevron-left" class="card-arrow"></i>
+                `;
+                listContainer.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function showRecipe(index) {
+            const recipe = recipes[index];
+            const container = document.getElementById('single-recipe-container');
+
+            // Render the single A4 page
+            container.innerHTML = `
+                <div class="page recipe-page">
+                    <div class="icons-bg"></div>
                     <div class="recipe-header">
                         <h1 class="recipe-title">${recipe.title}</h1>
                         <div class="recipe-author">נאפה באהבה על ידי: ${recipe.author}</div>
@@ -228,138 +240,22 @@
                         </div>
                         <div class="instructions-box">
                             <span class="box-title">אופן ההכנה</span>
-                            <div>${recipe.instructions.trim()}</div>
+                            <div>${recipe.instructions.replace(/\n/g, '<br>')}</div>
                         </div>
                     </div>
-                    <div class="recipe-image-placeholder" onclick="this.querySelector('input').click()">
-                        <div class="img-controls" onclick="event.stopPropagation()">
-                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'left', ${index})" title="ימין"><i data-lucide="align-right"></i></button>
-                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'center', ${index})" title="מרכז"><i data-lucide="align-center"></i></button>
-                            <button class="btn btn-outline btn-sm" onclick="alignImage(this, 'right', ${index})" title="שמאל"><i data-lucide="align-left"></i></button>
-                        </div>
-                        <i data-lucide="image"></i>
-                        <span>לחצי להוספת תמונה</span>
-                        <input type="file" style="display:none" onchange="handleImage(this, ${index})" onclick="event.stopPropagation()">
-                    </div>
-                `;
-                container.appendChild(page);
+                </div>
+            `;
 
-                // Create Sortable Item
-                const item = document.createElement('div');
-                item.className = 'btn btn-outline';
-                item.style.fontSize = '12px';
-                item.innerHTML = `<i data-lucide="grip-vertical"></i> ${recipe.title}`;
-                item.dataset.id = `recipe-${index}`;
-                sortableUI.appendChild(item);
-            });
+            // Switch views
+            document.getElementById('home-view').classList.remove('active');
+            document.getElementById('recipe-view').classList.add('active');
+            window.scrollTo(0, 0);
         }
 
-        function initSortable() {
-            Sortable.create(document.getElementById('sortablePages'), {
-                animation: 150,
-                onEnd: function (evt) {
-                    const pages = document.querySelectorAll('.recipe-page');
-                    const order = Array.from(evt.from.children).map(el => el.dataset.id);
-
-                    const container = document.getElementById('book-container');
-                    order.forEach(id => {
-                        const page = document.getElementById(id);
-                        container.appendChild(page);
-                    });
-                }
-            });
-        }
-
-        function updateFontSize(val) {
-            document.querySelectorAll('.ingredients-box, .instructions-box').forEach(box => {
-                box.style.fontSize = val + 'pt';
-            });
-        }
-
-        function updateFontFamily(val) {
-            document.querySelectorAll('.ingredients-box, .instructions-box').forEach(box => {
-                box.style.fontFamily = val;
-            });
-        }
-
-        function handleImage(input, index) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const page = document.getElementById(`recipe-${index}`);
-                    const placeholder = page.querySelector('.recipe-image-placeholder');
-
-                    // Remove existing image if any to prevent stacking
-                    const existingImg = placeholder.querySelector('.uploaded-image');
-                    if (existingImg) existingImg.remove();
-
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'uploaded-image';
-                    // Ensure the image covers everything but keeps input accessible via parent click
-                    img.style.cssText = "width:100%; height:100%; object-fit:cover; border-radius:8px; position:absolute; top:0; left:0; z-index:0;";
-                    // Hide icon/text by covering, or just append on top? 
-                    // Z-index 0 is fine if text is not z-indexed higher. Text is flow content.
-                    // Actually, let's make image bg white to cover text
-                    img.style.backgroundColor = "white";
-
-                    placeholder.appendChild(img);
-                    // Ensure icon/text are hidden or covered.
-                    // Let's just create an img that is absolute and z-index 1.
-                    img.style.zIndex = "1";
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-
-
-        async function generatePDF() {
-            const element = document.getElementById('book-container');
-            const opt = {
-                margin: 0,
-                filename: 'ספר המתכונים - החברים של עמית.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            // Temporarily hide toolbar and sidebar scrollbars
-            document.body.style.overflow = 'hidden';
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.body.style.overflow = 'auto';
-            });
-        }
-
-        function alignImage(btn, dir, index) {
-            // Stop propagation is handled in HTML, but good to be safe
-            // event.stopPropagation();
-
-            const page = document.getElementById(`recipe-${index}`);
-            const placeholder = page.querySelector('.recipe-image-placeholder');
-
-            if (dir === 'left') {
-                placeholder.style.left = '10mm';
-                placeholder.style.transform = 'none';
-                placeholder.style.right = 'auto';
-            } else if (dir === 'right') {
-                placeholder.style.right = '10mm';
-                placeholder.style.left = 'auto';
-                placeholder.style.transform = 'none';
-            } else {
-                // center
-                placeholder.style.left = '50%';
-                placeholder.style.right = 'auto';
-                placeholder.style.transform = 'translateX(-50%)';
-            }
-        }
-
-        function toggleHalfPage(index) {
-            const page = document.getElementById(`recipe-${index}`);
-            page.classList.toggle('half');
-            // Re-render icons since we might have added new ones or changed layout
-            lucide.createIcons();
+        function showHome() {
+            document.getElementById('recipe-view').classList.remove('active');
+            document.getElementById('home-view').classList.add('active');
+            window.scrollTo(0, 0);
         }
 
         window.onload = init;
