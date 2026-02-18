@@ -277,7 +277,7 @@ body {
 
 
 .recipe-title {
-    font-size: 32pt;
+    font-size: 24pt;
     /* Slightly smaller for responsive */
     color: var(--dark-blue);
     font-family: var(--font-title);
@@ -346,7 +346,7 @@ body {
     }
 
     .recipe-title {
-        font-size: 4rem;
+        font-size: 2.5rem;
         /* Very Large Title */
     }
 
@@ -419,16 +419,16 @@ body {
 /* Desktop Styles for Hamburger */
 @media (min-width: 900px) {
     .hamburger-btn {
-        top: 30px;
+        top: 20px;
         /* Vertically centered in header */
         right: 180px;
         /* Move further left */
     }
 
     .hamburger-btn svg {
-        width: 60px;
+        width: 70px;
         /* Bigger on desktop */
-        height: 60px;
+        height: 70px;
     }
 }
 
