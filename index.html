@@ -30,15 +30,51 @@
         <!-- Home View: Recipe List -->
         <div id="home-view" class="view active">
             <header class="app-header">
-                <div class="logo">
-                    <h2 style="margin:0; font-size: 1.2rem; opacity: 0.9; font-weight: normal;">עגלת קפה - ספר מתכונים
-                    </h2>
-                    <h1 style="margin:5px 0; font-family: var(--font-title); color: white; font-size: 2.2rem;">"החברים
-                        של עמית"</h1>
-                    <span style="font-size: 1rem; opacity: 0.9; display: block; margin-top: 5px;">לזכרו של סמ"ר עמית
-                        פרידמן</span>
+                <!-- Hamburger Button (Aligned) -->
+                <div class="menu-alignment-container">
+                    <button class="hamburger-btn" onclick="toggleMenu()">
+                        <i data-lucide="menu" stroke-width="3" width="36" height="36"></i>
+                    </button>
+                </div>
+
+                <div class="header-content">
+                    <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה" class="header-logo">
+                    <div class="header-text">
+                        <h2 style="margin:0; font-size: 1.2rem; opacity: 0.9; font-weight: normal;">"מאפיית פרידמן" -
+                            ספר
+                            מתכונים</h2>
+                        <h1 style="margin:5px 0; font-family: var(--font-title); color: black; font-size: 2.2rem;">עגלת
+                            "קפה
+                            החברים של עמית"</h1>
+                        <h3 style="margin:0; font-size: 1.2rem; font-weight: normal; margin-top: 5px;">לזכר סמ"ר עמית
+                            פרידמן</h3>
+                    </div>
                 </div>
             </header>
+
+
+
+            <!-- Side Menu & Overlay -->
+            <div class="side-menu-overlay" onclick="toggleMenu()"></div>
+            <div class="side-menu">
+                <button class="close-menu-btn" onclick="toggleMenu()">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="menu-header">
+                    <h3>תפריט</h3>
+                </div>
+                <nav class="menu-nav">
+                    <a href="javascript:void(0)" onclick="showAmitStory()">
+                        <i data-lucide="book-open"></i> הסיפור של עמית
+                    </a>
+                    <a href="javascript:void(0)" onclick="showCartLocation()">
+                        <i data-lucide="map-pin"></i> מיקום עגלת הקפה
+                    </a>
+                    <a href="javascript:void(0)" onclick="showAddRecipe()">
+                        <i data-lucide="plus-circle"></i> הוספת מתכון
+                    </a>
+                </nav>
+            </div>
 
             <div class="recipe-grid" id="recipe-list-container">
                 <!-- Recipe Cards Injected Here -->
@@ -54,6 +90,71 @@
         </div>
 
     </main>
+    <!-- Amit's Story View -->
+    <div id="amit-view" class="view">
+        <div class="page story-page">
+            <button class="close-btn" onclick="showHome()">
+                <i data-lucide="arrow-right"></i>
+            </button>
+            <div class="story-content">
+                <h1 class="story-title">לזכרו של סמ"ר עמית פרידמן הי"ד</h1>
+                <p>סמל ראשון עמית פרידמן מ"כ בגדוד 932 של חטיבת הנח"ל, נפל בקרב בתל סולטן שברפיח, רצועת עזה.</p>
+                <p>עמית גדל והתחנך באור יהודה, היה מדריך מוערך בשבט צופי יהודה בעיר, שם ניכר באישיותו המנהיגותית, באהבתו
+                    לזולת ובחברות האינסופית שהקרין על כל מי שסבב אותו.</p>
+                <p>עמית התגייס לחטיבת הנח"ל, בה הוכיח את עצמו כלוחם אמיץ ונחוש. לאחר שסיים את מסלול הלוחם, יצא לקורס
+                    מ"כים אותו סיים בהצלחה. גאוותו על שירותו הקרבי הייתה עצומה, והוא תמיד היה נכון לתת את כל כולו למען
+                    חבריו ולמען המדינה.</p>
+                <p>עמית היה ספורטאי בנשמתו. הוא שיחק כדורסל בקבוצת הספורט העירונית ע.ל.ה אור יהודה, והיה חלק מכיתת
+                    הספורט בתיכון 'יובלים'. אהבתו לספורט לא הסתיימה במגרש – הוא היה אוהד מסור של מכבי תל אביב, בכדורגל
+                    ובכדורסל, ותמיד הוגדר כ"צהוב בנשמה".</p>
+                <p>ביום כ"ד באב תשפ"ד, 27 באוגוסט 2024, נפל עמית בקרב בדרום רצועת עזה בגיל 19 בלבד. מותו הותיר חלל כבד
+                    בלב כל מי שהכיר ואהב אותו, אך החיוך המאיר שלו, אהבתו לחיים ותחושת השליחות שליוותה אותו ימשיכו להוות
+                    מקור השראה לכולנו.</p>
+                <p class="story-footer">מלח הארץ, שהיה גם מלך החיים הטובים. יהי זכרו ברוך.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location View -->
+    <div id="location-view" class="view">
+        <div class="page location-page">
+            <button class="close-btn" onclick="showHome()">
+                <i data-lucide="arrow-right"></i>
+            </button>
+            <div class="location-content">
+                <h1 class="story-title">מיקום עגלת הקפה</h1>
+
+                <div class="location-details">
+                    <div class="location-item">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <strong>כתובת:</strong>
+                            <p>הדקל 11 פינת ברלב שכונת נווה סביון אור יהודה</p>
+                        </div>
+                    </div>
+
+                    <div class="location-item box-waze">
+                        <i data-lucide="navigation"></i>
+                        <div>
+                            <strong>בווייז:</strong>
+                            <p>קפה החברים של עמית</p>
+                        </div>
+                        <a href="https://waze.com/ul?q=קפה%20החברים%20של%20עמית&navigate=yes" target="_blank"
+                            class="waze-btn">
+                            נווט עם Waze
+                        </a>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src="https://maps.google.com/maps?q=%D7%A7%D7%A4%D7%94+%D7%94%D7%97%D7%91%D7%A8%D7%99%D7%9D+%D7%A9%D7%9C+%D7%A2%D7%9E%D7%99%D7%AA,+%D7%90%D7%95%D7%A8+%D7%99%D7%94%D7%95%D7%93%D7%94&t=&z=17&ie=UTF8&iwloc=&output=embed">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Recipe Data
         const recipes = [
@@ -267,6 +368,32 @@
             document.getElementById('recipe-view').classList.remove('active');
             document.getElementById('home-view').classList.add('active');
             window.scrollTo(0, 0);
+        }
+
+        function toggleMenu() {
+            document.querySelector('.side-menu').classList.toggle('active');
+            document.querySelector('.side-menu-overlay').classList.toggle('active');
+        }
+
+        function showAmitStory() {
+            toggleMenu();
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.getElementById('amit-view').classList.add('active');
+            window.scrollTo(0, 0);
+            lucide.createIcons();
+        }
+
+        function showCartLocation() {
+            toggleMenu();
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.getElementById('location-view').classList.add('active');
+            window.scrollTo(0, 0);
+            lucide.createIcons();
+        }
+
+        function showAddRecipe() {
+            toggleMenu();
+            alert('הוספת מתכון - יעודכן בקרוב');
         }
 
         window.onload = init;

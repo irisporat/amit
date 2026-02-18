@@ -56,8 +56,10 @@ body {
 
 /* App Header */
 .app-header {
-    background: var(--primary-blue);
-    color: white;
+    background: url('images/רקע תכלת לוגו עגלה.png') no-repeat center center;
+    background-size: cover;
+    color: black;
+    /* Changed to black for better contrast on light background */
     padding: 15px 20px;
     position: relative;
     /* Changed from sticky to relative to avoid overlap */
@@ -65,6 +67,27 @@ body {
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    /* Space between logo and text */
+}
+
+.header-logo {
+    height: 80px;
+    /* Adjust size as needed */
+    width: auto;
+    object-fit: contain;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Mobile First (List View) */
@@ -353,4 +376,285 @@ body {
     color: var(--dark-blue);
     /* Consistent logic */
     font-family: var(--font-title);
+}
+
+/* Menu Alignment Wrapper */
+.menu-alignment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: absolute;
+    /* Overlay on header */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    /* Cover header height */
+    z-index: 1500;
+    pointer-events: none;
+    /* Let clicks pass through except for button */
+}
+
+/* Hamburger Menu */
+.hamburger-btn {
+    position: absolute;
+    top: 15px;
+    /* Moved down slightly */
+    right: 5px;
+    /* Moved right slightly */
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 5px;
+    pointer-events: auto;
+    /* Re-enable clicks */
+}
+
+/* Hamburger Menu Icon Size */
+.hamburger-btn svg {
+    width: 36px;
+    height: 36px;
+}
+
+/* Desktop Styles for Hamburger */
+@media (min-width: 900px) {
+    .hamburger-btn {
+        top: 30px;
+        /* Vertically centered in header */
+        right: 180px;
+        /* Move further left */
+    }
+
+    .hamburger-btn svg {
+        width: 60px;
+        /* Bigger on desktop */
+        height: 60px;
+    }
+}
+
+.hamburger-btn svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Hidden by default */
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2100;
+    /* Above everything */
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2050;
+    display: none;
+    backdrop-filter: blur(2px);
+}
+
+.side-menu-overlay.active {
+    display: block;
+}
+
+.close-menu-btn {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.menu-header h3 {
+    margin: 0 0 20px 0;
+    color: var(--primary-blue);
+    font-family: var(--font-title);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.menu-nav a:hover {
+    background: #f5f5f5;
+    color: var(--primary-blue);
+}
+
+/* Amit's Story Styling */
+.story-page {
+    padding: 30px;
+    background: var(--box-bg);
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 80vh;
+}
+
+.story-content {
+    text-align: right;
+    line-height: 1.8;
+    color: var(--text-black);
+}
+
+.story-title {
+    font-family: var(--font-title);
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-bronze);
+    padding-bottom: 10px;
+}
+
+.story-content p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.story-footer {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.3rem;
+    color: var(--primary-blue);
+}
+
+/* Desktop Styles for Story */
+@media (min-width: 900px) {
+    .story-title {
+        font-size: 2.5rem;
+    }
+
+    .story-content p {
+        font-size: 1.5rem;
+        line-height: 2;
+    }
+
+    .story-footer {
+        font-size: 1.8rem;
+    }
+}
+
+/* Location Page Styling */
+.location-page {
+    padding: 30px;
+    /* Background inherits from .page (beige + texture) */
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-height: 80vh;
+    text-align: right;
+}
+
+.location-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.location-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: var(--box-bg);
+    /* Match ingredients-box */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--accent-bronze);
+    /* Match ingredients-box */
+}
+
+.location-item i {
+    color: var(--primary-blue);
+    margin-top: 5px;
+}
+
+.location-item strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+    font-family: var(--font-title);
+}
+
+.location-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-black);
+}
+
+.box-waze {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.waze-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #33ccff;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    align-self: flex-start;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
 }
