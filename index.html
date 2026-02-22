@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Varela+Round&family=Amatic+SC:wght@400;700&family=Klee+One:wght@400;600&family=Frank+Ruhl+Libre:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=Assistant:wght@300;400;700&family=Varela+Round&family=Amatic+SC:wght@400;700&family=Klee+One:wght@400;600&family=Frank+Ruhl+Libre:wght@400;700&display=swap"
         rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -21,9 +21,6 @@
 </head>
 
 <body>
-
-
-
     <!-- View Switcher -->
     <main id="app-container">
 
@@ -38,17 +35,12 @@
                 </div>
 
                 <div class="header-content">
-                    <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה" class="header-logo">
                     <div class="header-text">
-                        <h2 style="margin:0; font-size: 1.2rem; opacity: 0.9; font-weight: normal;">"מאפיית פרידמן" -
-                            ספר
-                            מתכונים</h2>
-                        <h1 style="margin:5px 0; font-family: var(--font-title); color: black; font-size: 2.2rem;">עגלת
-                            "קפה
-                            החברים של עמית"</h1>
-                        <h3 style="margin:0; font-size: 1.2rem; font-weight: normal; margin-top: 5px;">לזכר סמ"ר עמית
-                            פרידמן</h3>
+                        <h1 class="header-title">עגלת "קפה החברים של עמית"</h1>
+                        <h2 class="header-subtitle">ספר מתכונים</h2>
+                        <h3 class="header-tagline">לזכר סמ"ר עמית פרידמן</h3>
                     </div>
+                    <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה" class="header-logo header-logo-top">
                 </div>
             </header>
 
@@ -60,18 +52,12 @@
                 <button class="close-menu-btn" onclick="toggleMenu()">
                     <i data-lucide="x"></i>
                 </button>
-                <div class="menu-header">
-                    <h3>תפריט</h3>
-                </div>
                 <nav class="menu-nav">
-                    <a href="javascript:void(0)" onclick="showAmitStory()">
+                    <a href="remember.html">
                         <i data-lucide="book-open"></i> הסיפור של עמית
                     </a>
-                    <a href="javascript:void(0)" onclick="showCartLocation()">
+                    <a href="location.html">
                         <i data-lucide="map-pin"></i> מיקום עגלת הקפה
-                    </a>
-                    <a href="javascript:void(0)" onclick="showAddRecipe()">
-                        <i data-lucide="plus-circle"></i> הוספת מתכון
                     </a>
                 </nav>
             </div>
@@ -487,11 +473,6 @@
             document.getElementById('location-view').classList.add('active');
             window.scrollTo(0, 0);
             lucide.createIcons();
-        }
-
-        function showAddRecipe() {
-            toggleMenu();
-            alert('הוספת מתכון - יעודכן בקרוב');
         }
 
         window.onload = init;

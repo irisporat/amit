@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מיקום עגלת הקפה - קפה החברים של עמית</title>
+    <meta name="description" content="מיקום עגלת קפה החברים של עמית - הדקל 11 פינת ברלב, נווה סביון, אור יהודה">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=Frank+Ruhl+Libre:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="location.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="menu-alignment-container">
+            <a href="index.html" class="hamburger-btn" title="חזרה לדף הבית" style="color:black; text-decoration:none;">
+                <i data-lucide="arrow-right" style="width:32px;height:32px;"></i>
+            </a>
+        </div>
+        <div class="header-content">
+            <div class="header-text">
+                <h1 class="header-title">מיקום עגלת הקפה</h1>
+            </div>
+            <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה" class="header-logo header-logo-top">
+        </div>
+    </header>
+
+    <div class="location-wrapper">
+        <div class="location-body">
+
+            <!-- Info cards column -->
+            <div class="location-info">
+
+                <div class="info-card">
+                    <i data-lucide="map-pin" width="22" height="22"></i>
+                    <div class="info-card-body">
+                        <strong>כתובת</strong>
+                        <p>הדקל 11 פינת ברלב<br>שכונת נווה סביון, אור יהודה</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <i data-lucide="clock" width="22" height="22"></i>
+                    <div class="info-card-body">
+                        <strong>שעות פעילות</strong>
+                        <p>ימי שישי — 10:00–13:00</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <i data-lucide="navigation" width="22" height="22"></i>
+                    <div class="info-card-body">
+                        <strong>ניווט</strong>
+                        <p>קפה החברים של עמית</p>
+                        <a href="https://waze.com/ul?q=קפה%20החברים%20של%20עמית&navigate=yes" target="_blank"
+                            rel="noopener" class="waze-btn">
+                            <i data-lucide="map" width="16" height="16"></i>
+                            נווט עם Waze
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Map column -->
+            <div class="map-container">
+                <iframe
+                    src="https://maps.google.com/maps?q=%D7%A7%D7%A4%D7%94+%D7%94%D7%97%D7%91%D7%A8%D7%99%D7%9D+%D7%A9%D7%9C+%D7%A2%D7%9E%D7%99%D7%AA,+%D7%90%D7%95%D7%A8+%D7%99%D7%94%D7%95%D7%93%D7%94&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

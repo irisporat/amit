@@ -1,0 +1,90 @@
+/* ============================================================
+   REMEMBER PAGE — remember.css  (Desktop First)
+   ============================================================ */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Wrapper ── */
+.remember-wrapper {
+    max-width: 800px;
+    margin: 36px auto;
+    padding: 0 32px;
+    flex: 1;
+}
+
+/* ── Story card ── */
+.story-card {
+    background: rgba(255, 255, 240, 0.45);
+    border-radius: 16px;
+    padding: 40px 48px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 110, 99, 0.2);
+}
+
+/* ── Title ── */
+.story-title {
+    font-family: var(--font-title);
+    color: var(--primary-blue);
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 0 0 12px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--accent-bronze);
+}
+
+/* ── Body text ── */
+.story-content {
+    text-align: right;
+    line-height: 2;
+    color: var(--text-black);
+    margin-top: 28px;
+}
+
+.story-content p {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+}
+
+/* ── Footer quote ── */
+.story-footer {
+    font-weight: 700;
+    text-align: center;
+    margin-top: 36px;
+    font-size: 1.3rem;
+    color: var(--primary-blue);
+    border-top: 1px solid rgba(141, 110, 99, 0.3);
+    padding-top: 20px;
+}
+
+/* ============================================================
+   MOBILE  (max-width: 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+    .remember-wrapper {
+        margin: 16px auto;
+        padding: 0 14px;
+    }
+
+    .story-card {
+        padding: 24px 20px;
+        border-radius: 12px;
+    }
+
+    .story-title {
+        font-size: 1.5rem;
+    }
+
+    .story-content p {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .story-footer {
+        font-size: 1.1rem;
+    }
+}

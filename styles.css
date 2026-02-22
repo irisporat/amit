@@ -1,13 +1,14 @@
+/* ============================================================
+   GLOBAL VARIABLES & RESET
+   ============================================================ */
 :root {
     --primary-blue: #0047AB;
-    /* Cobalt/Royal Blue */
     --accent-bronze: #8d6e63;
-    /* Sepia/Bronze */
     --dark-blue: #0047AB;
     --text-black: #2c1810;
     --beige-bg: #fdf6e3;
     --box-bg: #fffff0;
-    --font-main: "Segoe UI", Tahoma, Arial, sans-serif;
+    --font-main: 'Fredoka', 'Segoe UI', Tahoma, Arial, sans-serif;
     --font-title: 'Frank Ruhl Libre', serif;
     --font-handwriting: 'Klee One', cursive;
     --a4-width: 210mm;
@@ -21,16 +22,15 @@
 
 body {
     margin: 0;
-    background-color: #121212;
-    /* Dark theme background for list view per example? Or keep blue? Let's go with dark BG for list as requested via "example site" loop, but clean. */
     background-color: #f0f2f5;
-    /* Actually let's keep it clean web app style */
     font-family: var(--font-main);
     color: var(--text-black);
     overflow-x: hidden;
 }
 
-/* View Switcher Logic */
+/* ============================================================
+   VIEW SWITCHER
+   ============================================================ */
 .view {
     display: none;
     width: 100%;
@@ -54,15 +54,15 @@ body {
     }
 }
 
-/* App Header */
+/* ============================================================
+   APP HEADER
+   ============================================================ */
 .app-header {
     background: url('images/רקע תכלת לוגו עגלה.png') no-repeat center center;
     background-size: cover;
     color: black;
-    /* Changed to black for better contrast on light background */
     padding: 15px 20px;
     position: relative;
-    /* Changed from sticky to relative to avoid overlap */
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -74,14 +74,24 @@ body {
     align-items: center;
     justify-content: center;
     gap: 15px;
-    /* Space between logo and text */
 }
 
 .header-logo {
     height: 80px;
-    /* Adjust size as needed */
     width: auto;
     object-fit: contain;
+}
+
+/* Logo pinned to the left edge of the recipe-grid */
+.header-logo-top {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(20px, calc((100% - 1200px) / 2 + 20px));
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.7;
 }
 
 .header-text {
@@ -90,12 +100,69 @@ body {
     align-items: center;
 }
 
-/* Mobile First (List View) */
+.header-title {
+    margin: 10px 0;
+    font-family: var(--font-title);
+    color: black;
+    font-size: 2rem;
+}
+
+.header-subtitle {
+    margin: 0;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: normal;
+    align-self: flex-start;
+}
+
+.header-tagline {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    align-self: flex-start;
+}
+
+/* ============================================================
+   HAMBURGER / MENU ALIGNMENT
+   ============================================================ */
+.menu-alignment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1500;
+    pointer-events: none;
+}
+
+.hamburger-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: max(10px, calc((100% - 1200px) / 2 + 10px));
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 5px;
+    pointer-events: auto;
+}
+
+.hamburger-btn svg {
+    width: 50px;
+    height: 50px;
+}
+
+/* ============================================================
+   RECIPE GRID  (Desktop: 4-column grid)
+   ============================================================ */
 .recipe-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -103,94 +170,57 @@ body {
 
 .recipe-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
-    align-items: stretch;
-    /* Stretch to fill height */
+    flex-direction: column;
+    align-items: flex-start;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    min-height: 110px;
-    /* Slightly taller minimum */
     height: auto;
 }
 
 .card-img {
-    width: 110px;
+    width: 100%;
     height: auto;
     object-fit: cover;
-    aspect-ratio: 1/1;
-    /* Ensure square on mobile too if possible, or cover */
+    aspect-ratio: 1 / 1;
 }
 
 .card-info {
     flex: 1;
-    padding: 10px 15px;
-    /* Add vertical padding */
+    width: 100%;
+    padding: 10px 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Push author to bottom */
+    min-height: 80px;
 }
 
-/* Desktop Grid View */
-@media (min-width: 900px) {
-    .recipe-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        /* 4 in a row */
-        gap: 25px;
-        padding: 40px;
-    }
-
-    .recipe-card {
-        flex-direction: column;
-        height: auto;
-        /* Allow content to wrap */
-        align-items: flex-start;
-    }
-
-    .card-img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        /* Square */
-    }
-
-    .card-info {
-        width: 100%;
-        padding: 15px;
-        justify-content: flex-start;
-    }
-
-    .card-info h3 {
-        font-size: 1.6rem;
-        margin-bottom: 8px;
-    }
-
-    .card-info p {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #444;
-    }
-
-    .card-arrow {
-        display: none;
-        /* No arrow needed for card style */
-    }
+.card-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 0;
 }
 
-/* Close Button */
+.card-info p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #444;
+    margin: 0;
+}
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
 .close-btn {
     position: absolute;
     top: 10px;
     left: 10px;
-    /* Force Left */
     background: #6495ED;
-    /* Cornflower Blue (Lighter) */
-    /* Solid Blue for visibility */
     color: white;
     border: 2px solid white;
     width: 45px;
@@ -204,27 +234,27 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s, opacity 0.2s;
     opacity: 0.7;
-    /* 30% Transparent */
 }
 
 .close-btn:hover {
     transform: scale(1.1);
     background: #4169E1;
-    /* Royal Blue */
     opacity: 1;
 }
 
-/* Single Recipe Styling (A4 Adaptation) */
+/* ============================================================
+   SINGLE RECIPE PAGE  (Desktop default: A4-ish wide)
+   ============================================================ */
 .page {
-    width: var(--a4-width);
-    min-height: var(--a4-height);
+    width: 90%;
+    max-width: 1400px;
+    min-height: 80vh;
     background-color: var(--beige-bg);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     position: relative;
-    padding: 20mm;
+    padding: 50px;
     margin: 20px auto;
     overflow: hidden;
-    /* Texture */
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
@@ -234,39 +264,6 @@ body {
     display: none;
 }
 
-/* Responsive Fixes */
-@media (max-width: 850px) {
-    .page {
-        width: 100%;
-        margin: 0;
-        min-height: 100vh;
-        border-radius: 0;
-        padding: 20px;
-        /* Reduced padding for mobile */
-    }
-
-    .page::before {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-    }
-
-    .recipe-content {
-        flex-direction: column;
-    }
-
-    .ingredients-box {
-        flex: none;
-        width: 100%;
-    }
-
-    .logo h1 {
-        font-size: 1.5rem;
-    }
-}
-
-/* Reuse existing box styles */
 .recipe-header {
     text-align: center;
     margin-bottom: 8mm;
@@ -274,11 +271,8 @@ body {
     z-index: 10;
 }
 
-
-
 .recipe-title {
-    font-size: 24pt;
-    /* Slightly smaller for responsive */
+    font-size: 2.5rem;
     color: var(--dark-blue);
     font-family: var(--font-title);
     font-weight: 700;
@@ -286,7 +280,7 @@ body {
 }
 
 .recipe-author {
-    font-size: 14pt;
+    font-size: 2rem;
     color: var(--text-black);
     font-family: var(--font-handwriting);
     margin-top: 2mm;
@@ -296,29 +290,23 @@ body {
 .recipe-content {
     display: flex;
     justify-content: center;
-    /* Center boxes horizontally */
     gap: 20px;
     position: relative;
     z-index: 10;
     flex-wrap: wrap;
-    /* Ensure wrapping on smaller screens */
 }
 
 .ingredients-box {
     flex: 1;
-    /* 1/3 Width */
 }
 
 .instructions-box {
     flex: 2;
-    /* 2/3 Width */
 }
 
 .ingredients-box,
 .instructions-box {
-    /* Stretch to fill available width */
     min-width: 300px;
-    /* Ensure wrapping on small screens */
     background: var(--box-bg);
     padding: 20px;
     border-radius: 8px;
@@ -329,126 +317,32 @@ body {
 
 .ingredients-box div,
 .instructions-box div {
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-/* Large Desktop - Increase Page Size */
-/* Large Desktop - Increase Page Size */
-@media (min-width: 1000px) {
-    .page {
-        width: 90%;
-        /* Use percentage to be responsive but wide */
-        max-width: 1400px;
-        /* Cap width for very large screens */
-        padding: 50px;
-        min-height: 80vh;
-    }
-
-    .recipe-title {
-        font-size: 2.5rem;
-        /* Very Large Title */
-    }
-
-    .recipe-author {
-        font-size: 2rem;
-        /* Large Author Name */
-    }
-
-    .box-title {
-        font-size: 1.8rem;
-    }
-
-    .ingredients-box div,
-    .instructions-box div {
-        font-size: 1.5rem;
-        /* Large readable text */
-        line-height: 1.8;
-    }
+    line-height: 1.8;
+    font-size: 1.5rem;
 }
 
 .box-title {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 15px;
     border-bottom: 2px solid var(--accent-bronze);
     display: inline-block;
     color: var(--dark-blue);
-    /* Consistent logic */
     font-family: var(--font-title);
 }
 
-/* Menu Alignment Wrapper */
-.menu-alignment-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: absolute;
-    /* Overlay on header */
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    /* Cover header height */
-    z-index: 1500;
-    pointer-events: none;
-    /* Let clicks pass through except for button */
-}
-
-/* Hamburger Menu */
-.hamburger-btn {
-    position: absolute;
-    top: 15px;
-    /* Moved down slightly */
-    right: 5px;
-    /* Moved right slightly */
-    background: none;
-    border: none;
-    color: black;
-    cursor: pointer;
-    padding: 5px;
-    pointer-events: auto;
-    /* Re-enable clicks */
-}
-
-/* Hamburger Menu Icon Size */
-.hamburger-btn svg {
-    width: 36px;
-    height: 36px;
-}
-
-/* Desktop Styles for Hamburger */
-@media (min-width: 900px) {
-    .hamburger-btn {
-        top: 20px;
-        /* Vertically centered in header */
-        right: 180px;
-        /* Move further left */
-    }
-
-    .hamburger-btn svg {
-        width: 70px;
-        /* Bigger on desktop */
-        height: 70px;
-    }
-}
-
-.hamburger-btn svg {
-    width: 32px;
-    height: 32px;
-}
-
-/* Side Menu */
+/* ============================================================
+   SIDE MENU
+   ============================================================ */
 .side-menu {
     position: fixed;
     top: 0;
     right: -300px;
-    /* Hidden by default */
     width: 280px;
     height: 100vh;
     background: white;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     z-index: 2100;
-    /* Above everything */
     transition: right 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -502,7 +396,7 @@ body {
     text-decoration: none;
     color: var(--text-black);
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -516,7 +410,9 @@ body {
     color: var(--primary-blue);
 }
 
-/* Amit's Story Styling */
+/* ============================================================
+   AMIT'S STORY PAGE
+   ============================================================ */
 .story-page {
     padding: 30px;
     background: var(--box-bg);
@@ -537,7 +433,7 @@ body {
 .story-title {
     font-family: var(--font-title);
     color: var(--primary-blue);
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     margin-bottom: 30px;
     text-align: center;
     border-bottom: 2px solid var(--accent-bronze);
@@ -546,37 +442,23 @@ body {
 
 .story-content p {
     margin-bottom: 20px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    line-height: 2;
 }
 
 .story-footer {
     font-weight: bold;
     text-align: center;
     margin-top: 40px;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: var(--primary-blue);
 }
 
-/* Desktop Styles for Story */
-@media (min-width: 900px) {
-    .story-title {
-        font-size: 2.5rem;
-    }
-
-    .story-content p {
-        font-size: 1.5rem;
-        line-height: 2;
-    }
-
-    .story-footer {
-        font-size: 1.8rem;
-    }
-}
-
-/* Location Page Styling */
+/* ============================================================
+   LOCATION PAGE
+   ============================================================ */
 .location-page {
     padding: 30px;
-    /* Background inherits from .page (beige + texture) */
     max-width: 800px;
     margin: 20px auto;
     border-radius: 12px;
@@ -604,12 +486,10 @@ body {
     align-items: flex-start;
     gap: 15px;
     background: var(--box-bg);
-    /* Match ingredients-box */
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--accent-bronze);
-    /* Match ingredients-box */
 }
 
 .location-item i {
@@ -657,4 +537,126 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: 2px solid white;
+}
+
+/* ============================================================
+   MOBILE OVERRIDES  (max-width: 599px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+    /* Header */
+    .app-header {
+        padding-top: 15px;
+    }
+
+    .header-title {
+        font-size: 1.4rem;
+        margin-top: 0;
+    }
+
+    .header-subtitle,
+    .header-tagline {
+        font-size: 0.8rem;
+    }
+
+    /* Hamburger */
+    .hamburger-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .hamburger-btn {
+        top: 15px;
+        transform: none;
+    }
+
+    /* Logo */
+    .header-logo-top {
+        height: 50px;
+        top: 65%;
+        left: 5px;
+    }
+
+    /* Recipe Grid — single column list */
+    .recipe-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    /* Card — horizontal row on mobile */
+    .recipe-card {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 75px;
+    }
+
+    .card-img {
+        width: 65px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .card-info {
+        padding: 6px 12px;
+        min-height: unset;
+    }
+
+    .card-info h3 {
+        font-size: 1rem;
+    }
+
+    .card-info p {
+        font-size: 0.9rem;
+    }
+
+    /* Single Recipe Page */
+    .page {
+        width: 100%;
+        margin: 0;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 20px;
+    }
+
+    .recipe-title {
+        font-size: 1.4rem;
+    }
+
+    .recipe-author {
+        font-size: 1rem;
+    }
+
+    .recipe-content {
+        flex-direction: column;
+    }
+
+    .ingredients-box {
+        flex: none;
+        width: 100%;
+    }
+
+    .ingredients-box div,
+    .instructions-box div {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .box-title {
+        font-size: 1.4rem;
+    }
+
+    /* Story */
+    .story-title {
+        font-size: 1.8rem;
+    }
+
+    .story-content p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+    }
+
+    .story-footer {
+        font-size: 1.3rem;
+    }
 }
