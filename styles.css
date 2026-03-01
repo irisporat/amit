@@ -29,6 +29,61 @@ body {
 }
 
 /* ============================================================
+   SHARED TOP BAR NAVIGATION
+   ============================================================ */
+.top-bar {
+    height: 70px;
+    background: #1f2937;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-btn-top {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.page-title {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.top-bar-left img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ============================================================
    VIEW SWITCHER
    ============================================================ */
 .view {
@@ -540,6 +595,35 @@ body {
 }
 
 /* ============================================================
+   PLACEHOLDER PAGES & HOME
+   ============================================================ */
+.hello-world-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 70px);
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    background: linear-gradient(135deg, #1f2937, #111827);
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.container h2 {
+    color: #1f2937;
+}
+
+/* ============================================================
    MOBILE OVERRIDES  (max-width: 599px)
    ============================================================ */
 @media (max-width: 600px) {
@@ -658,5 +742,16 @@ body {
 
     .story-footer {
         font-size: 1.3rem;
+    }
+
+    /* Containers & Pages */
+    .hello-world-container {
+        font-size: 2rem;
+        height: calc(100vh - 65px);
+    }
+
+    .container {
+        margin: 20px;
+        padding: 20px;
     }
 }
