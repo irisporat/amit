@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
 /* ============================================================
    GLOBAL VARIABLES & RESET
    ============================================================ */
@@ -633,7 +635,7 @@ body {
 .memorial-quote {
     margin-top: 40px;
     font-size: 2.2rem;
-    font-family: 'Guttman Yad', var(--font-handwriting), cursive;
+    font-family: 'Guttman Yad', 'Amatic SC', var(--font-handwriting), cursive;
     font-weight: normal;
     line-height: 1.4;
 }
@@ -776,8 +778,10 @@ body {
     /* Containers & Pages */
     .hello-world-container {
         font-size: 2rem;
-        height: calc(100vh - 65px);
-        padding: 20px;
+        height: min-content;
+        min-height: calc(100vh - 65px);
+        padding: 45px 20px 20px 20px;
+        justify-content: flex-start;
     }
 
     .memorial-image {
