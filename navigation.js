@@ -20,16 +20,18 @@ function initNavigation(pageTitle, options = {}) {
     <!-- Top Navigation Bar -->
     <header class="top-bar">
         <div class="top-bar-right">
-            ${settings.hideHamburger ? 
-                `<!-- Hamburger hidden for this page -->` : 
-                `<button class="hamburger-btn-top" onclick="toggleMenu()">
+            ${settings.hideHamburger ?
+            `<!-- Hamburger hidden for this page -->` :
+            `<button class="hamburger-btn-top" onclick="toggleMenu()">
                     <i data-lucide="menu" stroke-width="2.5" width="28" height="28"></i>
                 </button>`
-            }
+        }
             <h1 class="page-title">${pageTitle}</h1>
         </div>
         <div class="top-bar-left">
-            <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה">
+            <a href="index.html">
+                <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה">
+            </a>
         </div>
     </header>
 
@@ -41,7 +43,7 @@ function initNavigation(pageTitle, options = {}) {
         </button>
         <nav class="menu-nav">
             <a href="index.html">
-                <i data-lucide="home"></i>
+                <i data-lucide="home"></i> דף הבית
             </a>
             <a href="remember.html">
                 <i data-lucide="info"></i> הסיפור של עמית
