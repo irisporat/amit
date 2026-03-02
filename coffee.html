@@ -21,46 +21,7 @@
 </head>
 
 <body>
-    <!-- Top Navigation Bar -->
-    <header class="top-bar">
-        <div class="top-bar-right">
-            <button class="hamburger-btn-top" onclick="toggleMenu()">
-                <i data-lucide="menu" stroke-width="2.5" width="28" height="28"></i>
-            </button>
-            <h1 class="page-title">Coffee</h1>
-        </div>
-        <div class="top-bar-left">
-            <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה">
-        </div>
-    </header>
-
-    <!-- Side Menu & Overlay -->
-    <div class="side-menu-overlay" onclick="toggleMenu()"></div>
-    <div class="side-menu">
-        <button class="close-menu-btn" onclick="toggleMenu()">
-            <i data-lucide="x"></i>
-        </button>
-        <nav class="menu-nav">
-            <a href="index.html">
-                <i data-lucide="home"></i>
-            </a>
-            <a href="about.html">
-                <i data-lucide="info"></i> הסיפור של עמית
-            </a>
-            <a href="coffee.html">
-                <i data-lucide="coffee"></i> קפה "החברים של עמית"
-            </a>
-            <a href="events.html">
-                <i data-lucide="calendar"></i> אירועי הנצחה
-            </a>
-            <a href="news.html">
-                <i data-lucide="newspaper"></i> כתבות בעיתונות
-            </a>
-            <a href="contact.html">
-                <i data-lucide="mail"></i> יצירת קשר
-            </a>
-        </nav>
-    </div>
+    <div id="navigation-root"></div>
 
     <!-- View Switcher -->
     <main id="app-container">
@@ -359,7 +320,7 @@
         function init() {
             sortRecipes();
             renderHome();
-            lucide.createIcons();
+            initNavigation("קפה \"החברים של עמית\"", { hideHamburger: true });
         }
 
         function sortRecipes() {
@@ -471,13 +432,9 @@
             window.scrollTo(0, 0);
         }
 
-        function toggleMenu() {
-            document.querySelector('.side-menu').classList.toggle('active');
-            document.querySelector('.side-menu-overlay').classList.toggle('active');
-        }
-
         window.onload = init;
     </script>
+    <script src="navigation.js"></script>
 </body>
 
 </html>
