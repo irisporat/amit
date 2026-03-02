@@ -215,7 +215,7 @@
             {
                 title: "עוגת תפוחים",
                 author: "לימור גור",
-                ingredients: "4-5 תפוחי גרנד סמיט\n3/4 כוס סוכר\nחצי כוס שמן\n3 ביצים L\n1 כוס קמת תופח\nקורט מלח\nכפית קינמון",
+                ingredients: "4-5 תפוחי גרנד סמיט (פרוסים לפלחים דקיקים או מגוררים גס)\n3/4 כוס סוכר\nחצי כוס שמן\n3 ביצים L\n1 כוס קמת תופח\nקורט מלח\nכפית קינמון",
                 instructions: "1. לערבב הכל פרט לתפוחים לתערובת אחידה.\n2. לשמן תבנית ולפזר סוכר חום.\n3. לסדר שכבות תפוחים עם סוכר חום וקינמון.\n4. לשפוך מעל את התערובת ולנער.\n5. לאפות 40 דקות."
             },
             {
@@ -355,9 +355,9 @@
                 const safeAuthor = recipe.author.replace(/[<>:"/\\|?*'\`\u05F3\u05F4]/g, '');
 
                 // Paths to try
-                const jpgPath = `images/${safeTitle} - ${safeAuthor}.jpg`;
-                const jpegPath = `images/${safeTitle} - ${safeAuthor}.jpeg`;
-                const pngPath = `images/${safeTitle} - ${safeAuthor}.png`;
+                const jpgPath = `images/coffee/${safeTitle} - ${safeAuthor}.jpg`;
+                const jpegPath = `images/coffee/${safeTitle} - ${safeAuthor}.jpeg`;
+                const pngPath = `images/coffee/${safeTitle} - ${safeAuthor}.png`;
 
                 // Placeholder fallback logic
                 let fallbackUrl = 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80'; // Default Cake

@@ -30,7 +30,7 @@ function initNavigation(pageTitle, options = {}) {
         </div>
         <div class="top-bar-left">
             <a href="index.html">
-                <img src="images/לוגו עגלה לבן.png" alt="לוגו עגלה">
+                <img src="images/main/לוגו עגלה לבן.png" alt="לוגו עגלה">
             </a>
         </div>
     </header>
