@@ -18,15 +18,58 @@
 <body>
     <div id="navigation-root"></div>
 
-    <div class="container">
-        <h2>חדשות ועדכונים</h2>
-        <p>דף זה נמצא בבנייה. כאן יפורסמו העדכונים האחרונים.</p>
-    </div>
+    <main id="app-container">
+        <div id="news-view" class="view active">
+            <div class="news-grid" id="news-list-container">
+                <!-- News Cards Injected Here -->
+            </div>
+        </div>
+    </main>
 
     <script src="navigation.js"></script>
     <script>
+        // News Data
+        const newsArticles = [
+            {
+                title: "לזכרו של סמ\"ר עמית פרידמן",
+                source: "Ynet",
+                image: "https://v.ynet.co.il/PicServer5/2023/10/08/12948639/12948633010099640360no.jpg",
+                link: "https://www.ynet.co.il/gal-hed/article/b1jpe83pbl?utm_source=ynet.app.ios&utm_term=b1jpe83pbl&utm_campaign=whatsapp&utm_medium=social?utm_source=https://www.ynet.co.il&utm_medium=social&utm_campaign=general_share"
+            },
+            {
+                title: "קפה לזכרו של גיבור",
+                source: "עיתונות מקומית",
+                image: "images/news/coffe 1.jpeg",
+                link: "images/news/coffe 1.jpeg"
+            },
+            {
+                title: "השקת עגלת הקפה",
+                source: "עיתונות מקומית",
+                image: "images/news/coffe 2.jpeg",
+                link: "images/news/coffe 2.jpeg"
+            }
+        ];
+
+        function renderNews() {
+            const listContainer = document.getElementById('news-list-container');
+            listContainer.innerHTML = newsArticles.map(article => `
+                <div class="news-card" onclick="window.open('${article.link}', '_blank')">
+                    <img src="${article.image}" alt="${article.title}" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1585829365234-78d9b692d47d?auto=format&fit=crop&w=300&q=80'">
+                    <div class="card-info">
+                        <h3>${article.title}</h3>
+                        <p>${article.source}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
         window.onload = () => {
-            initNavigation("News");
+            initNavigation("כתבות בעיתונות");
+            renderNews();
         };
     </script>
 </body>

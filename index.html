@@ -15,22 +15,54 @@
 
 </head>
 
-<body>
+<body class="home-page">
     <div id="navigation-root"></div>
 
-    <!-- Hello World -->
+    <!-- Hello World Redesign -->
     <div class="hello-world-container">
-        <img src="images/main/עמית פרידמן.jpeg" alt="עמית פרידמן" class="memorial-image">
-        <div>סמ"ר עמית פרידמן ז"ל</div>
-        <div class="memorial-dates">2005 - 2024</div>
-        <div class="memorial-quote">"מעצבן אותי אנשים שמפסידים חוויות<br>בגלל שלא היה להם כח לקום"</div>
+        <div class="memorial-image-container">
+            <img src="images/main/עמית פרידמן.jpeg" alt="עמית פרידמן" class="memorial-image">
+        </div>
+        <div class="memorial-text-container">
+            <h1 class="memorial-name">סמ"ר עמית פרידמן ז"ל</h1>
+            <div class="memorial-dates" dir="ltr">2005 &ndash; 2024</div>
+            <div class="memorial-info">
+                לוחם בחטיבת הנח"ל, נפל בקרב ברפיח<br>
+                ביום כ"ד באב תשפ"ד (27.8.2024)
+            </div>
+            <div class="memorial-quote">
+                "מעצבן אותי אנשים שמפסידים חוויות<br>בגלל שלא היה להם כח לקום"
+            </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel-section">
+            <div class="carousel-container">
+                <img src="images/main/zofim.jpeg" alt="צופים" class="carousel-img active">
+                <img src="images/main/birthday.jpeg" alt="יום הולדת" class="carousel-img">
+                <img src="images/main/At the party.jpeg" alt="במסיבה" class="carousel-img">
+                <img src="images/main/Army smile.jpeg" alt="חיוך צבאי" class="carousel-img">
+            </div>
+        </div>
     </div>
 
     <script src="navigation.js"></script>
     <script>
         window.onload = () => {
-            initNavigation("");
+            initNavigation("דף הבית");
+            startCarousel();
         };
+
+        function startCarousel() {
+            const images = document.querySelectorAll('.carousel-img');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }, 4000); // Change image every 4 seconds
+        }
     </script>
 </body>
 

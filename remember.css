@@ -11,36 +11,39 @@ body {
 /* ── Wrapper ── */
 .remember-wrapper {
     max-width: 800px;
-    margin: 36px auto;
+    margin: 110px auto 36px;
+    /* 70px header + 40px (2 lines) spacing */
     padding: 0 32px;
     flex: 1;
 }
 
 /* ── Story card ── */
 .story-card {
-    background: rgba(255, 255, 240, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+    /* Translucent dark */
+    backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 40px 48px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(141, 110, 99, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ── Title ── */
 .story-title {
     font-family: var(--font-title);
-    color: var(--primary-blue);
-    font-size: 2.2rem;
+    color: #fff;
+    font-size: 2.5rem;
     text-align: center;
     margin: 0 0 12px;
     padding-bottom: 14px;
-    border-bottom: 2px solid var(--accent-bronze);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ── Body text ── */
 .story-content {
     text-align: right;
     line-height: 2;
-    color: var(--text-black);
+    color: rgba(255, 255, 255, 0.9);
     margin-top: 28px;
 }
 
@@ -54,9 +57,9 @@ body {
     font-weight: 700;
     text-align: center;
     margin-top: 36px;
-    font-size: 1.3rem;
-    color: var(--primary-blue);
-    border-top: 1px solid rgba(141, 110, 99, 0.3);
+    font-size: 1.5rem;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
 }
 

@@ -64,6 +64,14 @@ function initNavigation(pageTitle, options = {}) {
                 <i data-lucide="map-pin"></i> מיקום העגלה
             </a>
         </nav>
+        <div class="menu-social">
+            <a href="https://www.instagram.com/remember_amitfriedman/" target="_blank" class="social-icon instagram">
+                <i data-lucide="instagram"></i>
+            </a>
+            <div class="social-icon facebook">
+                <i data-lucide="facebook"></i>
+            </div>
+        </div>
     </div>
     `;
 
