@@ -38,6 +38,12 @@ body.home-page {
     background-image: none;
 }
 
+body.soft-dark-page {
+    padding-top: 0;
+    background-color: #3e5166; /* Softer, lighter navy */
+    background-image: none;
+}
+
 /* ============================================================
    SHARED TOP BAR NAVIGATION
    ============================================================ */
@@ -764,8 +770,8 @@ body.home-page {
 
 .carousel-container {
     position: relative;
-    width: 700px;
-    height: 400px;
+    width: 900px;
+    height: 550px;
     border-radius: 30px;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -781,6 +787,18 @@ body.home-page {
     object-fit: cover;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
+}
+
+.carousel-img.pos-top {
+    object-position: center top;
+}
+
+.carousel-img.pos-center {
+    object-position: center;
+}
+
+.carousel-img.pos-face-center {
+    object-position: center 15%; /* Centering faces that are usually higher up */
 }
 
 .carousel-img.active {
@@ -999,5 +1017,125 @@ body.home-page {
     .container {
         margin: 20px;
         padding: 20px;
+    }
+}
+
+/* ============================================================
+   EVENTS PAGE
+   ============================================================ */
+.events-page-wrapper {
+    padding-bottom: 50px;
+}
+
+.events-main-title {
+    text-align: center;
+    font-family: var(--font-title);
+    color: var(--dark-blue);
+    font-size: 2.5rem;
+    margin-top: 40px;
+}
+
+.event-box {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    text-align: right;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    overflow: hidden; /* Ensure content stays inside */
+}
+
+.event-box.accordion {
+    cursor: pointer;
+}
+
+.event-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3mm 30px 3mm 3mm;
+    width: 100%;
+    min-height: 186px;
+    position: relative; /* For absolute positioning of arrow */
+}
+
+.accordion-arrow {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.event-box.active .accordion-arrow {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.event-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    background: rgba(0, 71, 171, 0.03); /* Very light blue background for content */
+    border-top: 0px solid rgba(0, 0, 0, 0.05);
+}
+
+.event-box.active .event-accordion-content {
+    max-height: 300px; /* Large enough to show content */
+    border-top-width: 1px;
+    padding-bottom: 20px;
+}
+
+.accordion-item {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    color: var(--text-black);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    transition: background 0.2s;
+}
+
+.accordion-item:hover {
+    background: rgba(0, 71, 171, 0.08);
+}
+
+.event-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+    margin: 0;
+    font-size: 2.2rem;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+    font-weight: 700;
+}
+
+.event-image {
+    width: 180px;
+    height: 180px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px; /* Shorter radius to look more square */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .event-box {
+        padding: 3mm 15px 3mm 3mm;
+        min-height: 106px;
+    }
+    
+    .event-title {
+        font-size: 1.4rem;
+    }
+    
+    .event-image {
+        width: 100px;
+        height: 100px;
     }
 }

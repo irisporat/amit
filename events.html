@@ -15,12 +15,52 @@
 
 </head>
 
-<body>
+<body class="soft-dark-page">
     <div id="navigation-root"></div>
 
-    <div class="container">
-        <h2>אירועים</h2>
-        <p>דף זה נמצא בבנייה. כאן נוסיף מידע על אירועים קרובים סביב העגלה.</p>
+    <div class="events-page-wrapper" style="padding-top: 100px;">
+        
+        <div class="container event-box accordion" onclick="toggleAccordion(this)">
+            <div class="event-main-content">
+                <h2 class="event-title">ימי זיכרון</h2>
+                <div class="accordion-arrow">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                <img src="images/events/memorial day 2025.jpeg" alt="ימי זיכרון" class="event-image">
+            </div>
+            <div class="event-accordion-content">
+                <div class="accordion-item">יום הזיכרון תשפ"ה</div>
+                <div class="accordion-item">יום השנה לזכרו</div>
+            </div>
+        </div>
+
+        <div class="container event-box">
+            <div class="event-main-content">
+                <h2 class="event-title">הרצאות</h2>
+                <img src="images/events/lecture.jpeg" alt="הרצאות" class="event-image">
+            </div>
+        </div>
+
+        <div class="container event-box">
+            <div class="event-main-content">
+                <h2 class="event-title">צופים</h2>
+                <img src="images/events/scouts.jpg" alt="צופים" class="event-image">
+            </div>
+        </div>
+
+        <div class="container event-box">
+            <div class="event-main-content">
+                <h2 class="event-title">ספורט</h2>
+                <img src="images/events/basketball team.jpg" alt="ספורט" class="event-image">
+            </div>
+        </div>
+
+        <div class="container event-box">
+            <div class="event-main-content">
+                <h2 class="event-title">אירועים נוספים</h2>
+                <!-- No image for now -->
+            </div>
+        </div>
     </div>
 
     <script src="navigation.js"></script>
@@ -28,6 +68,10 @@
         window.onload = () => {
             initNavigation("אירועי הנצחה");
         };
+
+        function toggleAccordion(element) {
+            element.classList.toggle('active');
+        }
     </script>
 </body>
 
