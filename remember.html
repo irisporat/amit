@@ -17,6 +17,9 @@
 </head>
 
 <body class="home-page">
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/main/clouds480.mp4" type="video/mp4">
+    </video>
     <div id="navigation-root"></div>
 
     <main class="remember-wrapper">
@@ -49,6 +52,10 @@
     <script>
         window.onload = () => {
             initNavigation("הסיפור של עמית");
+            const bgVideo = document.getElementById('bg-video');
+            if (bgVideo) {
+                bgVideo.playbackRate = 0.5;
+            }
         };
     </script>
 </body>
