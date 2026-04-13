@@ -1084,13 +1084,14 @@ body.home-page::after {
         display: flex;
         justify-content: center;
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 0px; /* Removed margin-bottom to bring motto closer */
     }
 
     .memorial-motto {
         order: 5;
-        margin-top: 5px !important;
-        margin-bottom: 30px;
+        width: 100%;
+        margin: 0px auto 30px !important; /* Removed top margin to bring motto closer */
+        text-align: center;
     }
 
     .memorial-rank {
