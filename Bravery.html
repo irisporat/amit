@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סיפור גבורתו - עמית פרידמן</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="about.css">
+
+</head>
+
+<body class="home-page">
+    <div id="bg-image"></div>
+    <div id="navigation-root"></div>
+
+    <main class="about-layout">
+        <!-- Text column (left in RTL = visually left) -->
+        <div class="story-card">
+            <h2 class="story-title">סיפור גבורתו של עמית פרידמן הי"ד</h2>
+            <div class="story-content">
+                <p class="story-first">כאן יופיע סיפור הגבורה של עמית פרידמן.</p>
+                <p>טקסט זה הוא זמני ויוחלף בסיפור המלא של עמית בקרב.</p>
+                <p>עמית פעל באומץ לב ובנחישות למען חבריו ולמען המדינה.</p>
+                <p class="story-footer">גיבור ישראל. יהי זכרו ברוך.</p>
+            </div>
+        </div>
+
+        <!-- Portrait column anchored to bottom-right -->
+        <div class="portrait-col">
+            <img src="images/about/AmitP.png" alt="עמית פרידמן" class="portrait-img">
+        </div>
+    </main>
+
+    <script src="navigation.js"></script>
+    <script>
+        window.onload = () => {
+            initNavigation("סיפור גבורתו");
+        };
+    </script>
+</body>
+
+</html>
