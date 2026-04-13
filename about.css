@@ -1,0 +1,188 @@
+/* ============================================================
+   ABOUT PAGE — about.css  (Desktop First)
+   ============================================================ */
+
+/* ── Background image ── */
+#bg-image {
+    position: fixed;
+    inset: 0;
+    background-image: url('images/about/flag.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Two-column layout ── */
+.about-layout {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    height: calc(100vh - 70px);    /* exact viewport, no scroll */
+    margin-top: 70px;
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+}
+
+/* ── Portrait column (RIGHT side) — full viewport height ── */
+.portrait-col {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    display: flex;
+    align-items: stretch;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.portrait-img {
+    display: block;
+    height: 100vh;
+    width: auto;
+    max-width: 42vw;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(-8px 0 28px rgba(0,0,0,0.6));
+}
+
+/* ── Story card (LEFT side) — no background, fits viewport ── */
+.story-card {
+    flex: 0 0 auto;
+    width: 52vw;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 0;
+    padding: 16px 8px 16px 32px;  /* small left padding to hug left edge */
+    margin-right: 42vw;
+    margin-left: 2vw;
+    box-shadow: none;
+    border: none;
+    align-self: center;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+/* ── Title ── */
+.story-title {
+    font-family: 'Rubik', sans-serif;
+    color: #000;
+    font-size: 2.2rem;     /* wraps naturally to 2 lines like reference */
+    font-weight: 800;
+    text-align: right;
+    margin: 0 0 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    text-shadow: none;
+    line-height: 1.25;
+}
+
+/* ── Body text ── */
+.story-content {
+    text-align: right;
+    line-height: 1.55;
+    color: #000;
+    margin-top: 8px;
+}
+
+.story-content p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+/* ── First paragraph — bold ── */
+.story-first {
+    font-weight: 700 !important;
+}
+
+/* ── Footer quote — bold ── */
+.story-footer {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700 !important;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #000;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: 8px;
+    text-shadow: none;
+}
+
+/* ============================================================
+   MOBILE  (max-width: 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+
+    .about-layout {
+        flex-direction: column;
+        align-items: stretch;
+        height: auto;              /* Allow automatic height */
+        min-height: unset;
+        margin-top: 60px;
+        padding: 0;
+        overflow: visible;         /* Enable scrolling */
+    }
+
+    /* ── Portrait column (BELOW text on mobile) ── */
+    .portrait-col {
+        position: relative;        /* Remove 'fixed' on mobile */
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        z-index: 1;
+        pointer-events: auto;
+        margin-top: 20px;
+        order: 2;                  /* Ensure it appears after text */
+    }
+
+    .portrait-img {
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center;
+        filter: drop-shadow(0 -4px 12px rgba(0,0,0,0.3));
+    }
+
+    /* ── Story card (FULL WIDTH on mobile) ── */
+    .story-card {
+        width: auto;               /* Remove vw width */
+        margin: 20px 16px;         /* Equal margins on both sides */
+        padding: 20px 14px;
+        order: 1;                  /* Set order to appear first */
+        max-height: none;
+        overflow: visible;
+        align-self: stretch;
+    }
+
+    .story-title {
+        font-size: 1.8rem;
+        text-align: center;
+        padding-bottom: 12px;
+    }
+
+    .story-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .story-footer {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+}
