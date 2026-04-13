@@ -22,19 +22,27 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
     margin: 0;
-    padding-top: 70px;
-    background-color: #f0f2f5;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Body doesn't scroll, the wrapper does */
+    display: flex;
+    flex-direction: column;
     font-family: var(--font-main);
     color: var(--text-black);
-    overflow-x: hidden;
 }
 
 body.home-page {
-    padding-top: 0;
     background: transparent !important;
 }
+
+#navigation-root {
+    flex: 0 0 auto;
+    z-index: 2000;
+}
+
 
 body.soft-dark-page {
     padding-top: 0;
@@ -54,12 +62,56 @@ body.soft-dark-page {
     justify-content: space-between;
     padding: 0 max(20px, calc((100% - 1600px) / 2 + 20px));
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    position: relative; /* No longer fixed, flex handles it */
+    width: 100%;
 }
+
+/* ── MAIN SCROLLABLE AREA ── */
+.main-content-scroll {
+    flex: 1 1 auto; /* Take remaining height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    direction: rtl; /* Puts scrollbar on the left */
+    background-color: #f0f2f5; /* Restore default body background */
+    z-index: 1; /* Ensure it's above fixed backgrounds */
+    position: relative;
+    /* Removed position: fixed and top: 70px to fix interaction */
+}
+
+/* For home-page, we want no background on the scroll area to see the fixed video/img */
+body.home-page .main-content-scroll {
+    background-color: transparent;
+    padding-top: 0;
+}
+
+/* Background for events page */
+body.events-page .main-content-scroll {
+    background-color: #3d85a8; /* Specific blue requested by user */
+}
+
+/* Put direction back to inherit for content so text alignment remains correct */
+.main-content-scroll > * {
+    direction: rtl;
+}
+
+/* Scrollbar styling for Chrome/Edge/Safari (Webkit) */
+.main-content-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.main-content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.main-content-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
 
 .top-bar-right {
     display: flex;
@@ -444,11 +496,13 @@ body.soft-dark-page {
     height: 100vh;
     background: white;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 2100;
+    z-index: 3000; /* Above top bar and scroll root */
     transition: right 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     padding: 20px;
+    direction: rtl; /* Scrollbar on the left */
+    overflow-y: auto;
 }
 
 .side-menu.active {
@@ -734,7 +788,7 @@ body.home-page::after {
     justify-content: flex-start;
     min-height: 100vh;
     color: #fff;
-    padding: 100px 40px 40px;
+    padding: 70px 40px 40px;
     max-width: 1600px;
     margin: 0 auto;
     position: relative;
@@ -756,7 +810,7 @@ body.home-page::after {
 .memorial-image-container {
     position: absolute;
     bottom: -1px;
-    right: -150px;
+    right: -20px;
     z-index: 5; /* Higher than overlay */
     pointer-events: none;
     line-height: 0;
@@ -808,7 +862,7 @@ body.home-page::after {
 
 .memorial-image {
     width: auto;
-    max-height: 750px;
+    max-height: calc(100vh - 70px);
     height: auto;
     display: block;
     object-fit: contain;
@@ -1096,6 +1150,15 @@ body.home-page::after {
         filter: url(#remove-white);
         mix-blend-mode: normal;
         margin: 0;
+    }
+
+    .main-content-scroll, .side-menu {
+        /* Hide scrollbar on mobile as requested */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    .main-content-scroll::-webkit-scrollbar, .side-menu::-webkit-scrollbar {
+        display: none; /* Chrome/Safari/Edge */
     }
 
     .container {

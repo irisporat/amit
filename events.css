@@ -3,7 +3,7 @@
    ============================================================ */
 
 body {
-    background: #3d4f5e;
+    background: #9dd8f5;
     min-height: 100vh;
     font-family: 'Rubik', sans-serif;
 }
@@ -12,7 +12,7 @@ body {
 .events-page-wrapper {
     max-width: 960px;
     margin: 0 auto;
-    padding: 130px 24px 48px;
+    padding: 60px 24px 48px; /* Adjusted padding as the container starts at 70px already */
 }
 
 /* ── Header ── */
@@ -83,7 +83,7 @@ body {
 
 .event-card-img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
 }

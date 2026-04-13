@@ -24,11 +24,11 @@ body {
     display: flex;
     flex-direction: row-reverse;
     align-items: stretch;
-    height: calc(100vh - 70px);    /* exact viewport, no scroll */
-    margin-top: 70px;
+    min-height: calc(100vh - 70px); /* Changed from height to min-height */
+    margin-top: 0; /* Handled by scroll root now */
     padding: 0;
     gap: 0;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden */
 }
 
 /* ── Portrait column (RIGHT side) — full viewport height ── */
@@ -51,7 +51,7 @@ body {
     max-width: 42vw;
     object-fit: contain;
     object-position: bottom center;
-    filter: drop-shadow(-8px 0 28px rgba(0,0,0,0.6));
+    filter: drop-shadow(-8px 0 28px rgba(0, 0, 0, 0.6));
 }
 
 /* ── Story card (LEFT side) — no background, fits viewport ── */
@@ -61,21 +61,22 @@ body {
     background: transparent;
     backdrop-filter: none;
     border-radius: 0;
-    padding: 16px 8px 16px 32px;  /* small left padding to hug left edge */
+    padding: 16px 8px 16px 32px;
+    /* small left padding to hug left edge */
     margin-right: 42vw;
     margin-left: 2vw;
     box-shadow: none;
     border: none;
     align-self: center;
-    overflow: hidden;
-    max-height: 100%;
+    overflow: visible; /* Changed from hidden */
 }
 
 /* ── Title ── */
 .story-title {
     font-family: 'Rubik', sans-serif;
     color: #000;
-    font-size: 2.2rem;     /* wraps naturally to 2 lines like reference */
+    font-size: 2.2rem;
+    /* wraps naturally to 2 lines like reference */
     font-weight: 800;
     text-align: right;
     margin: 0 0 8px;
@@ -95,7 +96,7 @@ body {
 
 .story-content p {
     font-family: 'Rubik', sans-serif;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: #000;
     margin-bottom: 8px;
@@ -127,16 +128,19 @@ body {
     .about-layout {
         flex-direction: column;
         align-items: stretch;
-        height: auto;              /* Allow automatic height */
+        height: auto;
+        /* Allow automatic height */
         min-height: unset;
         margin-top: 60px;
         padding: 0;
-        overflow: visible;         /* Enable scrolling */
+        overflow: visible;
+        /* Enable scrolling */
     }
 
     /* ── Portrait column (BELOW text on mobile) ── */
     .portrait-col {
-        position: relative;        /* Remove 'fixed' on mobile */
+        position: relative;
+        /* Remove 'fixed' on mobile */
         right: auto;
         top: auto;
         bottom: auto;
@@ -147,7 +151,8 @@ body {
         z-index: 1;
         pointer-events: auto;
         margin-top: 20px;
-        order: 2;                  /* Ensure it appears after text */
+        order: 2;
+        /* Ensure it appears after text */
     }
 
     .portrait-img {
@@ -156,15 +161,18 @@ body {
         max-width: 100%;
         object-fit: contain;
         object-position: center;
-        filter: drop-shadow(0 -4px 12px rgba(0,0,0,0.3));
+        filter: drop-shadow(0 -4px 12px rgba(0, 0, 0, 0.3));
     }
 
     /* ── Story card (FULL WIDTH on mobile) ── */
     .story-card {
-        width: auto;               /* Remove vw width */
-        margin: 20px 16px;         /* Equal margins on both sides */
+        width: auto;
+        /* Remove vw width */
+        margin: 20px 16px;
+        /* Equal margins on both sides */
         padding: 20px 14px;
-        order: 1;                  /* Set order to appear first */
+        order: 1;
+        /* Set order to appear first */
         max-height: none;
         overflow: visible;
         align-self: stretch;
