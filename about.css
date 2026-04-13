@@ -130,7 +130,7 @@ body {
         align-items: stretch;
         height: auto;
         min-height: unset;
-        margin-top: 0; /* Removed top margin */
+        margin-top: 15px; /* Added slight top margin to prevent "stuck" look */
         padding: 0;
         overflow: visible;
     }
@@ -147,7 +147,7 @@ body {
         justify-content: center;
         z-index: 1;
         pointer-events: auto;
-        margin-top: 20px;
+        margin-top: 0; /* Removed top margin completely */
         order: 2;
     }
 
@@ -163,8 +163,8 @@ body {
     /* ── Story card (FULL WIDTH on mobile) ── */
     .story-card {
         width: auto;
-        margin: 0 16px 20px; /* Removed top margin, kept side/bottom margins */
-        padding: 10px 14px 20px; /* Reduced top padding */
+        margin: 0 16px 0; /* Removed bottom margin completely */
+        padding: 25px 14px 0px; /* Removed bottom padding completely */
         order: 1;
         max-height: none;
         overflow: visible;

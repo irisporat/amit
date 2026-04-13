@@ -1046,7 +1046,7 @@ body.home-page::after {
     .hello-world-container {
         flex-direction: column;
         /* First child (Image) on top */
-        padding: 20px 20px 40px;
+        padding: 40px 20px 40px; /* Added slight top padding to prevent "stuck" look */
         gap: 30px;
         text-align: center;
         min-height: auto;
