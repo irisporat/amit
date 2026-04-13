@@ -606,7 +606,7 @@ body.events-page .main-content-scroll {
     padding: 30px;
     background: var(--box-bg);
     max-width: 800px;
-    margin: 20px auto;
+    margin: 100px auto 50px; /* Increased top margin for desktop to lower title */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -764,7 +764,7 @@ body.home-page::after {
     justify-content: flex-start;
     min-height: 100vh;
     color: #fff;
-    padding: 70px 40px 40px;
+    padding: 120px 40px 40px; /* Restored desktop padding */
     max-width: 1600px;
     margin: 0 auto;
     position: relative;
@@ -987,13 +987,18 @@ body.home-page::after {
         min-height: 75px;
     }
 
+    /* Stories (Bravery and About) Mobile Spacing */
+    .story-page {
+        padding-top: 0px !important; /* Minimum top padding to raise title in mobile */
+    }
+
     /* Single Recipe Page */
     .page {
         width: 100%;
         margin: 0;
         min-height: 100vh;
         border-radius: 0;
-        padding: 20px;
+        padding: 20px; /* Original/Standard mobile padding restored */
     }
 
     .recipe-title {
@@ -1041,7 +1046,7 @@ body.home-page::after {
     .hello-world-container {
         flex-direction: column;
         /* First child (Image) on top */
-        padding: 100px 20px 40px;
+        padding: 20px 20px 40px;
         gap: 30px;
         text-align: center;
         min-height: auto;

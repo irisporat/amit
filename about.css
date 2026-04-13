@@ -24,11 +24,11 @@ body {
     display: flex;
     flex-direction: row-reverse;
     align-items: stretch;
-    min-height: calc(100vh - 70px); /* Changed from height to min-height */
-    margin-top: 0; /* Handled by scroll root now */
+    min-height: calc(100vh - 70px); 
+    margin-top: 0;
     padding: 0;
     gap: 0;
-    overflow: visible; /* Changed from hidden */
+    overflow: visible;
 }
 
 /* ── Portrait column (RIGHT side) — full viewport height ── */
@@ -62,13 +62,13 @@ body {
     backdrop-filter: none;
     border-radius: 0;
     padding: 16px 8px 16px 32px;
-    /* small left padding to hug left edge */
     margin-right: 42vw;
     margin-left: 2vw;
     box-shadow: none;
     border: none;
-    align-self: center;
-    overflow: visible; /* Changed from hidden */
+    align-self: flex-start; /* Changed from center to allow margin-top control */
+    margin-top: 80px; /* Added margin for desktop to lower the title */
+    overflow: visible;
 }
 
 /* ── Title ── */
@@ -129,18 +129,15 @@ body {
         flex-direction: column;
         align-items: stretch;
         height: auto;
-        /* Allow automatic height */
         min-height: unset;
-        margin-top: 60px;
+        margin-top: 0; /* Removed top margin */
         padding: 0;
         overflow: visible;
-        /* Enable scrolling */
     }
 
     /* ── Portrait column (BELOW text on mobile) ── */
     .portrait-col {
         position: relative;
-        /* Remove 'fixed' on mobile */
         right: auto;
         top: auto;
         bottom: auto;
@@ -152,7 +149,6 @@ body {
         pointer-events: auto;
         margin-top: 20px;
         order: 2;
-        /* Ensure it appears after text */
     }
 
     .portrait-img {
@@ -167,12 +163,9 @@ body {
     /* ── Story card (FULL WIDTH on mobile) ── */
     .story-card {
         width: auto;
-        /* Remove vw width */
-        margin: 20px 16px;
-        /* Equal margins on both sides */
-        padding: 20px 14px;
+        margin: 0 16px 20px; /* Removed top margin, kept side/bottom margins */
+        padding: 10px 14px 20px; /* Reduced top padding */
         order: 1;
-        /* Set order to appear first */
         max-height: none;
         overflow: visible;
         align-self: stretch;
