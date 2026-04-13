@@ -19,10 +19,6 @@
     <!-- Static Background Image (No Jump) -->
     <div class="static-bg" style="background-image: url('images/main/bg home.png');"></div>
 
-    <!-- Moving Clouds Video (Masked to show only sky) -->
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="images/main/clouds480.mp4" type="video/mp4">
-    </video>
     <div id="navigation-root"></div>
 
     <!-- Hello World Redesign -->
@@ -69,10 +65,6 @@
     <script>
         window.onload = () => {
             initNavigation("");
-            const bgVideo = document.getElementById('bg-video');
-            if (bgVideo) {
-                bgVideo.playbackRate = 0.5;
-            }
         };
     </script>
 </body>

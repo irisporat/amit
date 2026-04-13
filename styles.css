@@ -744,30 +744,6 @@ body.events-page .main-content-scroll {
     z-index: -1001; /* Deepest layer */
 }
 
-/* Global Video Background for Home Page (Masked to show only sky) */
-#bg-video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1000; /* Just above static background */
-    pointer-events: none;
-    display: block;
-    -webkit-mask-image: linear-gradient(to bottom, 
-        rgba(0, 0, 0, 1) 0%, 
-        rgba(0, 0, 0, 1) 40%, 
-        rgba(0, 0, 0, 0) 55%
-    );
-    mask-image: linear-gradient(to bottom, 
-        rgba(0, 0, 0, 1) 0%, 
-        rgba(0, 0, 0, 1) 40%, 
-        rgba(0, 0, 0, 0) 55%
-    );
-}
-
 /* Global Dark Overlay for Home Page */
 body.home-page::after {
     content: '';
