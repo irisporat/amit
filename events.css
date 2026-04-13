@@ -1,0 +1,141 @@
+/* ============================================================
+   EVENTS PAGE — events.css
+   ============================================================ */
+
+body {
+    background: #3d4f5e;
+    min-height: 100vh;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* ── Page wrapper ── */
+.events-page-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 130px 24px 48px;
+}
+
+/* ── Header ── */
+.events-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.events-header .header-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.events-header .header-rank {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #444;
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.events-header .header-name {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #1a2a3a;
+    font-family: 'Rubik', sans-serif;
+    line-height: 1.1;
+}
+
+.events-header .header-suffix {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #444;
+    margin-right: 8px;
+}
+
+/* ── Cards grid ── */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ── Single card ── */
+.event-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(100, 160, 220, 0.15);
+    border: 1.5px solid rgba(160, 200, 240, 0.4);
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(100, 160, 220, 0.28);
+}
+
+.event-card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.event-card-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px 14px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a2a3a;
+    text-align: center;
+    background: #b8dff0;
+}
+
+/* ── Empty placeholder card ── */
+.event-card-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf3fb;
+    color: #b0c8e0;
+}
+
+.event-card-placeholder i {
+    width: 48px;
+    height: 48px;
+}
+
+
+/* ── Mobile ── */
+@media (max-width: 700px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .events-header .header-name {
+        font-size: 1.9rem;
+    }
+
+    .events-page-wrapper {
+        padding: 80px 14px 36px;
+    }
+}
+
+@media (max-width: 420px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
