@@ -57,6 +57,9 @@ function initNavigation(pageTitle, options = {}) {
             <a href="events.html">
                 <i data-lucide="calendar"></i> אירועי הנצחה
             </a>
+            <a href="remember.html">
+                <i data-lucide="heart"></i> זוכרים אותך
+            </a>
             <a href="news.html">
                 <i data-lucide="newspaper"></i> כתבות בעיתונות
             </a>

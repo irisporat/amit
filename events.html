@@ -26,7 +26,7 @@
             <div class="events-grid">
 
                 <!-- ימי הזיכרון -->
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="memorial">
                     <img src="images/events/memorial day 2025.jpeg" alt="ימי הזיכרון" class="event-card-img">
                     <div class="event-card-label">
                         <span>ימי הזיכרון</span>
@@ -34,7 +34,7 @@
                 </a>
 
                 <!-- הרצאות -->
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="lecture">
                     <img src="images/events/lecture.jpg" alt="הרצאות" class="event-card-img">
                     <div class="event-card-label">
                         <span>הרצאות</span>
@@ -42,7 +42,7 @@
                 </a>
 
                 <!-- צופים -->
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="scouts">
                     <img src="images/events/scouts 1.jpeg" alt="צופים" class="event-card-img">
                     <div class="event-card-label">
                         <span>צופים</span>
@@ -50,21 +50,21 @@
                 </a>
 
                 <!-- ספורט -->
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="sport">
                     <img src="images/events/basketball team.jpg" alt="ספורט" class="event-card-img">
                     <div class="event-card-label">
                         <span>ספורט</span>
                     </div>
                 </a>
 
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="birthday">
                     <img src="images/main/birthday.jpeg" alt="ימי הולדת בלעדיך" class="event-card-img">
                     <div class="event-card-label">
                         <span>ימי הולדת בלעדיך</span>
                     </div>
                 </a>
 
-                <a href="#" class="event-card">
+                <a href="#" class="event-card" data-category="others">
                     <img src="images/events/Lev.jpeg" alt="ארועים נוספים" class="event-card-img">
                     <div class="event-card-label">
                         <span>ארועים נוספים</span>
@@ -75,10 +75,175 @@
         </div>
     </main>
 
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="gallery-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">
+                <i data-lucide="x"></i>
+            </button>
+            
+            <button class="nav-btn prev-btn" id="prev-btn">
+                <i data-lucide="chevron-right"></i>
+            </button>
+            
+            <div class="image-container">
+                <img id="gallery-img" src="" alt="Gallery Image">
+            </div>
+            
+            <button class="nav-btn next-btn" id="next-btn">
+                <i data-lucide="chevron-left"></i>
+            </button>
+        </div>
+        
+        <div class="gallery-counter" dir="ltr">
+            <span id="current-index">1</span> / <span id="total-count">1</span>
+        </div>
+    </div>
+
     <script src="navigation.js"></script>
     <script>
+        const galleryData = {
+            'scouts': [
+                'images/events/scouts/zofim 1.jpeg',
+                'images/events/scouts/zofim 2.jpeg',
+                'images/events/scouts/zofim 3.jpeg',
+                'images/events/scouts/zofim actions 1.jpeg',
+                'images/events/scouts/zofim actions 2.jpeg',
+                'images/events/scouts/zofim hanuka 25.jpeg'
+            ],
+            'memorial': ['images/events/memorial day 2025.jpeg'],
+            'lecture': [
+                'images/events/lecture/DSC_2282.jpg',
+                'images/events/lecture/Rmember Amit 38.jpeg',
+                'images/events/lecture/Rmember Amit 41.jpeg',
+                'images/events/lecture/lecture1.jpeg'
+            ],
+            'sport': [
+                'images/events/sport/Rmember Amit 17.jpeg',
+                'images/events/sport/Rmember Amit 33.jpeg',
+                'images/events/sport/Rmember Amit 34.jpeg',
+                'images/events/sport/Rmember Amit 35.jpeg',
+                'images/events/sport/Rmember Amit 36.jpeg',
+                'images/events/sport/Rmember Amit 39.jpeg',
+                'images/events/sport/Rmember Amit 40.jpeg',
+                'images/events/sport/Rmember Amit 42.jpeg',
+                'images/events/sport/Rmember Amit 58.jpeg',
+                'images/events/sport/Yuvalim team.jpeg',
+                'images/events/sport/basketball 25.jpeg',
+                'images/events/sport/מכבי.jpeg'
+            ],
+            'birthday': [
+                'images/main/birthday.jpeg',
+                'images/events/birthday/Fridman.jpg',
+                'images/events/birthday/Rmember Amit 54.jpeg',
+                'images/events/birthday/Rmember Amit 56.jpeg',
+                'images/events/birthday/WhatsApp Image 2026-04-13 at 19.38.34.jpeg'
+            ],
+            'others': [
+                'images/events/more events/IMG_7629.JPEG',
+                'images/events/more events/IMG_7645.JPEG',
+                'images/events/more events/IMG_7655.JPEG',
+                'images/events/more events/Rmember Amit 25.jpeg',
+                'images/events/more events/Rmember Amit 26.jpeg',
+                'images/events/more events/Rmember Amit 44.jpeg',
+                'images/events/more events/Rmember Amit 45.jpeg'
+            ]
+        };
+
+        let currentCategory = '';
+        let currentIndex = 0;
+
+        const modal = document.getElementById('gallery-modal');
+        const galleryImg = document.getElementById('gallery-img');
+        const closeModal = document.getElementById('close-modal');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentIndexSpan = document.getElementById('current-index');
+        const totalCountSpan = document.getElementById('total-count');
+
+        function openGallery(category) {
+            currentCategory = category;
+            currentIndex = 0;
+            updateGallery();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function updateGallery() {
+            const images = galleryData[currentCategory];
+            if (!images || images.length === 0) return;
+
+            galleryImg.src = images[currentIndex];
+            currentIndexSpan.textContent = currentIndex + 1;
+            totalCountSpan.textContent = images.length;
+
+            // Show/hide nav buttons if only one image
+            if (images.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            }
+        }
+
+        function nextImage() {
+            const images = galleryData[currentCategory];
+            currentIndex = (currentIndex + 1) % images.length;
+            updateGallery();
+        }
+
+        function prevImage() {
+            const images = galleryData[currentCategory];
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateGallery();
+        }
+
+        function closeGallery() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = card.getAttribute('data-category');
+                openGallery(category);
+            });
+        });
+
+        closeModal.addEventListener('click', closeGallery);
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextImage();
+        });
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevImage();
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGallery();
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowRight') prevImage(); // In RTL, right is previous? Or next? 
+                // Let's stick to logical: ArrowRight goes "back" in RTL context depends on UI. 
+                // Usually ArrowLeft is Next in RTL.
+                if (e.key === 'ArrowLeft') nextImage();
+            }
+        });
+
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGallery();
+        });
+
         window.onload = () => {
             initNavigation("אירועי הנצחה");
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         };
     </script>
 </body>

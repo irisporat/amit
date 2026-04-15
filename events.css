@@ -3,7 +3,7 @@
    ============================================================ */
 
 body {
-    background: #9dd8f5;
+    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
     min-height: 100vh;
     font-family: 'Rubik', sans-serif;
 }
@@ -118,24 +118,183 @@ body {
 }
 
 
-/* ── Mobile ── */
-@media (max-width: 700px) {
-    .events-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-
-    .events-header .header-name {
-        font-size: 1.9rem;
-    }
-
-    .events-page-wrapper {
-        padding: 80px 14px 36px;
-    }
+/* ── Gallery Modal ── */
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Slightly more transparent to see the blur better */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: none;
+    z-index: 9999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-@media (max-width: 420px) {
-    .events-grid {
-        grid-template-columns: 1fr;
+.gallery-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    width: auto;
+    min-width: 300px;
+    max-width: 90vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(20, 30, 40, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+    padding: 20px 50px; /* Reduced padding, but space for side arrows */
+}
+
+.image-container {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#gallery-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    transform: scale(1); /* Full size within container */
+    transition: transform 0.3s ease;
+}
+
+.gallery-modal.active #gallery-img {
+    transform: scale(1);
+}
+
+/* ── Buttons ── */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10001;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    user-select: none;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.nav-btn i {
+    width: 28px;
+    height: 28px;
+}
+
+/* ── Counter ── */
+.gallery-counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90vw;
+        height: 70vh;
+        padding: 20px 10px;
+        flex-direction: row; /* Keep arrows on sides if possible, or use absolute */
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .image-container {
+        width: calc(100% - 100px); /* Leave room for arrows */
+        max-height: 100%;
+    }
+
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+    
+    .nav-btn.prev-btn {
+        order: 1;
+    }
+    
+    .image-container {
+        order: 2;
+    }
+    
+    .nav-btn.next-btn {
+        order: 3;
+    }
+    
+    .close-modal {
+        top: 10px;
+        left: 10px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .gallery-modal {
+        padding: 10px;
+    }
+    
+    .gallery-counter {
+        margin-top: 10px;
+        font-size: 0.9rem;
     }
 }

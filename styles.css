@@ -86,7 +86,7 @@ body.home-page .main-content-scroll {
 
 /* Background for events page */
 body.events-page .main-content-scroll {
-    background-color: #3d85a8; /* Specific blue requested by user */
+    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
 }
 
 /* Put direction back to inherit for content so text alignment remains correct */
