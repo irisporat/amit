@@ -250,6 +250,10 @@ body {
 
 /* ── Mobile adjustments ── */
 @media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
     .modal-content {
         width: 90vw;
         height: 70vh;

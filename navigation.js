@@ -64,7 +64,7 @@ function initNavigation(pageTitle, options = {}) {
                 <i data-lucide="newspaper"></i> כתבות בעיתונות
             </a>
             <a href="contact.html">
-                <i data-lucide="mail"></i> יצירת קשר
+                <i data-lucide="mail"></i> צור קשר
             </a>
             <a href="location.html">
                 <i data-lucide="map-pin"></i> מיקום העגלה
