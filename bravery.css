@@ -1,0 +1,110 @@
+/* ============================================================
+   BRAVERY PAGE — bravery.css
+   ============================================================ */
+
+body.bravery-page {
+    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+    font-family: 'Rubik', sans-serif;
+    color: #333;
+}
+
+.bravery-container {
+    max-width: 100%; /* Spans full width */
+    margin: 40px 0;
+    padding-right: 0; /* Sticked to the right frame */
+    padding-left: 60px; /* Some padding on the left for text */
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    direction: rtl;
+}
+
+/* ── Image Column ── */
+.bravery-image-col {
+    flex: 0 0 48%; /* Takes roughly half, sticks to right */
+    margin-top: 130px; /* Increased offset to align lower with the subtitle */
+}
+
+.bravery-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0 12px 12px 0; /* Rounded only on inner side for "stick to edge" look */
+    box-shadow: -10px 20px 60px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+/* ── Text Column ── */
+.bravery-text-col {
+    flex: 1; /* Takes remaining space, now wider */
+    padding-top: 0;
+}
+
+.bravery-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #3d85a8;
+    margin-bottom: 30px;
+    position: relative;
+    text-align: right;
+}
+
+.bravery-subtitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.bravery-story p {
+    font-size: 1.25rem; /* Slightly larger text for longer lines */
+    line-height: 1.8;
+    margin-bottom: 18px;
+    text-align: justify; /* Justified as requested */
+    color: #2c3e50;
+}
+
+.bravery-footer {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 30px;
+    color: #1a2a3a;
+}
+
+/* ── Image Column Moved ── */
+/* Column is now first in HTML for RHS placement in RTL */
+
+/* ── Mobile adjustments ── */
+@media (max-width: 1024px) {
+    .bravery-container {
+        flex-direction: column; /* Normal order on mobile: image then text */
+        padding: 10px 20px 30px; /* Reduced top padding */
+        margin: 0; /* Remove top margin on mobile */
+        gap: 20px; /* Reduced gap from 30px to 20px */
+    }
+
+    .bravery-image-col {
+        width: 100%;
+        margin-top: 10px; /* Reset the 130px margin-top on mobile */
+    }
+
+    .bravery-text-col {
+        width: 100%;
+    }
+
+    .bravery-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .bravery-subtitle {
+        text-align: center;
+    }
+
+    .bravery-story p {
+        text-align: right;
+    }
+}

@@ -29,6 +29,11 @@
 
             <!-- Home View: Recipe List -->
             <div id="home-view" class="view active">
+                <div class="back-link-wrapper">
+                    <a href="coffee_main.html" class="back-to-hub">
+                        <i data-lucide="arrow-right"></i> חזרה לעגלת הקפה
+                    </a>
+                </div>
                 <div class="recipe-grid" id="recipe-list-container">
                     <!-- Recipe Cards Injected Here -->
                 </div>
@@ -323,7 +328,7 @@
         function init() {
             sortRecipes();
             renderHome();
-            initNavigation("קפה \"החברים של עמית\"", { hideHamburger: true });
+            initNavigation("קפה \"החברים של עמית\"");
         }
 
         function sortRecipes() {

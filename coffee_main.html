@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עגלת קפה "החברים של עמית" - דף ראשי</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="coffee_main.css">
+</head>
+
+<body class="coffee-main-page">
+    <div id="navigation-root"></div>
+
+    <main class="main-content-scroll">
+        <div class="coffee-main-container">
+            
+            <!-- Hero Section -->
+            <section class="coffee-hero">
+                <div class="coffee-image-col">
+                    <img src="images/coffee/CoffeePIC/CoffeePic1.jpeg" alt="עגלת הקפה של עמית" class="coffee-hero-img">
+                </div>
+                
+                <div class="coffee-info-col">
+                    <div class="coffee-logo-area">
+                        <img src="images/main/לוגו עגלה לבן.png" alt="לוגו קפה החברים של עמית" class="coffee-logo-img">
+                    </div>
+                    <h1 class="coffee-main-title">עגלת "קפה החברים של עמית"</h1>
+                    <div class="coffee-description">
+                        <p>"קפה החברים של עמית" הוקמה לזכרו של סמ"ר עמית פרידמן ז"ל, שנפל בקרב בתל סולטן שברפיח ב-27 באוגוסט 2024, בגיל 19.</p>
+                        <p>העגלה פועלת ביוזמה קהילתית מדי יום שישי בנווה סביון. תושבי השכונה מתנדבים, אופים ומגישים קפה, מאפים ומשקאות, עוגיות אמסטרדם ייחודיות, סמבוסק, מילקשייק ועוד כאשר כל ההכנסות מוקדשות להנצחתו.</p>
+                        <p>המיזם נולד מהרגעים הפשוטים שעמית אהב יותר מכל: לשבת עם חברים אחרי הצבא, לשוחח, לצחוק ולהיות יחד.</p>
+                        <p>"קפה החברים של עמית" ממשיך לספר את סיפורו, אהבת האדם, השמחה והחברות והופך לזיכרון ולחיבור חם בקהילה.</p>
+                        <p><strong>העגלה פועלת בכל יום שישי בין השעות 10:00-13:00, ברחוב דקל 11 (גינת חיים בר-לב), בנווה סביון, אור יהודה (חפשו ב-WAZE: קפה החברים של עמית - עגלת קפה)</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cards Grid -->
+            <section class="coffee-grid">
+                
+                <!-- ספר מתכונים -->
+                <a href="coffee.html" class="coffee-card">
+                    <div class="coffee-card-img-wrapper">
+                        <img src="images/coffee/עוגת ריבועים שעמית הכי אהב - אסתר סבתא של עמית.jpg" alt="ספר מתכונים" class="coffee-card-img">
+                    </div>
+                    <div class="coffee-card-label">
+                        <span>ספר מתכונים</span>
+                    </div>
+                </a>
+
+                <!-- מפורסמים בעגלה -->
+                <a href="#" class="coffee-card">
+                    <div class="coffee-card-img-wrapper">
+                        <img src="images/coffee/CoffeeFam/מפורסמים.jpeg" alt="מפורסמים בעגלה" class="coffee-card-img">
+                    </div>
+                    <div class="coffee-card-label">
+                        <span>מפורסמים בעגלה</span>
+                    </div>
+                </a>
+
+                <!-- תמונות עגלה -->
+                <a href="#" class="coffee-card">
+                    <div class="coffee-card-img-wrapper">
+                        <img src="images/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg" alt="תמונות עגלה" class="coffee-card-img">
+                    </div>
+                    <div class="coffee-card-label">
+                        <span>תמונות עגלה</span>
+                    </div>
+                </a>
+
+                <!-- אירועי מאפיית פרידמן -->
+                <a href="#" class="coffee-card">
+                    <div class="coffee-card-img-wrapper">
+                        <img src="images/coffee/CoffeeEvent/IMG_7735.JPEG" alt="אירועי מאפיית פרידמן" class="coffee-card-img">
+                    </div>
+                    <div class="coffee-card-label">
+                        <span>אירועי מאפיית פרידמן</span>
+                    </div>
+                </a>
+
+                <!-- מיקום העגלה -->
+                <a href="location.html" class="coffee-card">
+                    <div class="coffee-card-img-wrapper">
+                        <img src="images/coffee/CoffeePIC/לב בכיכר.jpeg" alt="מיקום העגלה" class="coffee-card-img">
+                    </div>
+                    <div class="coffee-card-label">
+                        <span>מיקום</span>
+                    </div>
+                </a>
+
+            </section>
+        </div>
+    </main>
+
+    <script src="navigation.js"></script>
+    <script>
+        window.onload = () => {
+            initNavigation("עגלת \"קפה החברים של עמית\"");
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        };
+    </script>
+</body>
+
+</html>

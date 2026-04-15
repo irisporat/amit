@@ -51,8 +51,8 @@ function initNavigation(pageTitle, options = {}) {
             <a href="Bravery.html">
                 <i data-lucide="shield"></i> סיפור גבורתו
             </a>
-            <a href="coffee.html">
-                <i data-lucide="coffee"></i> קפה "החברים של עמית"
+            <a href="coffee_main.html">
+                <i data-lucide="coffee"></i> עגלת "קפה החברים של עמית"
             </a>
             <a href="events.html">
                 <i data-lucide="calendar"></i> אירועי הנצחה
@@ -65,9 +65,6 @@ function initNavigation(pageTitle, options = {}) {
             </a>
             <a href="contact.html">
                 <i data-lucide="mail"></i> צור קשר
-            </a>
-            <a href="location.html">
-                <i data-lucide="map-pin"></i> מיקום העגלה
             </a>
         </nav>
         <div class="menu-social">
