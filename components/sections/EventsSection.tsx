@@ -2,10 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
-import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
-import BodyClass from '@/components/BodyClass';
-import './events.css';
+import './EventsSection.css';
 
 const galleryData: Record<string, string[]> = {
   scouts: [
@@ -55,7 +53,16 @@ const galleryData: Record<string, string[]> = {
   ],
 };
 
-export default function EventsPage() {
+const eventCards = [
+  { category: 'memorial', img: '/events/memorial day 2025.jpeg', label: 'ימי הזיכרון' },
+  { category: 'lecture', img: '/events/lecture.jpg', label: 'הרצאות' },
+  { category: 'scouts', img: '/events/scouts 1.jpeg', label: 'צופים' },
+  { category: 'sport', img: '/events/basketball team.jpg', label: 'ספורט' },
+  { category: 'birthday', img: '/main/birthday.jpeg', label: 'ימי הולדת בלעדיך' },
+  { category: 'others', img: '/events/Lev.jpeg', label: 'ארועים נוספים' },
+];
+
+export default function EventsSection() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -66,38 +73,27 @@ export default function EventsPage() {
   const handlePrev = useCallback(() => setCurrentIndex(i => (i - 1 + images.length) % images.length), [images.length]);
 
   return (
-    <>
-      <BodyClass className="events-page" />
-      <div id="navigation-root">
-        <Navigation pageTitle="אירועי הנצחה" />
+    <section id="events" className="events-section">
+      <div className="section-page-header">
+        <h2>אירועי הנצחה</h2>
       </div>
-      <main className="main-content-scroll">
-        <div className="events-page-wrapper">
-          <div className="events-grid">
-            {[
-              { category: 'memorial', img: '/events/memorial day 2025.jpeg', label: 'ימי הזיכרון' },
-              { category: 'lecture', img: '/events/lecture.jpg', label: 'הרצאות' },
-              { category: 'scouts', img: '/events/scouts 1.jpeg', label: 'צופים' },
-              { category: 'sport', img: '/events/basketball team.jpg', label: 'ספורט' },
-              { category: 'birthday', img: '/main/birthday.jpeg', label: 'ימי הולדת בלעדיך' },
-              { category: 'others', img: '/events/Lev.jpeg', label: 'ארועים נוספים' },
-            ].map(({ category, img, label }) => (
-              <a
-                key={category}
-                href="#"
-                className="event-card"
-                data-category={category}
-                onClick={(e) => { e.preventDefault(); openGallery(category); }}
-              >
-                <div className="event-card-img-wrap">
-                  <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="event-card-img" />
-                </div>
-                <div className="event-card-label"><span>{label}</span></div>
-              </a>
-            ))}
-          </div>
+      <div className="events-section-wrapper">
+        <div className="events-cards-grid">
+          {eventCards.map(({ category, img, label }) => (
+            <a
+              key={category}
+              href="#"
+              className="event-gallery-card"
+              onClick={(e) => { e.preventDefault(); openGallery(category); }}
+            >
+              <div className="event-gallery-img-wrap">
+                <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="event-gallery-img" />
+              </div>
+              <div className="event-gallery-label"><span>{label}</span></div>
+            </a>
+          ))}
         </div>
-      </main>
+      </div>
       <GalleryModal
         isOpen={activeCategory !== null}
         images={images}
@@ -106,6 +102,6 @@ export default function EventsPage() {
         onNext={handleNext}
         onPrev={handlePrev}
       />
-    </>
+    </section>
   );
 }

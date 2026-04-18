@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Clock, Navigation as NavIcon, Map } from 'lucide-react';
-import Navigation from '@/components/Navigation';
 import './location.css';
 
 export const metadata: Metadata = {
@@ -12,9 +11,6 @@ export const metadata: Metadata = {
 export default function LocationPage() {
   return (
     <>
-      <div id="navigation-root">
-        <Navigation pageTitle="מיקום עגלת הקפה" />
-      </div>
       <main className="main-content-scroll">
         <div className="back-link-wrapper" style={{ marginTop: '36px' }}>
           <Link href="/coffee" className="back-to-hub">

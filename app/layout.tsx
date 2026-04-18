@@ -8,6 +8,7 @@ import {
   Klee_One,
   Frank_Ruhl_Libre,
 } from 'next/font/google';
+import Navigation from '@/components/Navigation';
 import './globals.css';
 
 const rubik = Rubik({ subsets: ['hebrew', 'latin'], weight: ['400', '500', '700', '800'], variable: '--font-main' });
@@ -37,7 +38,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         amaticSC.variable,
       ].join(' ')}
     >
-      <body>{children}</body>
+      <body>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }

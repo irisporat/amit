@@ -4,7 +4,6 @@ import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
-import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
 import CoffeeHeroVideo from '@/components/CoffeeHeroVideo';
@@ -57,9 +56,6 @@ export default function CoffeePage() {
   return (
     <>
       <BodyClass className="coffee-main-page" />
-      <div id="navigation-root">
-        <Navigation pageTitle="עגלת קפה" />
-      </div>
       <main className="main-content-scroll">
         <div className="coffee-main-container">
           <section className="coffee-hero">

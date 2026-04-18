@@ -2,10 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
-import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
-import BodyClass from '@/components/BodyClass';
-import './remember.css';
+import './RememberSection.css';
 
 const galleryData: Record<string, string[]> = {
   stickers: [
@@ -53,7 +51,14 @@ const galleryData: Record<string, string[]> = {
   ],
 };
 
-export default function RememberPage() {
+const rememberCards = [
+  { category: 'stickers', img: '/Remember/Stickers/Rmember Amit 31.jpeg', label: 'עמית מסביב לעולם' },
+  { category: 'memorial', img: '/Remember/memorial/Rmember Amit 9.jpeg', label: 'פינות הנצחה' },
+  { category: 'shows', img: '/Remember/shows/Rmember Amit 59.jpeg', label: 'הופעות' },
+  { category: 'journey', img: '/Remember/journey/Rmember Amit 14.jpeg', label: 'מסעות' },
+];
+
+export default function RememberSection() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -64,35 +69,27 @@ export default function RememberPage() {
   const handlePrev = useCallback(() => setCurrentIndex(i => (i - 1 + images.length) % images.length), [images.length]);
 
   return (
-    <>
-      <BodyClass className="remember-page" />
-      <div id="navigation-root">
-        <Navigation pageTitle="זוכרים אותך" />
+    <section id="remember" className="remember-section">
+      <div className="section-page-header">
+        <h2>זוכרים אותך</h2>
       </div>
-      <main className="main-content-scroll">
-        <div className="remember-page-wrapper">
-          <div className="remember-grid">
-            {[
-              { category: 'stickers', img: '/Remember/Stickers/Rmember Amit 31.jpeg', label: 'עמית מסביב לעולם' },
-              { category: 'memorial', img: '/Remember/memorial/Rmember Amit 9.jpeg', label: 'פינות הנצחה' },
-              { category: 'shows', img: '/Remember/shows/Rmember Amit 59.jpeg', label: 'הופעות' },
-              { category: 'journey', img: '/Remember/journey/Rmember Amit 14.jpeg', label: 'מסעות' },
-            ].map(({ category, img, label }) => (
-              <a
-                key={category}
-                href="#"
-                className="remember-card"
-                onClick={(e) => { e.preventDefault(); openGallery(category); }}
-              >
-                <div className="remember-card-img-wrap">
-                  <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="remember-card-img" />
-                </div>
-                <div className="remember-card-label"><span>{label}</span></div>
-              </a>
-            ))}
-          </div>
+      <div className="remember-section-wrapper">
+        <div className="remember-cards-grid">
+          {rememberCards.map(({ category, img, label }) => (
+            <a
+              key={category}
+              href="#"
+              className="remember-gallery-card"
+              onClick={(e) => { e.preventDefault(); openGallery(category); }}
+            >
+              <div className="remember-gallery-img-wrap">
+                <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="remember-gallery-img" />
+              </div>
+              <div className="remember-gallery-label"><span>{label}</span></div>
+            </a>
+          ))}
         </div>
-      </main>
+      </div>
       <GalleryModal
         isOpen={activeCategory !== null}
         images={images}
@@ -101,6 +98,6 @@ export default function RememberPage() {
         onNext={handleNext}
         onPrev={handlePrev}
       />
-    </>
+    </section>
   );
 }

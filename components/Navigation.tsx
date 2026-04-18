@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   Menu, X, Home, Info, Shield, Coffee,
   Calendar, Heart, Newspaper, Mail,
@@ -10,14 +11,35 @@ import {
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
 interface NavigationProps {
-  pageTitle: string;
+  pageTitle?: string;
   hideHamburger?: boolean;
 }
 
-export default function Navigation({ pageTitle, hideHamburger = false }: NavigationProps) {
+const sectionLinks = [
+  { id: 'home', icon: <Home />, label: 'דף הבית' },
+  { id: 'about', icon: <Info />, label: 'סיפורו של עמית' },
+  { id: 'bravery', icon: <Shield />, label: 'סיפור גבורתו' },
+  { id: 'events', icon: <Calendar />, label: 'אירועי הנצחה' },
+  { id: 'remember', icon: <Heart />, label: 'זוכרים אותך' },
+  { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
+  { id: 'contact', icon: <Mail />, label: 'צור קשר' },
+];
+
+export default function Navigation({ pageTitle = '', hideHamburger = false }: NavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
+
+  const handleSectionNav = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (pathname === '/') {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `/#${sectionId}`;
+    }
+  };
 
   return (
     <>
@@ -28,10 +50,10 @@ export default function Navigation({ pageTitle, hideHamburger = false }: Navigat
               <Menu strokeWidth={2.5} width={28} height={28} />
             </button>
           )}
-          <h1 className="page-title">{pageTitle}</h1>
+          {pageTitle && <h1 className="page-title">{pageTitle}</h1>}
         </div>
         <div className="top-bar-left">
-          <Link href="/">
+          <a href="/#home" onClick={(e) => handleSectionNav(e, 'home')}>
             <Image
               src="/main/לוגו עגלה לבן.png"
               alt="לוגו עגלה"
@@ -40,7 +62,7 @@ export default function Navigation({ pageTitle, hideHamburger = false }: Navigat
               sizes="200px"
               className="nav-logo-img"
             />
-          </Link>
+          </a>
         </div>
       </header>
 
@@ -53,14 +75,18 @@ export default function Navigation({ pageTitle, hideHamburger = false }: Navigat
           <X />
         </button>
         <nav className="menu-nav">
-          <Link href="/" onClick={toggleMenu}><Home /> דף הבית</Link>
-          <Link href="/about" onClick={toggleMenu}><Info /> סיפורו של עמית</Link>
-          <Link href="/bravery" onClick={toggleMenu}><Shield /> סיפור גבורתו</Link>
-          <Link href="/coffee" onClick={toggleMenu}><Coffee /> עגלת &quot;קפה החברים של עמית&quot;</Link>
-          <Link href="/events" onClick={toggleMenu}><Calendar /> אירועי הנצחה</Link>
-          <Link href="/remember" onClick={toggleMenu}><Heart /> זוכרים אותך</Link>
-          <Link href="/news" onClick={toggleMenu}><Newspaper /> כתבות בעיתונות</Link>
-          <Link href="/contact" onClick={toggleMenu}><Mail /> צור קשר</Link>
+          {sectionLinks.map(({ id, icon, label }) => (
+            <a
+              key={id}
+              href={`/#${id}`}
+              onClick={(e) => handleSectionNav(e, id)}
+            >
+              {icon} {label}
+            </a>
+          ))}
+          <Link href="/coffee" onClick={toggleMenu}>
+            <Coffee /> עגלת &quot;קפה החברים של עמית&quot;
+          </Link>
         </nav>
         <div className="menu-social">
           <a

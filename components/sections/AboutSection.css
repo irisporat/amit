@@ -1,0 +1,141 @@
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+
+.about-section {
+  background-image: url('/about/flag.PNG');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  position: relative;
+  min-height: calc(100vh - 70px);
+}
+
+/* Two-column flex: portrait on right (RTL), text on left */
+.about-section .about-layout {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  min-height: 100vh;
+  gap: 0;
+  overflow: visible;
+}
+
+/* ── Portrait column — sticky sidebar ── */
+.about-section .about-portrait-col {
+  flex: 0 0 42vw;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.about-section .about-portrait-img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(-8px 0 28px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Story card ── */
+.about-section .story-card {
+  flex: 1;
+  background: transparent;
+  padding: 80px 8px 60px 32px;
+  margin-right: 0;
+}
+
+.about-section .story-title {
+  font-family: 'Rubik', sans-serif;
+  color: #3d85a8;
+  font-size: 3.2rem;
+  font-weight: 800;
+  text-align: right;
+  margin: 0 0 30px;
+  line-height: 1.1;
+}
+
+.about-section .story-content {
+  text-align: right;
+  line-height: 1.8;
+  color: #2c3e50;
+}
+
+.about-section .story-content p {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #2c3e50;
+  margin-bottom: 18px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.about-section .story-first {
+  font-weight: 700 !important;
+}
+
+.about-section .story-footer {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700 !important;
+  text-align: right;
+  margin-top: 30px;
+  font-size: 1.25rem;
+  color: #1a2a3a;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .about-section .about-layout {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: unset;
+  }
+
+  .about-section .about-portrait-col {
+    position: relative;
+    top: auto;
+    height: auto;
+    width: 100%;
+    flex: unset;
+    justify-content: center;
+    pointer-events: auto;
+    order: 2;
+  }
+
+  .about-section .about-portrait-img {
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    object-position: center;
+    filter: drop-shadow(0 -4px 12px rgba(0, 0, 0, 0.3));
+  }
+
+  .about-section .story-card {
+    padding: 25px 14px 10px;
+    order: 1;
+  }
+
+  .about-section .story-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .about-section .story-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .about-section .story-footer {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+}

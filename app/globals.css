@@ -90,25 +90,21 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+    background: white;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden; /* Body doesn't scroll, the wrapper does */
-    display: flex;
-    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: clip; /* clip prevents horizontal scroll without breaking sticky */
+    background: white;
     font-family: var(--font-main);
     color: var(--text-black);
-}
-
-body.home-page {
-    background: transparent !important;
-}
-
-#navigation-root {
-    flex: 0 0 auto;
-    z-index: 2000;
 }
 
 
@@ -131,54 +127,16 @@ header.top-bar {
     justify-content: space-between;
     padding: 0 max(20px, calc((100% - 1600px) / 2 + 20px));
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: relative; /* No longer fixed, flex handles it */
+    position: sticky;
+    top: 0;
+    z-index: 2000;
     width: 100%;
 }
 
-/* ── MAIN SCROLLABLE AREA ── */
+/* ── MAIN SCROLLABLE AREA (kept for sub-pages compatibility) ── */
 .main-content-scroll {
-    flex: 1 1 auto; /* Take remaining height */
-    overflow-y: auto;
-    overflow-x: hidden;
-    direction: rtl; /* Puts scrollbar on the left */
-    background-color: #f0f2f5; /* Restore default body background */
-    z-index: 1; /* Ensure it's above fixed backgrounds */
-    position: relative;
-    /* Removed position: fixed and top: 70px to fix interaction */
-}
-
-/* For home-page, we want no background on the scroll area to see the fixed video/img */
-body.home-page .main-content-scroll {
-    background-color: transparent;
-    padding-top: 0;
-}
-
-/* Background for events page */
-body.events-page .main-content-scroll {
-    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
-}
-
-/* Put direction back to inherit for content so text alignment remains correct */
-.main-content-scroll > * {
     direction: rtl;
-}
-
-/* Scrollbar styling for Chrome/Edge/Safari (Webkit) */
-.main-content-scroll::-webkit-scrollbar {
-    width: 10px;
-}
-
-.main-content-scroll::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.main-content-scroll::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-.main-content-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
 
@@ -826,18 +784,7 @@ body.events-page .main-content-scroll {
     z-index: -1001; /* Deepest layer */
 }
 
-/* Global Dark Overlay for Home Page */
-body.home-page::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
-    z-index: -999; /* Just above video */
-    pointer-events: none;
-}
+/* Global Dark Overlay for Home Page - now handled in HeroSection component */
 
 .hello-world-container {
     display: flex;
@@ -1229,6 +1176,196 @@ body.home-page::after {
     .container {
         margin: 20px;
         padding: 20px;
+    }
+}
+
+/* ============================================================
+   SECTION HEADER (shared across portfolio sections)
+   ============================================================ */
+.section-page-header {
+    text-align: center;
+    padding: 50px 20px 10px;
+}
+
+.section-page-header h2 {
+    font-family: var(--font-title);
+    font-size: 2.8rem;
+    color: #3d85a8;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+.section-page-header .section-subtitle {
+    font-size: 1.1rem;
+    color: #557;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .section-page-header h2 {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================================
+   GALLERY MODAL (shared — used by GalleryModal component)
+   ============================================================ */
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: none;
+    z-index: 9999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    width: auto;
+    min-width: 300px;
+    max-width: 90vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(20, 30, 40, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+    padding: 20px 50px;
+}
+
+.image-container {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#gallery-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10001;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    user-select: none;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.gallery-counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90vw;
+        height: 70vh;
+        padding: 20px 10px;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .image-container {
+        width: calc(100% - 100px);
+        max-height: 100%;
+        order: 2;
+    }
+
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+
+    .nav-btn.prev-btn { order: 1; }
+    .nav-btn.next-btn { order: 3; }
+
+    .close-modal {
+        top: 10px;
+        left: 10px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .gallery-modal {
+        padding: 10px;
+    }
+
+    .gallery-counter {
+        margin-top: 10px;
+        font-size: 0.9rem;
     }
 }
 
