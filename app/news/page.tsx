@@ -12,14 +12,14 @@ const newsArticles = [
   {
     title: 'קפה לזכרו של גיבור',
     source: 'עיתונות מקומית',
-    image: '/images/news/coffe 1.jpeg',
-    link: '/images/news/coffe 1.jpeg',
+    image: '/news/coffe 1.jpeg',
+    link: '/news/coffe 1.jpeg',
   },
   {
     title: 'השקת עגלת הקפה',
     source: 'עיתונות מקומית',
-    image: '/images/news/coffe 2.jpeg',
-    link: '/images/news/coffe 2.jpeg',
+    image: '/news/coffe 2.jpeg',
+    link: '/news/coffe 2.jpeg',
   },
 ];
 

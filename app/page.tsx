@@ -32,7 +32,7 @@ export default function HomePage() {
       <main className="main-content-scroll">
         <div className="hello-world-container">
           <div className="memorial-image-container">
-            <img src="/images/main/amit mag home11.png" alt="עמית פרידמן" className="memorial-image" />
+            <img src="/main/amit mag home11.png" alt="עמית פרידמן" className="memorial-image" />
           </div>
           <div className="memorial-text-container">
             <div className="memorial-headline">

@@ -64,9 +64,9 @@ function getImagePaths(recipe: Recipe) {
   const safeTitle = recipe.title.replace(/[<>:"/\\|?*'`\u05F3\u05F4]/g, '');
   const safeAuthor = recipe.author.replace(/[<>:"/\\|?*'`\u05F3\u05F4]/g, '');
   return {
-    jpg: `/images/coffee/${safeTitle} - ${safeAuthor}.jpg`,
-    jpeg: `/images/coffee/${safeTitle} - ${safeAuthor}.jpeg`,
-    png: `/images/coffee/${safeTitle} - ${safeAuthor}.png`,
+    jpg: `/coffee/${safeTitle} - ${safeAuthor}.jpg`,
+    jpeg: `/coffee/${safeTitle} - ${safeAuthor}.jpeg`,
+    png: `/coffee/${safeTitle} - ${safeAuthor}.png`,
   };
 }
 

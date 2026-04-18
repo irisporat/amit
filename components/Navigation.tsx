@@ -31,7 +31,7 @@ export default function Navigation({ pageTitle, hideHamburger = false }: Navigat
         </div>
         <div className="top-bar-left">
           <Link href="/">
-            <img src="/images/main/לוגו עגלה לבן.png" alt="לוגו עגלה" />
+            <img src="/main/לוגו עגלה לבן.png" alt="לוגו עגלה" />
           </Link>
         </div>
       </header>

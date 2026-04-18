@@ -6,7 +6,7 @@
 #bg-image {
     position: fixed;
     inset: 0;
-    background-image: url('/images/about/flag.PNG');
+    background-image: url('/about/flag.PNG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -1,0 +1,11 @@
+name = "amit-memorial"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+main = ".open-next/worker.js"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[vars]
+NEXT_PUBLIC_WS_URL = "wss://amitfriedman.porat-roy.workers.dev"

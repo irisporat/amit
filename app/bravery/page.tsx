@@ -18,7 +18,7 @@ export default function BraveryPage() {
       <main className="main-content-scroll">
         <div className="bravery-container">
           <div className="bravery-image-col">
-            <img src="/images/Bravery/Wings.PNG" alt="עמית פרידמן - כנפיים" className="bravery-img" />
+            <img src="/Bravery/Wings.PNG" alt="עמית פרידמן - כנפיים" className="bravery-img" />
             <a href="https://www.youtube.com/watch?v=gAIJvP0JXAo" target="_blank" rel="noopener noreferrer" className="bravery-video-btn desktop-only">
               <PlayCircle />
               <div className="btn-text-content">
