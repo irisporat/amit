@@ -27,7 +27,7 @@ export default function ContactSection() {
     <section id="contact" className="contact-section">
       <div className="contact-inner">
         <div className="contact-header">
-          <h2>צור קשר</h2>
+          <h2>צרו קשר</h2>
           <p>נשמח לשמוע מכם</p>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
@@ -47,7 +47,7 @@ export default function ContactSection() {
             <label htmlFor="contact-message">הודעה</label>
             <textarea id="contact-message" name="message"></textarea>
           </div>
-          <button type="submit" className="submit-btn">שלח</button>
+          <button type="submit" className="submit-btn">שליחה</button>
         </form>
       </div>
     </section>

@@ -1083,7 +1083,7 @@ header.top-bar {
         flex-direction: column;
         /* First child (Image) on top */
         padding: 110px 20px 0; /* top = header (70px) + original spacing (40px) */
-        gap: 30px;
+        gap: 20px;
         text-align: center;
         min-height: 100vh;
         height: 100vh;
@@ -1127,18 +1127,19 @@ header.top-bar {
 
     .memorial-motto {
         order: 4;
-        position: absolute;
+        text-align: center;
+        margin: 0 auto 0 !important;
+        /* position: absolute;
         bottom: 5vh;
         left: 50%;
         transform: translateX(-50%);
         width: 90%;
         margin: 0 !important;
-        text-align: center;
         z-index: 10;
         background: rgba(0, 0, 0, 0.45);
         box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.45);
         border-radius: 12px;
-        padding: 14px 20px;
+        padding: 14px 20px; */
     }
 
     .memorial-rank {
