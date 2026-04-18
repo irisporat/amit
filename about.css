@@ -74,32 +74,33 @@ body {
 /* ── Title ── */
 .story-title {
     font-family: 'Rubik', sans-serif;
-    color: #000;
-    font-size: 2.2rem;
-    /* wraps naturally to 2 lines like reference */
+    color: #3d85a8;
+    font-size: 3.2rem;
     font-weight: 800;
     text-align: right;
-    margin: 0 0 8px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    margin: 0 0 30px;
+    padding-bottom: 0;
+    border-bottom: none;
     text-shadow: none;
-    line-height: 1.25;
+    line-height: 1.1;
 }
 
 /* ── Body text ── */
 .story-content {
     text-align: right;
-    line-height: 1.55;
-    color: #000;
+    line-height: 1.8;
+    color: #2c3e50;
     margin-top: 8px;
 }
 
 .story-content p {
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    color: #000;
-    margin-bottom: 8px;
+    color: #2c3e50;
+    margin-bottom: 18px;
+    line-height: 1.8;
+    text-align: justify;
 }
 
 /* ── First paragraph — bold ── */
@@ -112,11 +113,11 @@ body {
     font-family: 'Rubik', sans-serif;
     font-weight: 700 !important;
     text-align: right;
-    margin-top: 10px;
-    font-size: 1.1rem;
-    color: #000;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    padding-top: 8px;
+    margin-top: 30px;
+    font-size: 1.25rem;
+    color: #1a2a3a;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
     text-shadow: none;
 }
 
@@ -172,9 +173,10 @@ body {
     }
 
     .story-title {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
         text-align: center;
-        padding-bottom: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 0;
     }
 
     .story-content p {

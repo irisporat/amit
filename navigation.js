@@ -46,7 +46,7 @@ function initNavigation(pageTitle, options = {}) {
                 <i data-lucide="home"></i> דף הבית
             </a>
             <a href="about.html">
-                <i data-lucide="info"></i> הסיפור של עמית
+                <i data-lucide="info"></i> סיפורו של עמית
             </a>
             <a href="Bravery.html">
                 <i data-lucide="shield"></i> סיפור גבורתו
