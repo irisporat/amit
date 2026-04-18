@@ -37,19 +37,19 @@ body.coffee-main-page {
 
 .coffee-logo-area {
     position: absolute;
-    top: 10px; /* Moved up from 50px */
-    right: calc(48% - 70px); /* Overlap the edge of the 48% width image */
-    z-index: 20;
+    top: -40px;
+    left: -40px;
+    z-index: 100;
 }
 
 .coffee-logo-img {
-    width: 160px; /* Slightly larger for overlap effect */
-    height: 160px;
+    width: 140px; 
+    height: 140px;
     object-fit: cover;
     border-radius: 50%;
     display: block;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    background: white;
+    background: #3d85a8;
     border: 4px solid #fff;
 }
 
@@ -102,6 +102,7 @@ body.coffee-main-page {
 .coffee-image-col {
     flex: 0 0 48%; /* Same ratio as Bravery */
     margin-top: 130px; /* Offset to align with text start */
+    position: relative; /* Added for logo anchoring */
 }
 
 .coffee-hero-img {
@@ -239,31 +240,44 @@ body.coffee-main-page {
     }
 
     .coffee-hero {
+        position: relative;
         flex-direction: column; /* Image first, then text */
         padding: 0;
-        gap: 20px;
+        gap: 0;
     }
 
-    .coffee-image-col {
-        width: 100%;
-        margin-top: 0; 
-        position: relative; 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .coffee-recipe-btn {
-        margin: 15px auto 25px;
+    .coffee-image-col, .coffee-info-col {
+        display: contents; /* Allows children to be reordered by the parent flex container */
     }
 
     .coffee-hero-img {
-        border-radius: 12px; /* Full rounded corners on mobile */
+        order: 1;
+        border-radius: 12px;
+        margin-bottom: 30px;
     }
 
-    .coffee-info-col {
-        padding-top: 0;
+    .coffee-logo-area {
+        order: 2;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 0 auto 10px;
+        transform: none;
+        display: flex;
+        justify-content: center;
+    }
+
+    .coffee-main-title {
+        order: 3;
+        font-size: 2.4rem;
         text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .coffee-description {
+        order: 4;
+        width: 100%;
+        margin-bottom: 10px;
     }
 
     .coffee-logo-area {
@@ -274,8 +288,8 @@ body.coffee-main-page {
     }
 
     .coffee-logo-img {
-        width: 100px; /* Smaller logo for mobile */
-        height: 100px;
+        width: 80px; /* Smaller logo for mobile */
+        height: 80px;
         border-width: 3px;
     }
 
@@ -291,12 +305,18 @@ body.coffee-main-page {
         width: 100%;
     }
 
-    .coffee-cta-area {
-        text-align: center;
-        margin-top: 20px;
+    .embedded-video-wrapper {
+        order: 5;
+        margin: 25px auto;
+    }
+
+    .coffee-recipe-btn.unified-btn {
+        order: 6;
+        margin: 20px auto 30px;
     }
 
     .coffee-grid {
+        order: 7;
         grid-template-columns: repeat(2, 1fr); /* 2 per row */
         padding-right: 0;
         margin-top: 30px !important; 
