@@ -1,0 +1,1340 @@
+
+/* ============================================================
+   GLOBAL VARIABLES & RESET
+   ============================================================ */
+:root {
+    --primary-blue: #0047AB;
+    --accent-bronze: #8d6e63;
+    --dark-blue: #0047AB;
+    --text-black: #2c1810;
+    --beige-bg: #fdf6e3;
+    --box-bg: #fffff0;
+    --font-main: 'Rubik', 'Fredoka', 'Segoe UI', Tahoma, Arial, sans-serif;
+    --font-title: 'Frank Ruhl Libre', serif;
+    --font-handwriting: 'Klee One', cursive;
+    --a4-width: 210mm;
+    --a4-height: 297mm;
+}
+
+/* ── VIDEO BACKGROUND ── */
+.video-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ── BACK TO HUB BUTTON ── */
+.back-link-wrapper {
+    display: flex;
+    justify-content: flex-start; /* Aligns to right in RTL (start) */
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    padding: 0 32px;
+}
+
+.back-to-hub {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: white;
+    color: #3d85a8;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(61, 133, 168, 0.1);
+}
+
+.back-to-hub:hover {
+    background: #f0f7fa;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(61, 133, 168, 0.15);
+}
+
+.back-to-hub i {
+    width: 20px;
+    height: 20px;
+}
+
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Body doesn't scroll, the wrapper does */
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-main);
+    color: var(--text-black);
+}
+
+body.home-page {
+    background: transparent !important;
+}
+
+#navigation-root {
+    flex: 0 0 auto;
+    z-index: 2000;
+}
+
+
+body.soft-dark-page {
+    padding-top: 0;
+    background-color: #3e5166; /* Softer, lighter navy */
+    background-image: none;
+}
+
+/* ============================================================
+   SHARED TOP BAR NAVIGATION
+   ============================================================ */
+header.top-bar {
+    height: 70px;
+    background-color: #3d85a8 !important;
+    background: #3d85a8 !important;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 max(20px, calc((100% - 1600px) / 2 + 20px));
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative; /* No longer fixed, flex handles it */
+    width: 100%;
+}
+
+/* ── MAIN SCROLLABLE AREA ── */
+.main-content-scroll {
+    flex: 1 1 auto; /* Take remaining height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    direction: rtl; /* Puts scrollbar on the left */
+    background-color: #f0f2f5; /* Restore default body background */
+    z-index: 1; /* Ensure it's above fixed backgrounds */
+    position: relative;
+    /* Removed position: fixed and top: 70px to fix interaction */
+}
+
+/* For home-page, we want no background on the scroll area to see the fixed video/img */
+body.home-page .main-content-scroll {
+    background-color: transparent;
+    padding-top: 0;
+}
+
+/* Background for events page */
+body.events-page .main-content-scroll {
+    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
+}
+
+/* Put direction back to inherit for content so text alignment remains correct */
+.main-content-scroll > * {
+    direction: rtl;
+}
+
+/* Scrollbar styling for Chrome/Edge/Safari (Webkit) */
+.main-content-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.main-content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.main-content-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-btn-top {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.page-title {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.top-bar-left img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ============================================================
+   VIEW SWITCHER
+   ============================================================ */
+.view {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.view.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   APP HEADER
+   ============================================================ */
+.app-header {
+    background: url('/images/coffee/רקע תכלת לוגו עגלה.png') no-repeat center center;
+    background-size: cover;
+    color: black;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Logo pinned to the left edge of the recipe-grid */
+.header-logo-top {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(20px, calc((100% - 1200px) / 2 + 20px));
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.7;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-title {
+    margin: 10px 0;
+    font-family: var(--font-title);
+    color: black;
+    font-size: 2rem;
+}
+
+.header-subtitle {
+    margin: 0;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: normal;
+    align-self: flex-start;
+}
+
+.header-tagline {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    align-self: flex-start;
+}
+
+/* ============================================================
+   HAMBURGER / MENU ALIGNMENT
+   ============================================================ */
+.menu-alignment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1500;
+    pointer-events: none;
+}
+
+.hamburger-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: max(10px, calc((100% - 1200px) / 2 + 10px));
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 5px;
+    pointer-events: auto;
+}
+
+.hamburger-btn svg {
+    width: 50px;
+    height: 50px;
+}
+
+/* ============================================================
+   RECIPE GRID  (Desktop: 4-column grid)
+   ============================================================ */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipe-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: auto;
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.card-info {
+    flex: 1;
+    width: 100%;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 80px;
+}
+
+.card-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 0;
+}
+
+.card-info p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #444;
+    margin: 0;
+}
+
+/* ============================================================
+   NEWS GRID
+   ============================================================ */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #6495ED;
+    color: white;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.7;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+    background: #4169E1;
+    opacity: 1;
+}
+
+/* ============================================================
+   SINGLE RECIPE PAGE  (Desktop default: A4-ish wide)
+   ============================================================ */
+.page {
+    width: 90%;
+    max-width: 1400px;
+    min-height: 80vh;
+    background-color: var(--beige-bg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    padding: 50px;
+    margin: 20px auto;
+    overflow: hidden;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+}
+
+.page::before {
+    display: none;
+}
+
+.recipe-header {
+    text-align: center;
+    margin-bottom: 8mm;
+    position: relative;
+    z-index: 10;
+}
+
+.recipe-title {
+    font-size: 2.5rem;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+    font-weight: 700;
+    margin: 0;
+}
+
+.recipe-author {
+    font-size: 2rem;
+    color: var(--text-black);
+    font-family: var(--font-handwriting);
+    margin-top: 2mm;
+    font-style: italic;
+}
+
+.recipe-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+
+.ingredients-box {
+    flex: 1;
+}
+
+.instructions-box {
+    flex: 2;
+}
+
+.ingredients-box,
+.instructions-box {
+    min-width: 300px;
+    background: var(--box-bg);
+    padding: 20px;
+    border-radius: 8px;
+    font-family: var(--font-main);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--accent-bronze);
+}
+
+.ingredients-box div,
+.instructions-box div {
+    line-height: 1.8;
+    font-size: 1.5rem;
+}
+
+.box-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--accent-bronze);
+    display: inline-block;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+}
+
+/* ============================================================
+   SIDE MENU
+   ============================================================ */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 3000; /* Above top bar and scroll root */
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    direction: rtl; /* Scrollbar on the left */
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2050;
+    display: none;
+    backdrop-filter: blur(2px);
+}
+
+.side-menu-overlay.active {
+    display: block;
+}
+
+.close-menu-btn {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.menu-header h3 {
+    margin: 0 0 20px 0;
+    color: var(--primary-blue);
+    font-family: var(--font-title);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.menu-nav a:hover {
+    background: #f5f5f5;
+    color: var(--primary-blue);
+}
+
+.menu-social {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-icon {
+    color: var(--text-black);
+    transition: transform 0.2s, color 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    color: var(--primary-blue);
+}
+
+.social-icon.facebook {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.social-icon i {
+    width: 30px;
+    height: 30px;
+}
+
+/* ============================================================
+   AMIT'S STORY PAGE
+   ============================================================ */
+.story-page {
+    padding: 30px;
+    background: var(--box-bg);
+    max-width: 800px;
+    margin: 100px auto 50px; /* Increased top margin for desktop to lower title */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 80vh;
+}
+
+.story-content {
+    text-align: right;
+    line-height: 1.8;
+    color: var(--text-black);
+}
+
+.story-title {
+    font-family: var(--font-title);
+    color: var(--primary-blue);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-bronze);
+    padding-bottom: 10px;
+}
+
+.story-content p {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    line-height: 2;
+}
+
+.story-footer {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.8rem;
+    color: var(--primary-blue);
+}
+
+/* ============================================================
+   LOCATION PAGE
+   ============================================================ */
+.location-page {
+    padding: 30px;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-height: 80vh;
+    text-align: right;
+}
+
+.location-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.location-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: var(--box-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--accent-bronze);
+}
+
+.location-item i {
+    color: var(--primary-blue);
+    margin-top: 5px;
+}
+
+.location-item strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+    font-family: var(--font-title);
+}
+
+.location-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-black);
+}
+
+.box-waze {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.waze-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #33ccff;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    align-self: flex-start;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+}
+
+/* ============================================================
+   PLACEHOLDER PAGES & HOME
+   ============================================================ */
+/* Global Static Background for Home Page */
+.static-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1001; /* Deepest layer */
+}
+
+/* Global Dark Overlay for Home Page */
+body.home-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
+    z-index: -999; /* Just above video */
+    pointer-events: none;
+}
+
+.hello-world-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #fff;
+    padding: 120px 40px 40px; /* Restored desktop padding */
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    background: transparent;
+}
+
+.memorial-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    width: 50%; /* תופס רק חצי מסך (שמאלי ב-RTL) */
+    margin-right: auto; /* דוחף שמאלה ב-RTL */
+    position: relative;
+    padding-left: 20px;
+}
+
+.memorial-image-container {
+    position: absolute;
+    bottom: -1px;
+    right: -20px;
+    z-index: 5; /* Higher than overlay */
+    pointer-events: none;
+    line-height: 0;
+    isolation: auto; /* Ensure no blending isolation occurs */
+}
+
+.memorial-headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.memorial-rank {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: -15px;
+    opacity: 0.95;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.memorial-name-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.memorial-name {
+    font-size: 6rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    letter-spacing: -1px;
+    line-height: 1.1;
+    display: inline-block;
+}
+
+.memorial-suffix {
+    font-size: 1.6rem;
+    font-weight: 600;
+    opacity: 0.9;
+    display: inline-block;
+    vertical-align: sub;
+    position: relative;
+    top: 5px; /* Nudging it down to match the baseline of the larger font */
+    margin-right: 10px;
+}
+
+.memorial-image {
+    width: auto;
+    max-height: calc(100vh - 70px);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    mix-blend-mode: multiply; /* Keeps blend if supported */
+    filter: url(#remove-white) drop-shadow(0 10px 30px rgba(0,0,0,0.5)); /* Adds the custom SVG filter to remove white */
+    border: none;
+    background: transparent;
+    transition: transform 0.3s ease;
+}
+
+.memorial-image:hover {
+    transform: scale(1.02);
+}
+
+.memorial-dates {
+    font-size: 2.2rem;
+    margin-top: 0px;
+    opacity: 0.85;
+    font-weight: 400;
+}
+
+.memorial-info,
+.memorial-motto {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+.memorial-info {
+    margin-top: 25px;
+}
+
+.memorial-motto {
+    margin-top: 110px;
+}
+
+.memorial-quote {
+    margin-top: 80px;
+    /* Increased spacing before quote */
+    font-size: 2rem;
+    font-family: var(--font-handwriting), 'Guttman Yad', 'Amatic SC', sans-serif;
+    font-weight: normal;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Removed Carousel Styles */
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.container h2 {
+    color: #1f2937;
+}
+
+/* ============================================================
+   MOBILE OVERRIDES  (max-width: 599px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+    /* Header */
+    .app-header {
+        padding-top: 15px;
+    }
+
+    .header-title {
+        font-size: 1.4rem;
+        margin-top: 0;
+    }
+
+    .header-subtitle,
+    .header-tagline {
+        font-size: 0.8rem;
+    }
+
+    /* Hamburger */
+    .hamburger-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .hamburger-btn {
+        top: 15px;
+        transform: none;
+    }
+
+    /* Logo */
+    .header-logo-top {
+        height: 50px;
+        top: 65%;
+        left: 5px;
+    }
+
+    /* Recipe Grid — single column list */
+    .recipe-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    /* Card — horizontal row on mobile */
+    .recipe-card {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 75px;
+    }
+
+    .card-img {
+        width: 65px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .card-info {
+        padding: 6px 12px;
+        min-height: unset;
+    }
+
+    .card-info h3 {
+        font-size: 1rem;
+    }
+
+    .card-info p {
+        font-size: 0.9rem;
+    }
+
+    /* News Grid Mobile */
+    .news-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .news-card {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 75px;
+    }
+
+    /* Stories (Bravery and About) Mobile Spacing */
+    .story-page {
+        padding-top: 0px !important; /* Minimum top padding to raise title in mobile */
+    }
+
+    /* Single Recipe Page */
+    .page {
+        width: 100%;
+        margin: 0;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 20px; /* Original/Standard mobile padding restored */
+    }
+
+    .recipe-title {
+        font-size: 1.4rem;
+    }
+
+    .recipe-author {
+        font-size: 1rem;
+    }
+
+    .recipe-content {
+        flex-direction: column;
+    }
+
+    .ingredients-box {
+        flex: none;
+        width: 100%;
+    }
+
+    .ingredients-box div,
+    .instructions-box div {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .box-title {
+        font-size: 1.4rem;
+    }
+
+    /* Story */
+    .story-title {
+        font-size: 1.8rem;
+    }
+
+    .story-content p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+    }
+
+    .story-footer {
+        font-size: 1.3rem;
+    }
+
+    /* Containers & Pages */
+    .hello-world-container {
+        flex-direction: column;
+        /* First child (Image) on top */
+        padding: 40px 20px 0; /* Removed bottom padding for image to skin bottom */
+        gap: 30px;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .memorial-text-container {
+        display: contents;
+    }
+
+    .memorial-headline {
+        order: 1;
+        margin-bottom: 5px;
+    }
+
+    .memorial-info {
+        order: 2;
+        margin-top: 5px !important;
+        margin-bottom: 5px;
+    }
+
+    .memorial-quote {
+        order: 3;
+        margin-top: 10px !important;
+        margin-bottom: 10px;
+        font-size: 1.15rem;
+        align-self: center;
+    }
+
+    .memorial-image-container {
+        order: 5;
+        position: relative;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+        margin-bottom: 0px; /* Removed margin-bottom to bring motto closer */
+    }
+
+    .memorial-motto {
+        order: 4;
+        width: 100%;
+        margin: 10px auto 10px !important;
+        text-align: center;
+    }
+
+    .memorial-rank {
+        font-size: 0.9rem;
+        margin-bottom: -5px;
+    }
+
+    .memorial-name {
+        font-size: 2.2rem;
+    }
+
+    .memorial-suffix {
+        font-size: 0.8rem;
+        top: -5px;
+        margin-right: 5px;
+    }
+
+    .memorial-dates {
+        font-size: 1.3rem;
+        align-self: center;
+        margin-top: 5px;
+    }
+
+    .memorial-info,
+    .memorial-motto {
+        font-size: 1.1rem;
+    }
+
+    .memorial-info {
+        margin-top: 15px;
+    }
+
+    .memorial-image {
+        position: relative;
+        width: 320px;
+        max-width: 90%;
+        height: auto;
+        filter: url(#remove-white);
+        mix-blend-mode: normal;
+        margin: 0;
+        display: block; /* Ensures no line-height gap */
+    }
+
+    .main-content-scroll, .side-menu {
+        /* Hide scrollbar on mobile as requested */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    .main-content-scroll::-webkit-scrollbar, .side-menu::-webkit-scrollbar {
+        display: none; /* Chrome/Safari/Edge */
+    }
+
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+/* ============================================================
+   EVENTS PAGE
+   ============================================================ */
+.events-page-wrapper {
+    padding-bottom: 50px;
+}
+
+.events-main-title {
+    text-align: center;
+    font-family: var(--font-title);
+    color: var(--dark-blue);
+    font-size: 2.5rem;
+    margin-top: 40px;
+}
+
+.event-box {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    text-align: right;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    overflow: hidden; /* Ensure content stays inside */
+}
+
+.event-box.accordion {
+    cursor: pointer;
+}
+
+.event-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3mm 30px 3mm 3mm;
+    width: 100%;
+    min-height: 186px;
+    position: relative; /* For absolute positioning of arrow */
+}
+
+.accordion-arrow {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.event-box.active .accordion-arrow {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.event-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    background: rgba(0, 71, 171, 0.03); /* Very light blue background for content */
+    border-top: 0px solid rgba(0, 0, 0, 0.05);
+}
+
+.event-box.active .event-accordion-content {
+    max-height: 300px; /* Large enough to show content */
+    border-top-width: 1px;
+    padding-bottom: 20px;
+}
+
+.accordion-item {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    color: var(--text-black);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    transition: background 0.2s;
+}
+
+.accordion-item:hover {
+    background: rgba(0, 71, 171, 0.08);
+}
+
+.event-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+    margin: 0;
+    font-size: 2.2rem;
+    color: var(--dark-blue);
+    font-family: var(--font-title);
+    font-weight: 700;
+}
+
+.event-image {
+    width: 180px;
+    height: 180px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px; /* Shorter radius to look more square */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .event-box {
+        padding: 3mm 15px 3mm 3mm;
+        min-height: 106px;
+    }
+    
+    .event-title {
+        font-size: 1.4rem;
+    }
+    
+    .event-image {
+        width: 100px;
+        height: 100px;
+    }
+}
