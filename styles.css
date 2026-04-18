@@ -90,9 +90,10 @@ body.soft-dark-page {
 /* ============================================================
    SHARED TOP BAR NAVIGATION
    ============================================================ */
-.top-bar {
+header.top-bar {
     height: 70px;
-    background: #1f2937;
+    background-color: #3d85a8 !important;
+    background: #3d85a8 !important;
     color: white;
     display: flex;
     align-items: center;
