@@ -342,27 +342,28 @@ body.coffee-main-page {
 }
 
 /* ── Embedded Video ── */
+.coffee-embedded-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 9 / 16 !important; /* Force true portrait ratio */
+    object-fit: cover !important;
+}
+
 .embedded-video-wrapper {
     position: relative;
     width: 100%;
-    margin-top: 30px;
+    max-width: 380px; /* Constrain width to prevent it being huge */
+    margin: 30px auto; /* Centered in its column */
     border-radius: 12px;
     overflow: hidden;
     box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.coffee-embedded-video {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 16 / 9; /* Assuming 16:9 for the video */
-    background: #000;
-}
-
 .video-unmute-btn {
     position: absolute;
     bottom: 15px;
-    left: 15px;
+    right: 15px; /* Moved to right as requested */
     background: rgba(61, 133, 168, 0.9);
     color: white;
     border: none;
