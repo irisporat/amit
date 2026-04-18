@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="styles.css?v=3.0">
-    <link rel="stylesheet" href="coffee_main.css?v=3.0">
+    <link rel="stylesheet" href="styles.css?v=3.1">
+    <link rel="stylesheet" href="coffee_main.css?v=3.1">
 </head>
 
 <body class="coffee-main-page">
@@ -26,13 +26,16 @@
                 <div class="coffee-image-col">
                     <img src="images/coffee/CoffeePIC/CoffeePic1.jpeg" alt="עגלת הקפה של עמית" class="coffee-hero-img">
 
-                    <a href="coffee.html" class="coffee-recipe-btn desktop-only">
-                        <i data-lucide="book-open"></i>
-                        <div class="btn-text-content">
-                            <span class="btn-text-main">מאפיית פרידמן</span>
-                            <span class="btn-text-sub">ספר מתכונים</span>
-                        </div>
-                    </a>
+                    <!-- Embedded Video -->
+                    <div class="embedded-video-wrapper">
+                        <video id="hero-video" autoplay loop muted playsinline class="coffee-embedded-video">
+                            <source src="images/coffee/VIDEO-2025-07-23-12-35-10.mp4" type="video/mp4">
+                        </video>
+                        <button id="unmute-btn" class="video-unmute-btn">
+                            <i data-lucide="volume-x"></i>
+                            <span>הפעל סאונד</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="coffee-info-col">
@@ -50,7 +53,8 @@
                         <p><strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong></p>
                     </div>
 
-                    <a href="coffee.html" class="coffee-recipe-btn mobile-only">
+                    <!-- Relocated Recipe Button -->
+                    <a href="coffee.html" class="coffee-recipe-btn unified-btn">
                         <i data-lucide="book-open"></i>
                         <div class="btn-text-content">
                             <span class="btn-text-main">מאפיית פרידמן</span>
@@ -263,6 +267,26 @@
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeGallery();
         });
+
+        // Video Unmute Logic
+        const heroVideo = document.getElementById('hero-video');
+        const unmuteBtn = document.getElementById('unmute-btn');
+
+        if (unmuteBtn && heroVideo) {
+            unmuteBtn.addEventListener('click', () => {
+                heroVideo.muted = !heroVideo.muted;
+                const icon = unmuteBtn.querySelector('i');
+                const span = unmuteBtn.querySelector('span');
+                if (heroVideo.muted) {
+                    span.textContent = 'הפעל סאונד';
+                    icon.setAttribute('data-lucide', 'volume-x');
+                } else {
+                    span.textContent = 'השתק';
+                    icon.setAttribute('data-lucide', 'volume-2');
+                }
+                if (window.lucide) lucide.createIcons();
+            });
+        }
 
         window.onload = () => {
             initNavigation("עגלת קפה");

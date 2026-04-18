@@ -341,6 +341,64 @@ body.coffee-main-page {
     }
 }
 
+/* ── Embedded Video ── */
+.embedded-video-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.coffee-embedded-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9; /* Assuming 16:9 for the video */
+    background: #000;
+}
+
+.video-unmute-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(61, 133, 168, 0.9);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.video-unmute-btn:hover {
+    background: #3d85a8;
+    transform: scale(1.05);
+}
+
+.video-unmute-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* ── Unified Button ── */
+.coffee-recipe-btn.unified-btn {
+    margin: 40px auto 20px;
+    width: 100%;
+    max-width: 400px;
+    display: flex !important; /* Force display since desktop/mobile rules might conflict */
+}
+
 /* ── Gallery Modal ── */
 .gallery-modal {
     position: fixed;
