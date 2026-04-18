@@ -918,7 +918,7 @@ body.home-page::after {
     margin-top: 80px;
     /* Increased spacing before quote */
     font-size: 2rem;
-    font-family: 'Rubik', 'Guttman Yad', 'Amatic SC', var(--font-handwriting), cursive;
+    font-family: var(--font-handwriting), 'Guttman Yad', 'Amatic SC', sans-serif;
     font-weight: normal;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -1084,7 +1084,7 @@ body.home-page::after {
     .hello-world-container {
         flex-direction: column;
         /* First child (Image) on top */
-        padding: 40px 20px 40px; /* Added slight top padding to prevent "stuck" look */
+        padding: 40px 20px 0; /* Removed bottom padding for image to skin bottom */
         gap: 30px;
         text-align: center;
         min-height: auto;
@@ -1114,7 +1114,7 @@ body.home-page::after {
     }
 
     .memorial-image-container {
-        order: 4;
+        order: 5;
         position: relative;
         bottom: 0;
         right: 0;
@@ -1126,9 +1126,9 @@ body.home-page::after {
     }
 
     .memorial-motto {
-        order: 5;
+        order: 4;
         width: 100%;
-        margin: 0px auto 30px !important; /* Removed top margin to bring motto closer */
+        margin: 10px auto 10px !important;
         text-align: center;
     }
 
@@ -1170,6 +1170,7 @@ body.home-page::after {
         filter: url(#remove-white);
         mix-blend-mode: normal;
         margin: 0;
+        display: block; /* Ensures no line-height gap */
     }
 
     .main-content-scroll, .side-menu {
