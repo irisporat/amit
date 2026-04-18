@@ -1254,9 +1254,8 @@ header.top-bar {
 
 .modal-content {
     position: relative;
-    width: auto;
-    min-width: 300px;
-    max-width: 90vw;
+    width: 90vw;
+    max-width: 1000px;
     height: 80vh;
     display: flex;
     align-items: center;
