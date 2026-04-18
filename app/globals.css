@@ -796,6 +796,7 @@ header.top-bar {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
+    height: 100vh;
     color: #fff;
     padding: 120px 40px 40px; /* Restored desktop padding */
     max-width: 1600px;
@@ -908,7 +909,7 @@ header.top-bar {
 }
 
 .memorial-motto {
-    margin-top: 110px;
+    margin-top: 64px;
 }
 
 .memorial-quote {
@@ -1084,7 +1085,8 @@ header.top-bar {
         padding: 110px 20px 0; /* top = header (70px) + original spacing (40px) */
         gap: 30px;
         text-align: center;
-        min-height: auto;
+        min-height: 100vh;
+        height: 100vh;
     }
 
     .memorial-text-container {
@@ -1118,15 +1120,25 @@ header.top-bar {
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-top: 5px;
-        margin-bottom: 0px; /* Removed margin-bottom to bring motto closer */
+        margin-top: auto;
+        margin-bottom: 0px;
+        transform: translateX(15px);
     }
 
     .memorial-motto {
         order: 4;
-        width: 100%;
-        margin: 10px auto 10px !important;
+        position: absolute;
+        bottom: 5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        margin: 0 !important;
         text-align: center;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.45);
+        box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.45);
+        border-radius: 12px;
+        padding: 14px 20px;
     }
 
     .memorial-rank {
