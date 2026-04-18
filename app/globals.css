@@ -119,16 +119,20 @@ body.soft-dark-page {
    ============================================================ */
 header.top-bar {
     height: 70px;
-    background-color: #3d85a8 !important;
-    background: #3d85a8 !important;
+    background-color: rgba(30, 80, 130, 0.7) !important;
+    background: rgba(30, 80, 130, 0.7) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 max(20px, calc((100% - 1600px) / 2 + 20px));
+    padding: 0 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 2000;
     width: 100%;
 }
@@ -804,12 +808,14 @@ header.top-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     z-index: 10;
-    width: 50%; /* תופס רק חצי מסך (שמאלי ב-RTL) */
+    width: 45%; /* תופס רק חצי מסך (שמאלי ב-RTL) */
     margin-right: auto; /* דוחף שמאלה ב-RTL */
     position: relative;
     padding-left: 20px;
+    align-self: stretch;
 }
 
 .memorial-image-container {
@@ -1075,7 +1081,7 @@ header.top-bar {
     .hello-world-container {
         flex-direction: column;
         /* First child (Image) on top */
-        padding: 40px 20px 0; /* Removed bottom padding for image to skin bottom */
+        padding: 110px 20px 0; /* top = header (70px) + original spacing (40px) */
         gap: 30px;
         text-align: center;
         min-height: auto;
