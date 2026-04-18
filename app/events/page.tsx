@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
-import '@/styles/events.css';
+import './events.css';
 
 const galleryData: Record<string, string[]> = {
   scouts: [

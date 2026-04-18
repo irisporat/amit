@@ -87,7 +87,8 @@ body.bravery-page {
     background: #3d85a8;
     color: white;
     text-decoration: none;
-    padding: 15px 25px;
+    padding: 12px 25px;
+    min-height: 64px; /* Maintain height as requested */
     border-radius: 12px;
     margin-top: 25px;
     box-shadow: 0 4px 15px rgba(61, 133, 168, 0.3);
@@ -122,9 +123,11 @@ body.bravery-page {
     text-align: center;
 }
 
-.bravery-video-btn i {
+.bravery-video-btn i,
+.bravery-video-btn svg {
     width: 28px;
     height: 28px;
+    flex-shrink: 0;
 }
 
 /* ── Visibility Helpers ── */

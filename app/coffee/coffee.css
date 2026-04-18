@@ -1,5 +1,5 @@
 /* ============================================================
-   COFFEE MAIN HUB — coffee_main.css
+   COFFEE MAIN HUB — coffee.css
    ============================================================ */
 
 body.coffee-main-page {
@@ -10,9 +10,12 @@ body.coffee-main-page {
 }
 
 .coffee-main-container {
-    max-width: 100%; /* Spans full width like Bravery */
-    margin: 10px 0 40px; /* Reduced top margin from 40px to 10px */
-    padding-right: 0; /* Sticked to right frame */
+    max-width: 100%;
+    /* Spans full width like Bravery */
+    margin: 10px 0 40px;
+    /* Reduced top margin from 40px to 10px */
+    padding-right: 0;
+    /* Sticked to right frame */
     padding-left: 60px;
     direction: rtl;
 }
@@ -20,41 +23,45 @@ body.coffee-main-page {
 /* ── Hero Section (Two Columns) ── */
 .coffee-hero {
     display: flex;
-    align-items: stretch; /* Both columns will have same height */
+    align-items: stretch;
+    /* Both columns will have same height */
     gap: 50px;
     margin-bottom: 60px;
     background: transparent;
     padding: 0;
-    position: relative; /* For absolute positioning of logo */
+    position: relative;
 }
 
 .coffee-info-col {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 150px; /* Increased offset to give the headline more room below the logo */
+    padding-top: 90px;
 }
 
-.coffee-logo-area {
-    position: absolute;
-    top: 10px; /* Moved up from 50px */
-    right: calc(48% - 70px); /* Overlap the edge of the 48% width image */
-    z-index: 20;
+/* Logo sits in the image column (flow), above hero photo + video — matches static HTML */
+.coffee-image-col .coffee-logo-area {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    margin-bottom: 16px;
 }
 
 .coffee-logo-img {
-    width: 160px; /* Slightly larger for overlap effect */
+    width: 160px;
+    /* Slightly larger for overlap effect */
     height: 160px;
     object-fit: cover;
     border-radius: 50%;
     display: block;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     background: white;
     border: 4px solid #fff;
 }
 
 .coffee-main-title {
-    font-size: 3.2rem; /* Larger title like Bravery */
+    font-size: 3.2rem;
+    /* Larger title like Bravery */
     font-weight: 800;
     color: #3d85a8;
     margin-bottom: 30px;
@@ -62,7 +69,8 @@ body.coffee-main-page {
 }
 
 .coffee-description p {
-    font-size: 1.25rem; /* Larger text like Bravery */
+    font-size: 1.25rem;
+    /* Larger text like Bravery */
     line-height: 1.8;
     margin-bottom: 18px;
     text-align: justify;
@@ -70,7 +78,8 @@ body.coffee-main-page {
 }
 
 .coffee-description {
-    margin-bottom: 60px; /* Significant gap between text and squares */
+    margin-bottom: 60px;
+    /* Significant gap between text and squares */
 }
 
 .coffee-cta-area {
@@ -100,15 +109,19 @@ body.coffee-main-page {
 }
 
 .coffee-image-col {
-    flex: 0 0 48%; /* Same ratio as Bravery */
-    margin-top: 130px; /* Offset to align with text start */
+    flex: 0 0 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 80px;
 }
 
 .coffee-hero-img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 0 12px 12px 0; /* Rounded inner side */
+    border-radius: 0 12px 12px 0;
+    /* Rounded inner side */
     box-shadow: -10px 20px 60px rgba(0, 0, 0, 0.2);
     display: block;
 }
@@ -142,7 +155,8 @@ body.coffee-main-page {
 .coffee-recipe-btn .btn-text-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centered text content */
+    align-items: center;
+    /* Centered text content */
 }
 
 .coffee-recipe-btn .btn-text-main {
@@ -159,9 +173,11 @@ body.coffee-main-page {
     text-align: center;
 }
 
-.coffee-recipe-btn i {
+.coffee-recipe-btn i,
+.coffee-recipe-btn svg {
     width: 28px;
     height: 28px;
+    flex-shrink: 0;
 }
 
 .mobile-only {
@@ -178,7 +194,8 @@ body.coffee-main-page {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-    margin-top: 40px; /* Raised to align with the bottom of the hero image */
+    margin-top: 40px;
+    /* Raised to align with the bottom of the hero image */
     margin-bottom: 0;
     padding-right: 0;
 }
@@ -189,7 +206,7 @@ body.coffee-main-page {
     overflow: hidden;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
 }
@@ -234,20 +251,22 @@ body.coffee-main-page {
     .coffee-main-container {
         padding-left: 20px;
         padding-right: 20px;
-        padding-top: 40px; /* Added significant top padding to accommodate the overlapping logo */
+        padding-top: 40px;
+        /* Added significant top padding to accommodate the overlapping logo */
         margin-top: 0;
     }
 
     .coffee-hero {
-        flex-direction: column; /* Image first, then text */
+        flex-direction: column;
+        /* Image first, then text */
         padding: 0;
         gap: 20px;
     }
 
     .coffee-image-col {
         width: 100%;
-        margin-top: 0; 
-        position: relative; 
+        margin-top: 0;
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -258,7 +277,8 @@ body.coffee-main-page {
     }
 
     .coffee-hero-img {
-        border-radius: 12px; /* Full rounded corners on mobile */
+        border-radius: 12px;
+        /* Full rounded corners on mobile */
     }
 
     .coffee-info-col {
@@ -266,15 +286,12 @@ body.coffee-main-page {
         text-align: center;
     }
 
-    .coffee-logo-area {
-        top: -30px; /* Overlap further into the new padding area */
-        right: auto;
-        left: 5px; /* Moved slightly inside (not negative) to prevent side-clipping */
-        transform: none;
+    .coffee-image-col .coffee-logo-area {
+        margin-bottom: 12px;
     }
 
     .coffee-logo-img {
-        width: 100px; /* Smaller logo for mobile */
+        width: 100px;
         height: 100px;
         border-width: 3px;
     }
@@ -297,16 +314,20 @@ body.coffee-main-page {
     }
 
     .coffee-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 per row */
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 per row */
         padding-right: 0;
-        margin-top: 30px !important; 
+        margin-top: 30px !important;
         gap: 15px;
     }
 
     .coffee-grid .coffee-card:last-child {
-        grid-column: span 2; /* Spans across both columns */
-        width: 50%; /* But keeps the same size as others */
-        margin: 0 auto; /* Centers the item */
+        grid-column: span 2;
+        /* Spans across both columns */
+        width: 50%;
+        /* But keeps the same size as others */
+        margin: 0 auto;
+        /* Centers the item */
     }
 
     .mobile-only {
@@ -318,7 +339,8 @@ body.coffee-main-page {
     }
 
     .coffee-recipe-btn.mobile-only {
-        margin: 0 auto 30px; /* Centered with gap below text */
+        margin: 0 auto 30px;
+        /* Centered with gap below text */
     }
 }
 
@@ -326,19 +348,89 @@ body.coffee-main-page {
     .coffee-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .coffee-main-title {
         font-size: 2rem;
-    }
-
-    .coffee-logo-area {
-        left: -5px;
     }
 
     .coffee-logo-img {
         width: 85px;
         height: 85px;
     }
+}
+
+/* ── Embedded Video ── */
+.coffee-embedded-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 9 / 16 !important;
+    /* Force true portrait ratio */
+    object-fit: cover !important;
+}
+
+.embedded-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    /* Constrain width to prevent it being huge */
+    margin: 30px auto;
+    /* Centered in its column */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: -5px 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+
+
+
+.video-unmute-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    /* Moved to right as requested */
+    background: rgba(61, 133, 168, 0.9);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.video-unmute-btn:hover {
+    background: #3d85a8;
+    transform: scale(1.05);
+}
+
+.video-unmute-btn i,
+.video-unmute-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* ── Unified Button ── */
+.coffee-recipe-btn.unified-btn {
+    margin: 40px auto 20px;
+    width: 100%;
+    max-width: 400px;
+    display: flex !important;
+    /* Force display since desktop/mobile rules might conflict */
 }
 
 /* ── Gallery Modal ── */
@@ -390,7 +482,8 @@ body.coffee-main-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: auto; /* Allow scrolling when zoomed */
+    overflow: auto;
+    /* Allow scrolling when zoomed */
 }
 
 #gallery-img {
@@ -400,10 +493,11 @@ body.coffee-main-page {
     height: auto;
     object-fit: contain;
     border-radius: 4px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
     transform: scale(1);
     transition: transform 0.3s ease;
-    cursor: default; /* Default to no zoom */
+    cursor: default;
+    /* Default to no zoom */
 }
 
 #gallery-img[data-zoomable="true"] {
@@ -415,7 +509,8 @@ body.coffee-main-page {
 }
 
 #gallery-img.zoomed {
-    transform: none; /* Reset transform for scrolling */
+    transform: none;
+    /* Reset transform for scrolling */
     max-width: none;
     max-height: none;
     width: auto;
@@ -439,7 +534,7 @@ body.coffee-main-page {
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10001;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .close-modal:hover {
@@ -506,18 +601,26 @@ body.coffee-main-page {
         height: 45px;
         flex-shrink: 0;
     }
-    
-    .nav-btn.prev-btn { order: 1; }
-    .image-container { order: 2; }
-    .nav-btn.next-btn { order: 3; }
-    
+
+    .nav-btn.prev-btn {
+        order: 1;
+    }
+
+    .image-container {
+        order: 2;
+    }
+
+    .nav-btn.next-btn {
+        order: 3;
+    }
+
     .close-modal {
         top: 15px;
         left: 15px;
         width: 40px;
         height: 40px;
     }
-    
+
     .gallery-counter {
         margin-top: 15px;
         font-size: 1rem;

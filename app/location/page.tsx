@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Clock, Navigation as NavIcon, Map } from 'lucide-react';
 import Navigation from '@/components/Navigation';
-import '@/styles/location.css';
+import './location.css';
 
 export const metadata: Metadata = {
   title: 'מיקום עגלת הקפה - קפה החברים של עמית',

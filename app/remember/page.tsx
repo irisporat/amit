@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
-import '@/styles/remember.css';
+import './remember.css';
 
 const galleryData: Record<string, string[]> = {
   stickers: [

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { X, ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface GalleryModalProps {
@@ -51,6 +51,20 @@ export default function GalleryModal({
     }
   }, [currentIndex]);
 
+  const syncZoomable = useCallback(() => {
+    if (!imgRef.current) return;
+    if (!zoomable || !modalRef.current) {
+      imgRef.current.dataset.zoomable = 'false';
+      return;
+    }
+    const modalContent = modalRef.current.querySelector('.modal-content') as HTMLElement;
+    const img = imgRef.current;
+    const isSmall =
+      img.naturalWidth < modalContent.clientWidth * 0.85 ||
+      img.naturalHeight < modalContent.clientHeight * 0.85;
+    img.dataset.zoomable = isSmall ? 'true' : 'false';
+  }, [zoomable]);
+
   const handleImgClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!zoomable || !imgRef.current || !modalRef.current) return;
@@ -91,6 +105,7 @@ export default function GalleryModal({
             src={images[currentIndex]}
             alt="Gallery Image"
             onClick={handleImgClick}
+            onLoad={syncZoomable}
           />
         </div>
         {showNav && (

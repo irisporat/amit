@@ -2,7 +2,7 @@
 
 import Navigation from '@/components/Navigation';
 import BodyClass from '@/components/BodyClass';
-import '@/styles/contact.css';
+import './contact.css';
 
 export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

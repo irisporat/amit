@@ -6,7 +6,8 @@ import { BookOpen } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
-import '@/styles/coffee_main.css';
+import CoffeeHeroVideo from '@/components/CoffeeHeroVideo';
+import './coffee.css';
 
 const galleryData: Record<string, string[]> = {
   fam: [
@@ -62,36 +63,42 @@ export default function CoffeePage() {
         <div className="coffee-main-container">
           <section className="coffee-hero">
             <div className="coffee-image-col">
-              <img src="/coffee/CoffeePIC/CoffeePic1.jpeg" alt="עגלת הקפה של עמית" className="coffee-hero-img" />
-              <Link href="/coffee/recipe" className="coffee-recipe-btn desktop-only">
-                <BookOpen />
-                <div className="btn-text-content">
-                  <span className="btn-text-main">מאפיית פרידמן</span>
-                  <span className="btn-text-sub">ספר מתכונים</span>
-                </div>
-              </Link>
-            </div>
-            <div className="coffee-info-col">
               <div className="coffee-logo-area">
                 <img src="/main/לוגו עגלה לבן.png" alt="לוגו קפה החברים של עמית" className="coffee-logo-img" />
               </div>
+              <img src="/coffee/CoffeePIC/CoffeePic1.jpeg" alt="עגלת הקפה של עמית" className="coffee-hero-img" />
+              <CoffeeHeroVideo />
+            </div>
+            <div className="coffee-info-col">
               <h1 className="coffee-main-title">עגלת &quot;קפה החברים של עמית&quot;</h1>
               <div className="coffee-description">
-                <p>עגלת &quot;קפה החברים של עמית&quot; הוקמה לזכרו של סמ&quot;ר עמית פרידמן ז&quot;ל, שנפל בקרב בתל סולטן שברפיח ב־27 באוגוסט 2024, בגיל 19.</p>
+                <p>
+                  עגלת &ldquo;קפה החברים של עמית&rdquo; הוקמה לזכרו של סמ״ר עמית פרידמן ז״ל, שנפל בקרב בתל סולטן שברפיח ב־27 באוגוסט 2024, בגיל 19.{' '}
+                </p>
                 <p>העגלה פועלת ביוזמה קהילתית מדי יום שישי בנווה סביון שבאור יהודה. תושבי השכונה מתנדבים, אופים ומגישים קפה, מאפים ומשקאות, עוגיות אמסטרדם ייחודיות, סמבוסק, מילקשייק ועוד כאשר כל ההכנסות מוקדשות להנצחתו.</p>
-                <p>המיזם נולד מהרגעים הפשוטים שעמית אהב יותר מכל: לשבת עם חברים, לשוחח, לצחוק ולהיות יחד. <br />
-                כשעמית היה יוצא מהצבא נהג לפקוד את בתי הקפה באזור ולפגוש חברים ממעגלים שונים.</p>
-                <p>&quot;קפה החברים של עמית&quot; ממשיך לספר את סיפורו, אהבת האדם, השמחה והחברות והופך לזיכרון ולחיבור חם בקהילה.<br />
-                מיזם של קהילה שלמה שלוקחת חלק בלהשאיר את עמית נוכח ולהנציח את האדם שהיה והאור שהפיץ.</p>
-                <p><strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong></p>
+                <p>
+                  המיזם נולד מהרגעים הפשוטים שעמית אהב יותר מכל: לשבת עם חברים, לשוחח, לצחוק ולהיות יחד.{' '}
+                  <br />
+                  כשעמית היה יוצא מהצבא נהג לפקוד את בתי הקפה באזור ולפגוש חברים ממעגלים שונים.
+                </p>
+                <p>
+                  &ldquo;קפה החברים של עמית&rdquo; ממשיך לספר את סיפורו, אהבת האדם, השמחה והחברות והופך לזיכרון ולחיבור חם בקהילה.
+                  <br />
+                  מיזם של קהילה שלמה שלוקחת חלק בלהשאיר את עמית נוכח ולהנציח את האדם שהיה והאור שהפיץ.
+                </p>
+                <p>
+                  <strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong>
+                </p>
               </div>
-              <Link href="/coffee/recipe" className="coffee-recipe-btn mobile-only">
+
+              <Link href="/coffee/recipe" className="coffee-recipe-btn unified-btn">
                 <BookOpen />
                 <div className="btn-text-content">
                   <span className="btn-text-main">מאפיית פרידמן</span>
                   <span className="btn-text-sub">ספר מתכונים</span>
                 </div>
               </Link>
+
               <section className="coffee-grid">
                 {[
                   { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },

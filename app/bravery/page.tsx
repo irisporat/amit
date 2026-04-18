@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { PlayCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import BodyClass from '@/components/BodyClass';
-import '@/styles/bravery.css';
+import './bravery.css';
 
 export const metadata: Metadata = {
   title: 'סיפור גבורתו - עמית פרידמן',
@@ -22,8 +22,7 @@ export default function BraveryPage() {
             <a href="https://www.youtube.com/watch?v=gAIJvP0JXAo" target="_blank" rel="noopener noreferrer" className="bravery-video-btn desktop-only">
               <PlayCircle />
               <div className="btn-text-content">
-                <span className="btn-text-main">מרדף עד הכרעה בתל-סולטאן</span>
-                <span className="btn-text-sub">חטיבת הנח&quot;ל</span>
+                <span className="btn-text-main">מצפן מורשת - חטיבת הנח״ל</span>
               </div>
             </a>
           </div>
@@ -41,8 +40,7 @@ export default function BraveryPage() {
             <a href="https://www.youtube.com/watch?v=gAIJvP0JXAo" target="_blank" rel="noopener noreferrer" className="bravery-video-btn mobile-only">
               <PlayCircle />
               <div className="btn-text-content">
-                <span className="btn-text-main">מרדף עד הכרעה בתל-סולטאן</span>
-                <span className="btn-text-sub">חטיבת הנח&quot;ל</span>
+                <span className="btn-text-main">מצפן מורשת - חטיבת הנח״ל</span>
               </div>
             </a>
           </div>

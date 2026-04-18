@@ -8,7 +8,7 @@ import {
   Klee_One,
   Frank_Ruhl_Libre,
 } from 'next/font/google';
-import '@/styles/globals.css';
+import './globals.css';
 
 const rubik = Rubik({ subsets: ['hebrew', 'latin'], weight: ['400', '500', '700', '800'], variable: '--font-main' });
 const frankRuhlLibre = Frank_Ruhl_Libre({ subsets: ['hebrew', 'latin'], weight: ['400', '700'], variable: '--font-title' });
