@@ -4,51 +4,64 @@
 
 .about-section {
   background-color: #AAD9EB;
-  background-image: url('/about/flag.PNG');
-  background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
   position: relative;
-  min-height: calc(100vh - 70px);
 }
 
-/* Two-column flex: portrait on right (RTL), text on left */
-.about-section .about-layout {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  min-height: 100vh;
-  gap: 0;
-  overflow: visible;
+/* Absolutely-positioned shell that fills the section exactly.
+   Removed from flow so section height = content height only.
+   overflow:clip clips the sticky bg to the section without
+   creating a scroll container (which would break sticky). */
+.about-sticky-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* ── Portrait column — sticky sidebar ── */
-.about-section .about-portrait-col {
-  flex: 0 0 42vw;
+/* Sticky bg sticks within the wrapper (= section bounds). */
+.about-sticky-bg {
   position: sticky;
   top: 70px;
   height: calc(100vh - 70px);
-  display: flex;
-  align-items: flex-end;
-  pointer-events: none;
 }
 
-.about-section .about-portrait-img {
-  display: block;
+/* Flag: full-viewport-width image behind everything */
+.about-flag-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+}
+
+.about-flag-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Portrait: pinned to the right, sitting at the bottom */
+.about-portrait-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   height: 100%;
   width: auto;
   max-width: 42vw;
   object-fit: contain;
-  object-position: bottom center;
+  object-position: bottom right;
   filter: drop-shadow(-8px 0 28px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Scrolling text layer ── */
+.about-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Story card ── */
 .about-section .story-card {
-  flex: 1;
   background: transparent;
   padding: 140px 8px 120px 32px;
-  margin-right: 0;
+  margin-right: 42vw;
 }
 
 .about-section .story-title {
@@ -66,7 +79,6 @@
   text-align: right;
   line-height: 1.8;
   color: #2c3e50;
-  max-width: 50vw;
   padding: 0 40px 0 0;
 }
 
@@ -95,41 +107,28 @@
   padding-top: 15px;
 }
 
+/* Portrait inside content – mobile only */
+.about-portrait-mobile {
+  display: none;
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .about-section .about-layout {
-    flex-direction: column;
-    align-items: stretch;
-    min-height: unset;
-    position: relative;
+  /* Restore flag as CSS background, hide the sticky layers entirely */
+  .about-sticky-wrapper {
+    display: none;
   }
 
-  /* Story card: normal flow, on top */
+  .about-section {
+    background-image: url('/about/flag.PNG');
+    background-size: cover;
+    background-position: center;
+  }
+
   .about-section .story-card {
-    position: relative;
-    z-index: 1;
     max-width: 100%;
-    padding: 60px 20px 0 15px;
-    order: 1;
-  }
-
-  .about-section .about-portrait-col {
-    position: relative;
-    top: auto;
-    height: auto;
-    width: 100%;
-    flex: unset;
-    justify-content: center;
-    pointer-events: auto;
-    order: 2;
-  }
-
-  .about-section .about-portrait-img {
-    height: auto;
-    width: 100%;
-    max-width: 100%;
-    object-position: center;
-    filter: drop-shadow(0 -4px 12px rgba(0, 0, 0, 0.3));
+    margin-right: 0;
+    padding: 60px 20px 40px 15px;
   }
 
   .about-section .story-title {
@@ -140,7 +139,6 @@
   }
 
   .about-section .story-content {
-    max-width: 90%;
     padding: 0;
   }
 
@@ -152,5 +150,12 @@
   .about-section .story-footer {
     font-size: 1.1rem;
     text-align: center;
+  }
+
+  /* Show portrait below text */
+  .about-portrait-mobile {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 }

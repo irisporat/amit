@@ -58,19 +58,10 @@ export default function CoffeePage() {
       <BodyClass className="coffee-main-page" />
       <main className="main-content-scroll">
         <div className="coffee-main-container">
-          <section className="coffee-hero">
+
+          {/* ── Top Row: hero image | title + description + btn ── */}
+          <div className="coffee-top-row">
             <div className="coffee-image-col">
-              <div className="coffee-logo-area">
-                <Image
-                  src="/main/לוגו עגלה לבן.png"
-                  alt="לוגו קפה החברים של עמית"
-                  width={160}
-                  height={160}
-                  sizes="160px"
-                  className="coffee-logo-img"
-                  priority
-                />
-              </div>
               <Image
                 src="/coffee/CoffeePIC/CoffeePic1.jpeg"
                 alt="עגלת הקפה של עמית"
@@ -80,10 +71,20 @@ export default function CoffeePage() {
                 className="coffee-hero-img"
                 priority
               />
-              <CoffeeHeroVideo />
             </div>
             <div className="coffee-info-col">
-              <h1 className="coffee-main-title">עגלת &quot;קפה החברים של עמית&quot;</h1>
+              <div className="coffee-title-with-logo">
+                <Image
+                  src="/main/לוגו עגלה לבן.png"
+                  alt="לוגו קפה החברים של עמית"
+                  width={90}
+                  height={90}
+                  sizes="90px"
+                  className="coffee-logo-img"
+                  priority
+                />
+                <h1 className="coffee-main-title">עגלת &quot;קפה החברים של עמית&quot;</h1>
+              </div>
               <div className="coffee-description">
                 <p>
                   עגלת &ldquo;קפה החברים של עמית&rdquo; הוקמה לזכרו של סמ״ר עמית פרידמן ז״ל, שנפל בקרב בתל סולטן שברפיח ב־27 באוגוסט 2024, בגיל 19.{' '}
@@ -103,7 +104,6 @@ export default function CoffeePage() {
                   <strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong>
                 </p>
               </div>
-
               <Link href="/coffee/recipe" className="coffee-recipe-btn unified-btn">
                 <BookOpen />
                 <div className="btn-text-content">
@@ -111,34 +111,41 @@ export default function CoffeePage() {
                   <span className="btn-text-sub">ספר מתכונים</span>
                 </div>
               </Link>
-
-              <section className="coffee-grid">
-                {[
-                  { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
-                  { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
-                  { category: 'event', img: '/coffee/CoffeeEvent/IMG_7735.JPEG', label: 'אירועי מאפיית פרידמן' },
-                ].map(({ category, img, label }) => (
-                  <a
-                    key={category}
-                    href="#"
-                    className="coffee-card"
-                    onClick={(e) => { e.preventDefault(); openGallery(category); }}
-                  >
-                    <div className="coffee-card-img-wrapper">
-                      <Image
-                        src={img}
-                        alt={label}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 400px"
-                        className="coffee-card-img"
-                      />
-                    </div>
-                    <div className="coffee-card-label"><span>{label}</span></div>
-                  </a>
-                ))}
-              </section>
             </div>
-          </section>
+          </div>
+
+          {/* ── Bottom Row: video | vertical grid ── */}
+          <div className="coffee-bottom-row">
+            <div className="coffee-video-col">
+              <CoffeeHeroVideo />
+            </div>
+            <section className="coffee-grid">
+              {[
+                { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
+                { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
+                { category: 'event', img: '/coffee/CoffeeEvent/IMG_7735.JPEG', label: 'אירועי מאפיית פרידמן' },
+              ].map(({ category, img, label }) => (
+                <a
+                  key={category}
+                  href="#"
+                  className="coffee-card"
+                  onClick={(e) => { e.preventDefault(); openGallery(category); }}
+                >
+                  <div className="coffee-card-img-wrapper">
+                    <Image
+                      src={img}
+                      alt={label}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 400px"
+                      className="coffee-card-img"
+                    />
+                  </div>
+                  <div className="coffee-card-label"><span>{label}</span></div>
+                </a>
+              ))}
+            </section>
+          </div>
+
         </div>
       </main>
       <GalleryModal

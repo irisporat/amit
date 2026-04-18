@@ -4,8 +4,35 @@ import './AboutSection.css';
 export default function AboutSection() {
   return (
     <section id="about" className="about-section">
-      <div className="about-layout">
-        <div className="story-card">
+      {/* Absolutely-positioned wrapper fills the section exactly.
+          Removed from flow → section height = content only.
+          overflow:clip clips the sticky bg at the section boundary. */}
+      <div className="about-sticky-wrapper">
+      <div className="about-sticky-bg">
+        <div className="about-flag-wrap">
+          <Image
+            src="/about/flag.PNG"
+            alt=""
+            fill
+            className="about-flag-img"
+            priority
+          />
+        </div>
+        <Image
+          src="/about/AmitP.png"
+          alt="עמית פרידמן"
+          width={900}
+          height={1200}
+          sizes="42vw"
+          priority
+          className="about-portrait-img"
+        />
+      </div>
+      </div>{/* end about-sticky-wrapper */}
+
+      {/* Scrolling text content – sits above sticky layer */}
+      <div className="about-content">
+        <div className="story-card about-story-card">
           <h2 className="story-title">סיפורו של עמית</h2>
           <div className="story-content">
             <p className="story-first">
@@ -24,17 +51,15 @@ export default function AboutSection() {
             <p className="story-footer">בתחילת מלחמת ״חרבות ברזל״ לאחר שסיים את הכשרתו בהצטיינות, יצא עמית לקורס מ&quot;כים, אשר גם אותו סיים בהצטיינות, ושב לגדוד כמפקד כיתה.</p>
           </div>
         </div>
-        <div className="about-portrait-col">
-          <Image
-            src="/about/AmitP.png"
-            alt="עמית פרידמן"
-            width={900}
-            height={1200}
-            sizes="42vw"
-            priority
-            className="about-portrait-img"
-          />
-        </div>
+        {/* Mobile-only portrait – shown below text on small screens */}
+        <Image
+          src="/about/AmitP.png"
+          alt="עמית פרידמן"
+          width={900}
+          height={1200}
+          sizes="100vw"
+          className="about-portrait-mobile"
+        />
       </div>
     </section>
   );

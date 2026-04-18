@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, X } from 'lucide-react';
+import { useState } from 'react';
 
 interface Recipe {
   title: string;
@@ -61,44 +61,64 @@ function getSortedRecipes(): Recipe[] {
   });
 }
 
-function getImagePaths(recipe: Recipe) {
+// Static map from "safeTitle - safeAuthor" → exact public path.
+// Avoids requesting non-existent files through Next.js's file server, which
+// crashes the Node process with a malloc error on Hebrew-named 404s.
+const RECIPE_IMAGE_MAP: Record<string, string> = {
+  'אלפחורס (המתכון שקים דוקרקר זל אהבה) - חן': '/coffee/אלפחורס (המתכון שקים דוקרקר זל אהבה) - חן.png',
+  'אלפחורס - לאה מונרוב': '/coffee/אלפחורס - לאה מונרוב.png',
+  'בראוניז - אוסנת יעקב': '/coffee/בראוניז - אוסנת יעקב.jpeg',
+  'חיתוכי ריבה - אוסנת יעקב': '/coffee/חיתוכי ריבה - אוסנת יעקב.png',
+  'לחמניות - עמית אדרי': '/coffee/לחמניות - עמית אדרי.jpg',
+  'מלבי - אילנית זרגרי': '/coffee/מלבי - אילנית זרגרי.jpg',
+  'סהרוני שקדים - הילה תקדים': '/coffee/סהרוני שקדים - הילה תקדים.png',
+  'סלט ביצים - אמיר מימרן': '/coffee/סלט ביצים - אמיר מימרן.png',
+  'סמבוסק גבינה - בתיה': '/coffee/סמבוסק גבינה - בתיה.png',
+  'סמבוסק גבינה בולגרית - אינגה מיכאלי': '/coffee/סמבוסק גבינה בולגרית - אינגה מיכאלי.jpg',
+  'עוגיות אמסטרדם - שירה טייב': '/coffee/עוגיות אמסטרדם - שירה טייב.jpeg',
+  'עוגיות שוקולד ציפס - צביה האוז': '/coffee/עוגיות שוקולד ציפס - צביה האוז.png',
+  'עוגיות שוקולד ציפס - שרית': '/coffee/עוגיות שוקולד ציפס - שרית.png',
+  'עוגיות שקדים - צביה האוז': '/coffee/עוגיות שקדים - צביה האוז.jpg',
+  'עוגת גבינה - מיטל שבתאי': '/coffee/עוגת גבינה - מיטל שבתאי.jpeg',
+  'עוגת גבינה - צביה האוז': '/coffee/עוגת גבינה - צביה האוז.jpg',
+  'עוגת גבינה אפויה - ליאורה סולטן יעבץ': '/coffee/עוגת גבינה אפויה - ליאורה סולטן יעבץ.png',
+  'עוגת גבינה פירורים - אילנית זרגרי': '/coffee/עוגת גבינה פירורים - אילנית זרגרי.jpeg',
+  'עוגת גזר - מירב טוויג': '/coffee/עוגת גזר - מירב טוויג.png',
+  'עוגת טחינה - מירב טוויג': '/coffee/עוגת טחינה - מירב טוויג.png',
+  'עוגת מייפל - בטי לוי': '/coffee/עוגת מייפל - בטי לוי.png',
+  'עוגת מייפל - לירון פורטל': '/coffee/עוגת מייפל - לירון פורטל.png',
+  'עוגת מייפל פרווה - נטלי בוגנה': '/coffee/עוגת מייפל פרווה - נטלי בוגנה.jpeg',
+  'עוגת ריבועים שעמית הכי אהב - אסתר סבתא של עמית': '/coffee/עוגת ריבועים שעמית הכי אהב - אסתר סבתא של עמית.jpg',
+  'עוגת שוקולד - גלי דעבול': '/coffee/עוגת שוקולד - גלי דעבול.png',
+  'עוגת שוקולד - חני ריינס': '/coffee/עוגת שוקולד - חני ריינס.jpg',
+  'עוגת שוקולד - יובל שמואל': '/coffee/עוגת שוקולד - יובל שמואל.png',
+  'עוגת שוקולד שקדים ללא גלוטן - צפרא': '/coffee/עוגת שוקולד שקדים ללא גלוטן - צפרא.png',
+  'עוגת שמרים פרווה - שירה מלכי': '/coffee/עוגת שמרים פרווה - שירה מלכי.jpeg',
+  'עוגת שמרים שוקולד - סיוון': '/coffee/עוגת שמרים שוקולד - סיוון.png',
+  'עוגת תפוזים - שרית': '/coffee/עוגת תפוזים - שרית.png',
+  'שושני שמרים - הילה תקדים': '/coffee/שושני שמרים - הילה תקדים.png',
+};
+
+function getImagePath(recipe: Recipe): string | null {
   const safeTitle = recipe.title.replace(/[<>:"/\\|?*'`\u05F3\u05F4]/g, '');
   const safeAuthor = recipe.author.replace(/[<>:"/\\|?*'`\u05F3\u05F4]/g, '');
-  return {
-    jpg: `/coffee/${safeTitle} - ${safeAuthor}.jpg`,
-    jpeg: `/coffee/${safeTitle} - ${safeAuthor}.jpeg`,
-    png: `/coffee/${safeTitle} - ${safeAuthor}.png`,
-  };
-}
-
-function getFallbackUrl(title: string): string {
-  if (title.includes('שוקולד') || title.includes('בראוניז')) return 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('גבינה')) return 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('תפוח')) return 'https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('עוגיות') || title.includes('סהרוני')) return 'https://images.unsplash.com/photo-1499636138143-bd649043ea52?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('סמבוסק') || title.includes('לחמניות')) return 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('אלפחורס')) return 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('סלט')) return 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('גזר')) return 'https://images.unsplash.com/photo-1598375811776-6c58971f11e9?auto=format&fit=crop&w=300&q=80';
-  if (title.includes('שמרים') || title.includes('שושני')) return 'https://images.unsplash.com/photo-1606101272675-52467d16a570?auto=format&fit=crop&w=300&q=80';
-  return 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80';
+  return RECIPE_IMAGE_MAP[`${safeTitle} - ${safeAuthor}`] ?? null;
 }
 
 type View = 'home' | 'recipe';
 
-function RecipeCardImage({ paths, fallback, title }: { paths: { jpg: string; jpeg: string; png: string }; fallback: string; title: string }) {
-  const [src, setSrc] = useState(paths.jpg);
-  const [errCount, setErrCount] = useState(0);
-
-  const handleError = () => {
-    if (errCount === 0) { setSrc(paths.jpeg); setErrCount(1); }
-    else if (errCount === 1) { setSrc(paths.png); setErrCount(2); }
-    else { setSrc(fallback); }
-  };
-
+function RecipeCardImage({ src, title }: { src: string; title: string }) {
   return (
     <div className="card-img-fill-wrap">
-      <Image src={src} onError={handleError} alt={title} fill sizes="(max-width: 768px) 50vw, 25vw" className="card-img" />
+      <Image src={src} alt={title} fill sizes="(max-width: 600px) 75px, (max-width: 768px) 50vw, 25vw" className="card-img" unoptimized />
+    </div>
+  );
+}
+
+function RecipeCardPlaceholder() {
+  return (
+    <div className="card-img-fill-wrap" style={{ background: '#e8f4f8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem' }}>
+      🍰
     </div>
   );
 }
@@ -121,11 +141,10 @@ export default function CoffeeApp() {
         </div>
         <div className="recipe-grid" id="recipe-list-container">
           {sorted.map((recipe, idx) => {
-            const paths = getImagePaths(recipe);
-            const fallback = getFallbackUrl(recipe.title);
+            const imgSrc = getImagePath(recipe);
             return (
               <div key={idx} className="recipe-card" onClick={() => showRecipe(recipe)} style={{ cursor: 'pointer' }}>
-                <RecipeCardImage paths={paths} fallback={fallback} title={recipe.title} />
+                {imgSrc ? <RecipeCardImage src={imgSrc} title={recipe.title} /> : <RecipeCardPlaceholder />}
                 <div className="card-info">
                   <h3>{recipe.title}</h3>
                   <p>{recipe.author}</p>

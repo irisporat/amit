@@ -991,6 +991,13 @@ header.top-bar {
         min-height: 75px;
     }
 
+    .card-img-fill-wrap {
+        width: 75px;
+        height: 75px;
+        flex-shrink: 0;
+        aspect-ratio: unset;
+    }
+
     .card-img {
         width: 65px;
         aspect-ratio: 1 / 1;
