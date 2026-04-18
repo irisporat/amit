@@ -3,6 +3,7 @@
    ============================================================ */
 
 .about-section {
+  background-color: #AAD9EB;
   background-image: url('/about/flag.PNG');
   background-size: cover;
   background-position: center;
@@ -46,7 +47,7 @@
 .about-section .story-card {
   flex: 1;
   background: transparent;
-  padding: 80px 8px 60px 32px;
+  padding: 140px 8px 120px 32px;
   margin-right: 0;
 }
 
@@ -58,12 +59,15 @@
   text-align: right;
   margin: 0 0 30px;
   line-height: 1.1;
+  padding-right: 40px;
 }
 
 .about-section .story-content {
   text-align: right;
   line-height: 1.8;
   color: #2c3e50;
+  max-width: 50vw;
+  padding: 0 40px 0 0;
 }
 
 .about-section .story-content p {
@@ -97,6 +101,16 @@
     flex-direction: column;
     align-items: stretch;
     min-height: unset;
+    position: relative;
+  }
+
+  /* Story card: normal flow, on top */
+  .about-section .story-card {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    padding: 60px 20px 0 15px;
+    order: 1;
   }
 
   .about-section .about-portrait-col {
@@ -118,15 +132,16 @@
     filter: drop-shadow(0 -4px 12px rgba(0, 0, 0, 0.3));
   }
 
-  .about-section .story-card {
-    padding: 25px 14px 10px;
-    order: 1;
-  }
-
   .about-section .story-title {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
+    padding-right: 0;
+  }
+
+  .about-section .story-content {
+    max-width: 90%;
+    padding: 0;
   }
 
   .about-section .story-content p {
