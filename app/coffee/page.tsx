@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import Navigation from '@/components/Navigation';
@@ -64,9 +65,25 @@ export default function CoffeePage() {
           <section className="coffee-hero">
             <div className="coffee-image-col">
               <div className="coffee-logo-area">
-                <img src="/main/לוגו עגלה לבן.png" alt="לוגו קפה החברים של עמית" className="coffee-logo-img" />
+                <Image
+                  src="/main/לוגו עגלה לבן.png"
+                  alt="לוגו קפה החברים של עמית"
+                  width={160}
+                  height={160}
+                  sizes="160px"
+                  className="coffee-logo-img"
+                  priority
+                />
               </div>
-              <img src="/coffee/CoffeePIC/CoffeePic1.jpeg" alt="עגלת הקפה של עמית" className="coffee-hero-img" />
+              <Image
+                src="/coffee/CoffeePIC/CoffeePic1.jpeg"
+                alt="עגלת הקפה של עמית"
+                width={1200}
+                height={900}
+                sizes="(max-width: 1024px) 100vw, 48vw"
+                className="coffee-hero-img"
+                priority
+              />
               <CoffeeHeroVideo />
             </div>
             <div className="coffee-info-col">
@@ -112,7 +129,13 @@ export default function CoffeePage() {
                     onClick={(e) => { e.preventDefault(); openGallery(category); }}
                   >
                     <div className="coffee-card-img-wrapper">
-                      <img src={img} alt={label} className="coffee-card-img" />
+                      <Image
+                        src={img}
+                        alt={label}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 400px"
+                        className="coffee-card-img"
+                      />
                     </div>
                     <div className="coffee-card-label"><span>{label}</span></div>
                   </a>

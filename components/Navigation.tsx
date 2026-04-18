@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Menu, X, Home, Info, Shield, Coffee,
@@ -31,7 +32,14 @@ export default function Navigation({ pageTitle, hideHamburger = false }: Navigat
         </div>
         <div className="top-bar-left">
           <Link href="/">
-            <img src="/main/לוגו עגלה לבן.png" alt="לוגו עגלה" />
+            <Image
+              src="/main/לוגו עגלה לבן.png"
+              alt="לוגו עגלה"
+              width={200}
+              height={50}
+              sizes="200px"
+              className="nav-logo-img"
+            />
           </Link>
         </div>
       </header>

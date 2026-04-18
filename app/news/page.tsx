@@ -1,6 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
+
+const NEWS_IMG_FALLBACK =
+  'https://images.unsplash.com/photo-1585829365234-78d9b692d47d?auto=format&fit=crop&w=300&q=80';
 
 const newsArticles = [
   {
@@ -23,6 +28,44 @@ const newsArticles = [
   },
 ];
 
+function NewsArticleCard({
+  title,
+  source,
+  image,
+  link,
+}: {
+  title: string;
+  source: string;
+  image: string;
+  link: string;
+}) {
+  const [src, setSrc] = useState(image);
+
+  return (
+    <a
+      className="news-card"
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className="card-img-fill-wrap">
+        <Image
+          src={src}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="card-img"
+          onError={() => setSrc(NEWS_IMG_FALLBACK)}
+        />
+      </div>
+      <div className="card-info">
+        <h3>{title}</h3>
+        <p>{source}</p>
+      </div>
+    </a>
+  );
+}
+
 export default function NewsPage() {
   return (
     <>
@@ -34,27 +77,13 @@ export default function NewsPage() {
           <div id="news-view" className="view active">
             <div className="news-grid" id="news-list-container">
               {newsArticles.map((article, i) => (
-                <a
+                <NewsArticleCard
                   key={i}
-                  className="news-card"
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="card-img"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        'https://images.unsplash.com/photo-1585829365234-78d9b692d47d?auto=format&fit=crop&w=300&q=80';
-                    }}
-                  />
-                  <div className="card-info">
-                    <h3>{article.title}</h3>
-                    <p>{article.source}</p>
-                  </div>
-                </a>
+                  title={article.title}
+                  source={article.source}
+                  image={article.image}
+                  link={article.link}
+                />
               ))}
             </div>
           </div>

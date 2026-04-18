@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { X, ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface GalleryModalProps {
@@ -99,11 +100,15 @@ export default function GalleryModal({
           </button>
         )}
         <div className="image-container">
-          <img
+          <Image
             ref={imgRef}
             id="gallery-img"
             src={images[currentIndex]}
             alt="Gallery Image"
+            width={2400}
+            height={1600}
+            unoptimized
+            sizes="90vw"
             onClick={handleImgClick}
             onLoad={syncZoomable}
           />

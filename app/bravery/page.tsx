@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { PlayCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import BodyClass from '@/components/BodyClass';
@@ -18,7 +19,15 @@ export default function BraveryPage() {
       <main className="main-content-scroll">
         <div className="bravery-container">
           <div className="bravery-image-col">
-            <img src="/Bravery/Wings.PNG" alt="עמית פרידמן - כנפיים" className="bravery-img" />
+            <Image
+              src="/Bravery/Wings.PNG"
+              alt="עמית פרידמן - כנפיים"
+              width={1200}
+              height={900}
+              sizes="(max-width: 900px) 100vw, 48vw"
+              priority
+              className="bravery-img"
+            />
             <a href="https://www.youtube.com/watch?v=gAIJvP0JXAo" target="_blank" rel="noopener noreferrer" className="bravery-video-btn desktop-only">
               <PlayCircle />
               <div className="btn-text-content">

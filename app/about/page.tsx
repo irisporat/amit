@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import BodyClass from '@/components/BodyClass';
 import './about.css';
@@ -35,7 +36,15 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="portrait-col">
-            <img src="/about/AmitP.png" alt="עמית פרידמן" className="portrait-img" />
+            <Image
+              src="/about/AmitP.png"
+              alt="עמית פרידמן"
+              width={900}
+              height={1200}
+              sizes="42vw"
+              priority
+              className="portrait-img"
+            />
           </div>
         </div>
       </main>

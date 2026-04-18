@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import type { Metadata } from 'next';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
@@ -89,7 +89,9 @@ export default function EventsPage() {
                 data-category={category}
                 onClick={(e) => { e.preventDefault(); openGallery(category); }}
               >
-                <img src={img} alt={label} className="event-card-img" />
+                <div className="event-card-img-wrap">
+                  <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="event-card-img" />
+                </div>
                 <div className="event-card-label"><span>{label}</span></div>
               </a>
             ))}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, X } from 'lucide-react';
 
@@ -95,7 +96,11 @@ function RecipeCardImage({ paths, fallback, title }: { paths: { jpg: string; jpe
     else { setSrc(fallback); }
   };
 
-  return <img src={src} onError={handleError} alt={title} className="card-img" />;
+  return (
+    <div className="card-img-fill-wrap">
+      <Image src={src} onError={handleError} alt={title} fill sizes="(max-width: 768px) 50vw, 25vw" className="card-img" />
+    </div>
+  );
 }
 
 export default function CoffeeApp() {

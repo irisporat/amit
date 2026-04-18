@@ -217,9 +217,14 @@ body.coffee-main-page {
 }
 
 .coffee-card-img-wrapper {
+    position: relative;
     width: 100%;
     aspect-ratio: 1.2 / 1;
     overflow: hidden;
+}
+
+.coffee-card-img-wrapper .coffee-card-img {
+    height: 100% !important;
 }
 
 .coffee-card-img {

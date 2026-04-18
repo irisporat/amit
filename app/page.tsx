@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import VideoBackground from '@/components/VideoBackground';
 import BodyClass from '@/components/BodyClass';
@@ -32,7 +33,15 @@ export default function HomePage() {
       <main className="main-content-scroll">
         <div className="hello-world-container">
           <div className="memorial-image-container">
-            <img src="/main/amit mag home11.png" alt="עמית פרידמן" className="memorial-image" />
+            <Image
+              src="/main/amit mag home11.png"
+              alt="עמית פרידמן"
+              width={1200}
+              height={1600}
+              priority
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className="memorial-image"
+            />
           </div>
           <div className="memorial-text-container">
             <div className="memorial-headline">

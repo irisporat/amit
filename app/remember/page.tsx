@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import GalleryModal from '@/components/GalleryModal';
 import BodyClass from '@/components/BodyClass';
@@ -83,7 +84,9 @@ export default function RememberPage() {
                 className="remember-card"
                 onClick={(e) => { e.preventDefault(); openGallery(category); }}
               >
-                <img src={img} alt={label} className="remember-card-img" />
+                <div className="remember-card-img-wrap">
+                  <Image src={img} alt={label} fill sizes="(max-width: 900px) 50vw, 33vw" className="remember-card-img" />
+                </div>
                 <div className="remember-card-label"><span>{label}</span></div>
               </a>
             ))}

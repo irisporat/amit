@@ -81,9 +81,17 @@ body {
     box-shadow: 0 8px 28px rgba(100, 160, 220, 0.28);
 }
 
-.event-card-img {
+.event-card-img-wrap {
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
+}
+
+.event-card-img-wrap .event-card-img {
+    height: 100% !important;
+}
+
+.event-card-img {
     object-fit: cover;
     display: block;
 }
