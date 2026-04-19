@@ -1,0 +1,161 @@
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+
+.about-section {
+  background-color: #AAD9EB;
+  position: relative;
+}
+
+/* Absolutely-positioned shell that fills the section exactly.
+   Removed from flow so section height = content height only.
+   overflow:clip clips the sticky bg to the section without
+   creating a scroll container (which would break sticky). */
+.about-sticky-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sticky bg sticks within the wrapper (= section bounds). */
+.about-sticky-bg {
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+}
+
+/* Flag: full-viewport-width image behind everything */
+.about-flag-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+}
+
+.about-flag-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Portrait: pinned to the right, sitting at the bottom */
+.about-portrait-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(-8px 0 28px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Scrolling text layer ── */
+.about-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Story card ── */
+.about-section .story-card {
+  background: transparent;
+  padding: 140px 8px 120px 32px;
+  margin-right: 42vw;
+}
+
+.about-section .story-title {
+  font-family: 'Rubik', sans-serif;
+  color: #3d85a8;
+  font-size: 3.2rem;
+  font-weight: 800;
+  text-align: right;
+  margin: 0 0 30px;
+  line-height: 1.1;
+  padding-right: 40px;
+}
+
+.about-section .story-content {
+  text-align: right;
+  line-height: 1.8;
+  color: #2c3e50;
+  padding: 0 40px 0 0;
+}
+
+.about-section .story-content p {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #2c3e50;
+  margin-bottom: 18px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.about-section .story-first {
+  font-weight: 700 !important;
+}
+
+.about-section .story-footer {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700 !important;
+  text-align: right;
+  margin-top: 30px;
+  font-size: 1.25rem;
+  color: #1a2a3a;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+}
+
+/* Portrait inside content – mobile only */
+.about-portrait-mobile {
+  display: none;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  /* Restore flag as CSS background, hide the sticky layers entirely */
+  .about-sticky-wrapper {
+    display: none;
+  }
+
+  .about-section {
+    background-image: url('/about/flag.PNG');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .about-section .story-card {
+    max-width: 100%;
+    margin-right: 0;
+    padding: 60px 20px 40px 15px;
+  }
+
+  .about-section .story-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-right: 0;
+  }
+
+  .about-section .story-content {
+    padding: 0;
+  }
+
+  .about-section .story-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .about-section .story-footer {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  /* Show portrait below text */
+  .about-portrait-mobile {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
