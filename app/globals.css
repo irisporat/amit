@@ -796,7 +796,7 @@ header.top-bar {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    height: 100vh;
+    height: auto;
     color: #fff;
     padding: 120px 40px 40px; /* Restored desktop padding */
     max-width: 1600px;
@@ -809,7 +809,7 @@ header.top-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     z-index: 10;
     width: 45%; /* תופס רק חצי מסך (שמאלי ב-RTL) */
@@ -1093,7 +1093,7 @@ header.top-bar {
         gap: 20px;
         text-align: center;
         min-height: 100vh;
-        height: 100vh;
+        height: auto;
     }
 
     .memorial-text-container {

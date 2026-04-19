@@ -12,6 +12,9 @@
 /* Video is scoped to this section only — override global fixed positioning */
 .hero-section .video-bg-container {
   position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
 
