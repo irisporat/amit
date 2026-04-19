@@ -56,9 +56,9 @@ export default function CoffeeSection() {
     <section id="coffee" className="coffee-section-wrapper">
       <div className="coffee-main-container">
 
-        {/* ── Top Row: hero image | title + description + btn ── */}
-        <div className="coffee-top-row">
-          <div className="coffee-image-col">
+        <div className="coffee-main-grid">
+          {/* ── Row 1: Hero Image | Title & Description ── */}
+          <div className="coffee-image-zone desktop-only">
             <Image
               src="/coffee/CoffeePIC/CoffeePic1.jpeg"
               alt="עגלת הקפה של עמית"
@@ -69,7 +69,8 @@ export default function CoffeeSection() {
               priority
             />
           </div>
-          <div className="coffee-info-col">
+
+          <div className="coffee-info-zone">
             <div className="coffee-title-with-logo">
               <Image
                 src="/main/לוגו עגלה לבן.png"
@@ -101,6 +102,14 @@ export default function CoffeeSection() {
                 <strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong>
               </p>
             </div>
+          </div>
+
+          {/* ── Row 2: Video | Button & Grid ── */}
+          <div className="coffee-video-zone">
+            <CoffeeHeroVideo />
+          </div>
+
+          <div className="coffee-cta-grid-zone">
             <Link href="/coffee/recipe" className="coffee-recipe-btn unified-btn">
               <BookOpen />
               <div className="btn-text-content">
@@ -108,38 +117,32 @@ export default function CoffeeSection() {
                 <span className="btn-text-sub">ספר מתכונים</span>
               </div>
             </Link>
-          </div>
-        </div>
 
-        {/* ── Bottom Row: video | vertical grid ── */}
-        <div className="coffee-bottom-row">
-          <div className="coffee-video-col">
-            <CoffeeHeroVideo />
-          </div>
-          <div className="coffee-grid">
-            {[
-              { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
-              { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
-              { category: 'event', img: '/coffee/CoffeeEvent/IMG_7735.JPEG', label: 'אירועי מאפיית פרידמן' },
-            ].map(({ category, img, label }) => (
-              <a
-                key={category}
-                href="#"
-                className="coffee-card"
-                onClick={(e) => { e.preventDefault(); openGallery(category); }}
-              >
-                <div className="coffee-card-img-wrapper">
-                  <Image
-                    src={img}
-                    alt={label}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                    className="coffee-card-img"
-                  />
-                </div>
-                <div className="coffee-card-label"><span>{label}</span></div>
-              </a>
-            ))}
+            <div className="coffee-grid">
+              {[
+                { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
+                { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
+                { category: 'event', img: '/coffee/CoffeeEvent/IMG_7735.JPEG', label: 'אירועי מאפיית פרידמן' },
+              ].map(({ category, img, label }) => (
+                <a
+                  key={category}
+                  href="#"
+                  className="coffee-card"
+                  onClick={(e) => { e.preventDefault(); openGallery(category); }}
+                >
+                  <div className="coffee-card-img-wrapper">
+                    <Image
+                      src={img}
+                      alt={label}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 400px"
+                      className="coffee-card-img"
+                    />
+                  </div>
+                  <div className="coffee-card-label"><span>{label}</span></div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -1,11 +1,34 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export default function CoffeeHeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(err => console.log('Autoplay blocked:', err));
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 } // Play when at least 50% visible
+    );
+
+    observer.observe(video);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const toggleMute = useCallback(() => {
     const v = videoRef.current;
@@ -19,7 +42,6 @@ export default function CoffeeHeroVideo() {
       <video
         ref={videoRef}
         id="hero-video"
-        autoPlay
         loop
         muted
         playsInline

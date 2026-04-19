@@ -35,13 +35,12 @@ export default function HeroSection() {
         </div>
         <div className="memorial-text-container">
           <div className="memorial-headline">
-            <div className="memorial-rank">סמ&quot;ר</div>
-            <div className="memorial-name-wrapper">
-              <h1 className="memorial-name">
-                עמית פרידמן
-                <span className="memorial-suffix">ז&quot;ל</span>
-              </h1>
-            </div>
+            <h1 className="memorial-name">
+              <span className="memorial-rank">סמ&quot;ר</span>
+              {' '}
+              עמית פרידמן
+              <span className="memorial-suffix">ז&quot;ל</span>
+            </h1>
             <div className="memorial-dates" dir="ltr">2005 – 2024</div>
           </div>
           <div className="memorial-info">

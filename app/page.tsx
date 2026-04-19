@@ -53,7 +53,7 @@ export default function HomePage() {
         <CoffeeSection />
         <EventsSection />
         <RememberSection />
-        <NewsSection />
+        {/* <NewsSection /> */}
         <ContactSection />
       </main>
     </>

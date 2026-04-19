@@ -21,8 +21,8 @@ const sectionLinks = [
   { id: 'bravery', icon: <Shield />, label: 'סיפור גבורתו' },
   { id: 'coffee', icon: <Coffee />, label: 'עגלת "קפה החברים של עמית"' },
   { id: 'events', icon: <Calendar />, label: 'אירועי הנצחה' },
-  { id: 'remember', icon: <Heart />, label: 'זוכרים אותך' },
-  { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
+  { id: 'remember', icon: <Heart />, label: 'זוכרים אותך עמית' },
+  // { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
   { id: 'contact', icon: <Mail />, label: 'צור קשר' },
 ];
 

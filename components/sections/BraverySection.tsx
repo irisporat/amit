@@ -29,7 +29,16 @@ export default function BraverySection() {
           </a>
         </div>
         <div className="bravery-text-col">
-          <h2 className="bravery-title">סיפור גבורתו</h2>
+          <div className="bravery-title-with-logo">
+            <h2 className="bravery-title">סיפור גבורתו</h2>
+            <Image
+              src="/Bravery/Nahal_Brigade.svg.png"
+              alt="סמל חטיבת הנח״ל"
+              width={60}
+              height={60}
+              className="bravery-nahal-logo"
+            />
+          </div>
           <h3 className="bravery-subtitle">
             סמל ראשון עמית פרידמן מ&quot;כ בגדוד 932 של חטיבת הנח&quot;ל, נפל בקרב בתל סולטן שברפיח, רצועת עזה.
           </h3>

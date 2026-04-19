@@ -839,9 +839,11 @@ header.top-bar {
 .memorial-rank {
     font-size: 1.8rem;
     font-weight: 400;
-    margin-bottom: -15px;
     opacity: 0.95;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-left: 15px;
+    display: inline-block;
+    vertical-align: baseline;
 }
 
 .memorial-name-wrapper {
@@ -866,9 +868,9 @@ header.top-bar {
     font-weight: 600;
     opacity: 0.9;
     display: inline-block;
-    vertical-align: sub;
+    vertical-align: baseline;
     position: relative;
-    top: 5px; /* Nudging it down to match the baseline of the larger font */
+    top: 0; 
     margin-right: 10px;
 }
 
@@ -915,8 +917,8 @@ header.top-bar {
 .memorial-quote {
     margin-top: 80px;
     /* Increased spacing before quote */
-    font-size: 2rem;
-    font-family: var(--font-handwriting), 'Guttman Yad', 'Amatic SC', sans-serif;
+    font-size: 1.6rem; /* Smaller than info (1.8rem) for hierarchy */
+    font-family: var(--font-main);
     font-weight: normal;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -1115,7 +1117,7 @@ header.top-bar {
         order: 3;
         margin-top: 10px !important;
         margin-bottom: 10px;
-        font-size: 1.15rem;
+        font-size: 1.0rem; /* Smaller than info (1.1rem) */
         align-self: center;
     }
 
@@ -1151,7 +1153,9 @@ header.top-bar {
 
     .memorial-rank {
         font-size: 0.9rem;
-        margin-bottom: -5px;
+        margin-left: 8px;
+        display: inline-block;
+        vertical-align: baseline;
     }
 
     .memorial-name {
@@ -1160,7 +1164,7 @@ header.top-bar {
 
     .memorial-suffix {
         font-size: 0.8rem;
-        top: -5px;
+        top: 0;
         margin-right: 5px;
     }
 
