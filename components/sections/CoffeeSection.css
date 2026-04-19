@@ -93,7 +93,7 @@
     /* Larger text like Bravery */
     line-height: 1.8;
     margin-bottom: 18px;
-    text-align: justify;
+    text-align: right; /* Changed from justify for consistency */
     color: #2c3e50;
 }
 
@@ -349,7 +349,7 @@
     }
 
     .coffee-description p {
-        text-align: center;
+        text-align: right; /* Changed from center for consistency with Bravery section */
         font-size: 1.15rem;
     }
 

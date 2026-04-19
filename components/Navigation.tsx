@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Menu, X, Home, Info, Shield, Coffee,
-  Calendar, Heart, Newspaper, Mail,
+  Calendar, Heart, Newspaper, Mail, Quote
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
@@ -23,7 +23,8 @@ const sectionLinks = [
   { id: 'events', icon: <Calendar />, label: 'אירועי הנצחה' },
   { id: 'remember', icon: <Heart />, label: 'זוכרים אותך עמית' },
   // { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
-  { id: 'contact', icon: <Mail />, label: 'צור קשר' },
+  // { id: 'contact', icon: <Mail />, label: 'צור קשר' },
+  { id: 'sentences', icon: <Quote />, label: 'לדברי עמית' },
 ];
 
 export default function Navigation({ pageTitle = '', hideHamburger = false }: NavigationProps) {

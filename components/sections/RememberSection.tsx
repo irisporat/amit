@@ -65,7 +65,7 @@ const rememberCards = [
   { category: 'stickers', img: '/Remember/Stickers/Rmember Amit 31.jpeg', label: 'עמית מסביב לעולם' },
   { category: 'memorial', img: '/Remember/memorial/Rmember Amit 9.jpeg', label: 'מנציחים אותך' },
   { category: 'journey', img: '/Remember/journey/Rmember Amit 14.jpeg', label: 'מסעות' },
-  { category: 'lessons', img: '/Remember/memorial/ציור פרידמן.jpeg', label: 'מערכי שיעור' },
+  { category: 'lessons', img: '/events/more events/event3.jpeg', label: 'מערכי שיעור' },
   { category: 'songs', img: '/Remember/עמית פרידמן 2.jpeg', label: 'שירים וסרטים' },
   { category: 'others', img: '/events/Lev.jpeg', label: 'הנצחות נוספות' },
 ];

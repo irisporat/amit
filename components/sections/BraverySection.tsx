@@ -34,9 +34,16 @@ export default function BraverySection() {
             <Image
               src="/Bravery/Nahal_Brigade.svg.png"
               alt="סמל חטיבת הנח״ל"
-              width={60}
-              height={60}
-              className="bravery-nahal-logo"
+              width={80}
+              height={80}
+              className="bravery-unit-logo"
+            />
+            <Image
+              src="/Bravery/932 -2.jpeg"
+              alt="סמל גדוד 932"
+              width={100}
+              height={100}
+              className="bravery-unit-logo bravery-932-logo"
             />
           </div>
           <h3 className="bravery-subtitle">

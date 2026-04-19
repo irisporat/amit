@@ -68,7 +68,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(224, 242, 254, 0.95); /* Light blue background */
   backdrop-filter: blur(8px);
   padding: 12px 20px;
   border-radius: 12px;

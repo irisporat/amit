@@ -8,6 +8,7 @@ import EventsSection from '@/components/sections/EventsSection';
 import RememberSection from '@/components/sections/RememberSection';
 import NewsSection from '@/components/sections/NewsSection';
 import ContactSection from '@/components/sections/ContactSection';
+import SentencesSection from '@/components/sections/SentencesSection';
 
 export const metadata: Metadata = {
   title: 'לזכרו של סמ"ר עמית פרידמן ז"ל',
@@ -54,7 +55,8 @@ export default function HomePage() {
         <EventsSection />
         <RememberSection />
         {/* <NewsSection /> */}
-        <ContactSection />
+        {/* <ContactSection /> */}
+        <SentencesSection />
       </main>
     </>
   );

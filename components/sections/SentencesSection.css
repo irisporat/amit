@@ -1,0 +1,71 @@
+/* ============================================================
+   SENTENCES SECTION
+   ============================================================ */
+
+.sentences-section {
+    background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
+    padding-bottom: 80px;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+}
+
+.sentences-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.sentences-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    width: 100%;
+    direction: rtl; /* Ensures right-side image is on the right */
+}
+
+.sentence-img-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sentence-img {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    background: white;
+    padding: 10px;
+}
+
+.sentence-img:hover {
+    transform: scale(1.02);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .sentences-section {
+        padding-bottom: 40px;
+    }
+
+    .sentences-wrapper {
+        padding: 0 20px;
+    }
+
+    .sentences-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .sentence-img {
+        max-height: 60vh;
+    }
+}
