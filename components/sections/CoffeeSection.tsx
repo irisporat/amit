@@ -24,7 +24,6 @@ const galleryData: Record<string, string[]> = {
     '/coffee/CoffeePIC/Rmember Amit 15.jpeg',
     '/coffee/CoffeePIC/Rmember Amit 29.jpeg',
     '/coffee/CoffeePIC/Rmember Amit 50.jpeg',
-    '/coffee/CoffeePIC/Rmember Amit 51.jpeg',
     '/coffee/CoffeePIC/Rmember Amit 60.jpeg',
     '/coffee/CoffeePIC/Rmember Amit 62.jpeg',
     '/coffee/CoffeePIC/WhatsApp Image 2026-04-13 at 19.38.33.jpeg',
@@ -122,7 +121,7 @@ export default function CoffeeSection() {
               {[
                 { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
                 { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
-                { category: 'event', img: '/coffee/CoffeeEvent/IMG_7735.JPEG', label: 'אירועי מאפיית פרידמן' },
+                { category: 'event', img: '/coffee/CoffeeEvent/7f351100-6fed-40e2-89ec-ec2314840e5a.jpg', label: 'אירועי מאפיית פרידמן' },
               ].map(({ category, img, label }) => (
                 <a
                   key={category}

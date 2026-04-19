@@ -8,7 +8,7 @@ import {
   Menu, X, Home, Info, Shield, Coffee,
   Calendar, Heart, Newspaper, Mail, Quote
 } from 'lucide-react';
-import { FaInstagram, FaFacebook } from 'react-icons/fa';
+import { FaInstagram, FaTiktok } from 'react-icons/fa';
 
 interface NavigationProps {
   pageTitle?: string;
@@ -96,9 +96,14 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
           >
             <FaInstagram size={30} />
           </a>
-          <div className="social-icon facebook">
-            <FaFacebook size={30} />
-          </div>
+          <a
+            href="https://www.tiktok.com/search?q=%D7%9C%D7%96%D7%9B%D7%A8%20%D7%A1%D7%9E%22%D7%A8%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A4%D7%A8%D7%99%D7%93%D7%9E%D7%9F%20-%20%D7%94%D7%A8%D7%A9%D7%9E%D7%99&t=1776615784329"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-icon tiktok"
+          >
+            <FaTiktok size={30} />
+          </a>
         </div>
       </div>
     </>

@@ -50,6 +50,44 @@
     transform: scale(1.02);
 }
 
+.left-img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sentence-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.sentence-social-icon {
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+.sentence-social-icon:hover {
+    transform: scale(1.15);
+}
+
+.sentence-social-icon img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.tiktok-logo-img {
+    height: 45px;
+    width: auto;
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
     .sentences-section {

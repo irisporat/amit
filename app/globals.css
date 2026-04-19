@@ -633,9 +633,12 @@ header.top-bar {
     color: var(--primary-blue);
 }
 
-.social-icon.facebook {
-    cursor: default;
-    opacity: 0.5;
+.social-icon.instagram:hover {
+    color: #E1306C;
+}
+
+.social-icon.tiktok:hover {
+    color: #000000;
 }
 
 .social-icon i {
