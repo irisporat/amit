@@ -2,11 +2,13 @@
    COFFEE MAIN HUB — coffee.css
    ============================================================ */
 
-body.coffee-main-page {
+.coffee-section-wrapper {
     background: linear-gradient(135deg, #f5faff 0%, #e0f2fe 100%);
     min-height: 100vh;
-    font-family: 'Rubik', sans-serif;
+    font-family: var(--font-main), 'Rubik', sans-serif;
     color: #333;
+    position: relative;
+    overflow: hidden;
 }
 
 .coffee-main-container {

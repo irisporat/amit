@@ -19,6 +19,7 @@ const sectionLinks = [
   { id: 'home', icon: <Home />, label: 'דף הבית' },
   { id: 'about', icon: <Info />, label: 'סיפורו של עמית' },
   { id: 'bravery', icon: <Shield />, label: 'סיפור גבורתו' },
+  { id: 'coffee', icon: <Coffee />, label: 'עגלת "קפה החברים של עמית"' },
   { id: 'events', icon: <Calendar />, label: 'אירועי הנצחה' },
   { id: 'remember', icon: <Heart />, label: 'זוכרים אותך' },
   { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
@@ -84,9 +85,6 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
               {icon} {label}
             </a>
           ))}
-          <Link href="/coffee" onClick={toggleMenu}>
-            <Coffee /> עגלת &quot;קפה החברים של עמית&quot;
-          </Link>
         </nav>
         <div className="menu-social">
           <a

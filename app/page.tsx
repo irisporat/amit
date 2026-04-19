@@ -3,6 +3,7 @@ import ScrollToSection from '@/components/ScrollToSection';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import BraverySection from '@/components/sections/BraverySection';
+import CoffeeSection from '@/components/sections/CoffeeSection';
 import EventsSection from '@/components/sections/EventsSection';
 import RememberSection from '@/components/sections/RememberSection';
 import NewsSection from '@/components/sections/NewsSection';
@@ -49,6 +50,7 @@ export default function HomePage() {
         <HeroSection />
         <AboutSection />
         <BraverySection />
+        <CoffeeSection />
         <EventsSection />
         <RememberSection />
         <NewsSection />
