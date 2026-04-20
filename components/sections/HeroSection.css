@@ -71,6 +71,10 @@
     order: 5; /* Positioned between motto (4) and image (6) on mobile */
   }
   
+  .hero-social-links.hide-on-mobile {
+    display: none;
+  }
+  
   .hero-social-icon img,
   .hero-tiktok-logo {
     height: 38px;

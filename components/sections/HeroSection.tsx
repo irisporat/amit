@@ -54,7 +54,7 @@ export default function HeroSection() {
             מלח הארץ שהיה גם מלך החיים הטובים
           </div>
 
-          <div className="hero-social-links">
+          <div className="hero-social-links hide-on-mobile">
             <a
               href="https://www.instagram.com/remember_amitfriedman/"
               target="_blank"

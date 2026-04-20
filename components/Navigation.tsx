@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Menu, X, Home, Info, Shield, Coffee,
-  Calendar, Heart, Newspaper, Mail, Quote
+  Calendar, Heart, Newspaper, Mail, Quote, BookOpen
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -19,6 +19,7 @@ const sectionLinks = [
   { id: 'about', icon: <Info />, label: 'סיפורו של עמית' },
   { id: 'bravery', icon: <Shield />, label: 'סיפור גבורתו' },
   { id: 'coffee', icon: <Coffee />, label: 'עגלת "קפה החברים של עמית"' },
+  { id: 'recipe', icon: <BookOpen />, label: 'מאפיית פרידמן - ספר מתכונים', path: '/coffee/recipe' },
   { id: 'events', icon: <Calendar />, label: 'אירועי הנצחה' },
   { id: 'remember', icon: <Heart />, label: 'זוכרים אותך עמית' },
   // { id: 'news', icon: <Newspaper />, label: 'כתבות בעיתונות' },
@@ -32,10 +33,12 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
 
-  const handleSectionNav = (e: React.MouseEvent, sectionId: string) => {
+  const handleSectionNav = (e: React.MouseEvent, sectionId: string, path?: string) => {
     e.preventDefault();
     setMenuOpen(false);
-    if (pathname === '/') {
+    if (path) {
+      window.location.href = path;
+    } else if (pathname === '/') {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.location.href = `/#${sectionId}`;
@@ -76,11 +79,11 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
           <X />
         </button>
         <nav className="menu-nav">
-          {sectionLinks.map(({ id, icon, label }) => (
+          {sectionLinks.map(({ id, icon, label, path }) => (
             <a
               key={id}
-              href={`/#${id}`}
-              onClick={(e) => handleSectionNav(e, id)}
+              href={path || `/#${id}`}
+              onClick={(e) => handleSectionNav(e, id, path)}
             >
               {icon} {label}
             </a>
