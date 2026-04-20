@@ -32,3 +32,47 @@
   position: relative;
   z-index: 2;
 }
+
+.hero-social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: auto; /* Pushes icons to the bottom of the stretch container */
+  margin-bottom: 40px; /* Space from very bottom */
+  padding: 10px;
+  width: 100%;
+}
+
+.hero-social-icon {
+  display: block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-social-icon:hover {
+  transform: scale(1.15);
+}
+
+.hero-social-icon img,
+.hero-tiktok-logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .hero-social-links {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    order: 5; /* Positioned between motto (4) and image (6) on mobile */
+  }
+  
+  .hero-social-icon img,
+  .hero-tiktok-logo {
+    height: 38px;
+  }
+}

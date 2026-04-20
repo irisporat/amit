@@ -10,14 +10,14 @@ import './CoffeeSection.css';
 
 const galleryData: Record<string, string[]> = {
   fam: [
-    '/coffee/CoffeeFam/מפורסמים.jpeg',
+    '/coffee/CoffeeFam/%D7%9E%D7%A4%D7%95%D7%A8%D7%A1%D7%9E%D7%99%D7%9D.jpeg',
     '/coffee/CoffeeFam/DSC_1403.jpg',
-    '/coffee/CoffeeFam/ליאת פרידמן ושחר חיון, בפסל הלב לזכרו של עמית פרידמן.jpeg',
-    '/coffee/CoffeeFam/מה קשור בעגלה.jpeg',
-    '/coffee/CoffeeFam/עגלה עם ליאת שוחט.jpeg',
+    '/coffee/CoffeeFam/%D7%9C%D7%99%D7%90%D7%AA%20%D7%A4%D7%A8%D7%99%D7%93%D7%9E%D7%9F%20%D7%95%D7%A9%D7%97%D7%A8%20%D7%97%D7%99%D7%95%D7%9F%2C%20%D7%91%D7%A4%D7%A1%D7%9C%20%D7%94%D7%9C%D7%91%20%D7%9C%D7%96%D7%9B%D7%A8%D7%95%20%D7%A9%D7%9C%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A4%D7%A8%D7%99%D7%93%D7%9E%D7%9F.jpeg',
+    '/coffee/CoffeeFam/%D7%9E%D7%94%20%D7%A7%D7%A9%D7%95%D7%A8%20%D7%91%D7%A2%D7%92%D7%9C%D7%94.jpeg',
+    '/coffee/CoffeeFam/%D7%A2%D7%92%D7%9C%D7%94%20%D7%A2%D7%9D%20%D7%9C%D7%99%D7%90%D7%AA%20%D7%A9%D7%95%D7%97%D7%98.jpeg',
   ],
   pic: [
-    '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg',
+    '/coffee/CoffeePIC/%D7%9B%D7%95%D7%A1%20%D7%9E%D7%A2%D7%95%D7%A6%D7%91%D7%AA%20%D7%9E%D7%97%D7%99%D7%99%D7%9B%D7%AA.jpeg',
     '/coffee/CoffeePIC/CoffeePic1.jpeg',
     '/coffee/CoffeePIC/DSC_5887.jpg',
     '/coffee/CoffeePIC/IMG_9418.jpeg',
@@ -28,10 +28,10 @@ const galleryData: Record<string, string[]> = {
     '/coffee/CoffeePIC/Rmember Amit 62.jpeg',
     '/coffee/CoffeePIC/WhatsApp Image 2026-04-13 at 19.38.33.jpeg',
     '/coffee/CoffeePIC/wine.jpeg',
-    '/coffee/CoffeePIC/לב בכיכר.jpeg',
-    '/coffee/CoffeePIC/מפית משפטים.jpeg',
-    '/coffee/CoffeePIC/קפה החברים של עמית צילום יחצ (1).jpg',
-    '/coffee/CoffeePIC/קפה החברים של עמית צילום נטלי בוגנה.jpg',
+    '/coffee/CoffeePIC/%D7%9C%D7%91%20%D7%91%D7%9B%D7%99%D7%9B%D7%A8.jpeg',
+    '/coffee/CoffeePIC/%D7%9E%D7%A4%D7%99%D7%AA%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99%D7%9D.jpeg',
+    '/coffee/CoffeePIC/%D7%A7%D7%A4%D7%94%20%D7%94%D7%97%D7%91%D7%A8%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%99%D7%97%D7%A6%20(1).jpg',
+    '/coffee/CoffeePIC/%D7%A7%D7%A4%D7%94%20%D7%94%D7%97%D7%91%D7%A8%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%A0%D7%98%D7%9C%D7%99%20%D7%91%D7%95%D7%92%D7%A0%D7%94.jpg',
   ],
   event: [
     '/coffee/CoffeeEvent/IMG_7735.JPEG',
@@ -72,7 +72,7 @@ export default function CoffeeSection() {
           <div className="coffee-info-zone">
             <div className="coffee-title-with-logo">
               <Image
-                src="/main/לוגו עגלה לבן.png"
+                src="/main/%D7%9C%D7%95%D7%92%D7%95%20%D7%A2%D7%92%D7%9C%D7%94%20%D7%9C%D7%91%D7%9F.png"
                 alt="לוגו קפה החברים של עמית"
                 width={90}
                 height={90}
@@ -99,6 +99,20 @@ export default function CoffeeSection() {
               </p>
               <p>
                 <strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong>
+                <a
+                  href="https://www.instagram.com/amits_friends_cafe?igsh=MWQ5cXd2b3RmMndkcw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="coffee-insta-link"
+                >
+                  <Image
+                    src="/main/instegram.svg"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="coffee-insta-icon"
+                  />
+                </a>
               </p>
             </div>
           </div>
@@ -119,8 +133,8 @@ export default function CoffeeSection() {
 
             <div className="coffee-grid">
               {[
-                { category: 'fam', img: '/coffee/CoffeeFam/מפורסמים.jpeg', label: 'מפורסמים בעגלה' },
-                { category: 'pic', img: '/coffee/CoffeePIC/כוס מעוצבת מחייכת.jpeg', label: 'תמונות עגלה' },
+                { category: 'fam', img: '/coffee/CoffeeFam/%D7%9E%D7%A4%D7%95%D7%A8%D7%A1%D7%9E%D7%99%D7%9D.jpeg', label: 'מפורסמים בעגלה' },
+                { category: 'pic', img: '/coffee/CoffeePIC/%D7%9B%D7%95%D7%A1%20%D7%9E%D7%A2%D7%95%D7%A6%D7%91%D7%AA%20%D7%9E%D7%97%D7%99%D7%99%D7%9B%D7%AA.jpeg', label: 'תמונות עגלה' },
                 { category: 'event', img: '/coffee/CoffeeEvent/7f351100-6fed-40e2-89ec-ec2314840e5a.jpg', label: 'אירועי מאפיית פרידמן' },
               ].map(({ category, img, label }) => (
                 <a

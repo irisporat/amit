@@ -133,10 +133,10 @@ export default function CoffeeApp() {
 
   return (
     <div id="app-container">
-      <div id="home-view" className={`view${view === 'home' ? ' active' : ''}`}>
-        <div className="back-link-wrapper">
-          <Link href="/coffee" className="back-to-hub">
-            <ArrowRight /> חזרה לעגלת הקפה
+      <div id="home-view" className={`view${view === 'home' ? ' active' : ''}`} style={{ paddingTop: '80px' }}>
+        <div className="back-link-wrapper" style={{ justifyContent: 'flex-start', maxWidth: '1200px', margin: '0 auto 10px', display: 'flex' }}>
+          <Link href="/#coffee" className="back-to-hub" style={{ marginLeft: 0, marginRight: 'auto' }}>
+            חזור
           </Link>
         </div>
         <div className="recipe-grid" id="recipe-list-container">
@@ -152,6 +152,11 @@ export default function CoffeeApp() {
               </div>
             );
           })}
+        </div>
+        <div className="back-link-wrapper" style={{ marginTop: '40px', marginBottom: '60px' }}>
+          <Link href="/#coffee" className="back-to-hub">
+            חזור
+          </Link>
         </div>
       </div>
 
@@ -176,6 +181,30 @@ export default function CoffeeApp() {
                   <span className="box-title">אופן ההכנה</span>
                   <div dangerouslySetInnerHTML={{ __html: selectedRecipe.instructions.replace(/\n/g, '<br>') }} />
                 </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                <button 
+                  onClick={showHome}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 24px',
+                    backgroundColor: 'var(--primary-blue)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '30px',
+                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                    transition: 'transform 0.2s',
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  <ArrowRight /> חזרה למתכונים
+                </button>
               </div>
             </div>
           </div>

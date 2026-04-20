@@ -53,6 +53,36 @@ export default function HeroSection() {
           <div className="memorial-motto">
             מלח הארץ שהיה גם מלך החיים הטובים
           </div>
+
+          <div className="hero-social-links">
+            <a
+              href="https://www.instagram.com/remember_amitfriedman/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-social-icon"
+            >
+              <Image
+                src="/main/instegram.svg"
+                alt="Instagram"
+                width={45}
+                height={45}
+              />
+            </a>
+            <a
+              href="https://www.tiktok.com/search?q=%D7%9C%D7%96%D7%9B%D7%A8%20%D7%A1%D7%9E%22%D7%A8%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A4%D7%A8%D7%99%D7%93%D7%9E%D7%9F%20-%20%D7%94%D7%A8%D7%A9%D7%9E%D7%99&t=1776615784329"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-social-icon"
+            >
+              <Image
+                src="/main/tiktok.svg"
+                alt="TikTok"
+                width={45}
+                height={45}
+                className="hero-tiktok-logo"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </section>

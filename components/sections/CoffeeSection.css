@@ -101,6 +101,26 @@
     margin-bottom: 30px;
 }
 
+.coffee-insta-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-right: 12px;
+    transition: transform 0.2s ease;
+}
+
+.coffee-insta-link:hover {
+    transform: scale(1.15);
+}
+
+.coffee-insta-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
 .coffee-cta-area {
     margin-top: 30px;
     text-align: right;

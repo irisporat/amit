@@ -8,7 +8,6 @@ import {
   Menu, X, Home, Info, Shield, Coffee,
   Calendar, Heart, Newspaper, Mail, Quote
 } from 'lucide-react';
-import { FaInstagram, FaTiktok } from 'react-icons/fa';
 
 interface NavigationProps {
   pageTitle?: string;
@@ -57,7 +56,7 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
         <div className="top-bar-left">
           <a href="/#home" onClick={(e) => handleSectionNav(e, 'home')}>
             <Image
-              src="/main/לוגו עגלה לבן.png"
+              src="/main/%D7%9C%D7%95%D7%92%D7%95%20%D7%A2%D7%92%D7%9C%D7%94%20%D7%9C%D7%91%D7%9F.png"
               alt="לוגו עגלה"
               width={200}
               height={50}
@@ -94,7 +93,7 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
             rel="noopener noreferrer"
             className="social-icon instagram"
           >
-            <FaInstagram size={30} />
+            <Image src="/main/instegram.svg" alt="Instagram" width={30} height={30} />
           </a>
           <a
             href="https://www.tiktok.com/search?q=%D7%9C%D7%96%D7%9B%D7%A8%20%D7%A1%D7%9E%22%D7%A8%20%D7%A2%D7%9E%D7%99%D7%AA%20%D7%A4%D7%A8%D7%99%D7%93%D7%9E%D7%9F%20-%20%D7%94%D7%A8%D7%A9%D7%9E%D7%99&t=1776615784329"
@@ -102,7 +101,7 @@ export default function Navigation({ pageTitle = '', hideHamburger = false }: Na
             rel="noopener noreferrer"
             className="social-icon tiktok"
           >
-            <FaTiktok size={30} />
+            <Image src="/main/tiktok.svg" alt="TikTok" width={30} height={30} />
           </a>
         </div>
       </div>

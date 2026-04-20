@@ -13,7 +13,7 @@ export default function LocationPage() {
     <>
       <main className="main-content-scroll">
         <div className="back-link-wrapper" style={{ marginTop: '36px' }}>
-          <Link href="/coffee" className="back-to-hub">
+          <Link href="/#coffee" className="back-to-hub">
             <ArrowRight /> חזרה לעגלת הקפה
           </Link>
         </div>
