@@ -6,9 +6,9 @@ import BraverySection from '@/components/sections/BraverySection';
 import CoffeeSection from '@/components/sections/CoffeeSection';
 import EventsSection from '@/components/sections/EventsSection';
 import RememberSection from '@/components/sections/RememberSection';
-import NewsSection from '@/components/sections/NewsSection';
-import ContactSection from '@/components/sections/ContactSection';
 import SentencesSection from '@/components/sections/SentencesSection';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://amitfriedman.co.il/';
 
 export const metadata: Metadata = {
   title: 'לזכרו של סמ"ר עמית פרידמן ז"ל',
@@ -39,12 +39,29 @@ const jsonLd = {
   url: '/',
 };
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'בית',
+      item: siteUrl,
+    },
+  ],
+};
+
 export default function HomePage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <ScrollToSection />
       <main>
