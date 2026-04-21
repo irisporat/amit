@@ -135,7 +135,7 @@ export default function CoffeeApp() {
 
   return (
     <div id="app-container">
-      <div id="home-view" className={`view${view === 'home' ? ' active' : ''}`} style={{ paddingTop: '80px' }}>
+      <div id="home-view" className={`view${view === 'home' ? ' active' : ''}`} style={{ paddingTop: '110px' }}>
         <div className="back-link-wrapper" style={{ justifyContent: 'flex-start', maxWidth: '1200px', margin: '0 auto 10px', display: 'flex' }}>
           <Link href="/#coffee" className="back-to-hub" style={{ marginLeft: 0, marginRight: 'auto' }}>
             חזור
@@ -162,7 +162,7 @@ export default function CoffeeApp() {
         </div>
       </div>
 
-      <div id="recipe-view" className={`view${view === 'recipe' ? ' active' : ''}`}>
+      <div id="recipe-view" className={`view${view === 'recipe' ? ' active' : ''}`} style={{ paddingTop: '110px' }}>
         {selectedRecipe && (
           <div id="single-recipe-container" className="preview-area">
             <div className="page recipe-page">
@@ -214,7 +214,7 @@ export default function CoffeeApp() {
       </div>
 
       {/* Dead views — never activated in source, kept for identical HTML structure */}
-      <div id="amit-view" className="view">
+      <div id="amit-view" className="view" style={{ paddingTop: '110px' }}>
         <div className="page story-page">
           <button className="close-btn" onClick={showHome}><X /></button>
           <div className="story-content">
@@ -222,7 +222,7 @@ export default function CoffeeApp() {
           </div>
         </div>
       </div>
-      <div id="location-view" className="view">
+      <div id="location-view" className="view" style={{ paddingTop: '110px' }}>
         <div className="page location-page">
           <button className="close-btn" onClick={showHome}><X /></button>
           <div className="location-content">

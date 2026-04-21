@@ -1058,6 +1058,10 @@ header.top-bar {
         padding: 20px; /* Original/Standard mobile padding restored */
     }
 
+    .recipe-page {
+        padding-top: 40px !important; /* Extra padding top inside the page to clear header further if needed */
+    }
+
     .recipe-title {
         font-size: 1.4rem;
     }
