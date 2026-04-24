@@ -19,10 +19,11 @@ const assistant = Assistant({ subsets: ['hebrew', 'latin'], weight: ['300', '400
 const varelaRound = Varela_Round({ subsets: ['latin', 'hebrew'], weight: ['400'], variable: '--font-varela' });
 const amaticSC = Amatic_SC({ subsets: ['latin', 'hebrew'], weight: ['400', '700'], variable: '--font-amatic' });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hachaverimshel-amit.co.il';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://amitfriedman.co.il';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: '/manifest.json',
   title: {
     default: 'החברים של עמית | לזכרו של סמ"ר עמית פרידמן ז"ל',
     template: '%s | החברים של עמית',
