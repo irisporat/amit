@@ -101,24 +101,39 @@
     margin-bottom: 30px;
 }
 
-.coffee-insta-link {
+.coffee-social-icons {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 15px;
+    margin-right: 20px;
     vertical-align: middle;
-    margin-right: 12px;
-    transition: transform 0.2s ease;
-}
-
-.coffee-insta-link:hover {
-    transform: scale(1.15);
 }
 
 .coffee-insta-icon {
-    width: 24px;
-    height: 24px;
+    width: 36px !important;
+    height: 36px !important;
     display: block;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    filter: brightness(0) drop-shadow(0 2px 4px rgba(0,0,0,0.1)) !important;
+    transition: transform 0.2s ease;
+}
+
+.coffee-waze-icon {
+    width: 36px !important;
+    height: 36px !important;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.coffee-insta-link, .coffee-waze-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.coffee-insta-link:hover, .coffee-waze-link:hover {
+    transform: scale(1.15);
 }
 
 .coffee-cta-area {

@@ -99,20 +99,37 @@ export default function CoffeeSection() {
               </p>
               <p>
                 <strong>העגלה פועלת בכל יום שישי בין השעות 10:00–13:00, ברחוב דקל 11 פינת חיים בר־לב, נווה סביון, אור יהודה (חפשו ב-Waze: קפה החברים של עמית – עגלת קפה)</strong>
-                <a
-                  href="https://www.instagram.com/amits_friends_cafe?igsh=MWQ5cXd2b3RmMndkcw=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="coffee-insta-link"
-                >
-                  <Image
-                    src="/main/instegram.svg"
-                    alt="Instagram"
-                    width={24}
-                    height={24}
-                    className="coffee-insta-icon"
-                  />
-                </a>
+                <div className="coffee-social-icons">
+                  <a
+                    href="https://www.instagram.com/amits_friends_cafe?igsh=MWQ5cXd2b3RmMndkcw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="coffee-insta-link"
+                  >
+                    <Image
+                      src="/main/instegram.svg"
+                      alt="Instagram"
+                      width={36}
+                      height={36}
+                      className="coffee-insta-icon"
+                      style={{ filter: 'brightness(0)' }}
+                    />
+                  </a>
+                  <a
+                    href="https://waze.com/ul?q=רחוב%20דקל%2011%20פינת%20חיים%20בר־לב,%20נווה%20סביון,%20אור%20יהודה"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="coffee-waze-link"
+                  >
+                    <Image
+                      src="/coffee/waze.png"
+                      alt="Waze"
+                      width={36}
+                      height={36}
+                      className="coffee-waze-icon"
+                    />
+                  </a>
+                </div>
               </p>
             </div>
           </div>

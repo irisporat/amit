@@ -60,7 +60,7 @@
   width: auto;
   object-fit: contain;
   border-radius: 8px;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  filter: brightness(2) drop-shadow(0 4px 10px rgba(0,0,0,0.4));
 }
 
 /* Mobile adjustments */
