@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import GalleryModal from '@/components/GalleryModal';
+import VideoModal from '@/components/VideoModal';
 import './EventsSection.css';
 
 const galleryData: Record<string, string[]> = {
@@ -93,6 +94,7 @@ const eventCards = [
 
 export default function EventsSection() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const openGallery = (category: string) => { setActiveCategory(category); setCurrentIndex(0); };
@@ -107,6 +109,32 @@ export default function EventsSection() {
         <h2>אירועי הנצחה</h2>
       </div>
       <div className="events-section-wrapper">
+        <div className="event-featured-card-wrapper">
+          <a
+            href="#"
+            className="event-gallery-card featured-event-card"
+            onClick={(e) => { e.preventDefault(); setIsVideoModalOpen(true); }}
+          >
+            <div className="event-gallery-img-wrap">
+              <Image 
+                src="/events/memorial day 2026.jpeg" 
+                alt="שרים וזוכרים - יום הזיכרון תשפ&quot;ו" 
+                fill 
+                sizes="(max-width: 900px) 100vw, 400px" 
+                className="event-gallery-img" 
+              />
+              <div className="play-overlay">
+                <div className="play-icon-circle">
+                  <div className="play-triangle"></div>
+                </div>
+              </div>
+            </div>
+            <div className="event-gallery-label featured-label">
+              <span>שרים וזוכרים<br />יום הזיכרון תשפ&quot;ו</span>
+            </div>
+          </a>
+        </div>
+
         <div className="events-cards-grid">
           {eventCards.map(({ category, img, label }) => (
             <a
@@ -130,6 +158,11 @@ export default function EventsSection() {
         onClose={closeGallery}
         onNext={handleNext}
         onPrev={handlePrev}
+      />
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        videoUrl="https://www.youtube.com/watch?v=LeBBFsKYUTw"
+        onClose={() => setIsVideoModalOpen(false)}
       />
     </section>
   );
