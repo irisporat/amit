@@ -48,6 +48,12 @@ const galleryData: Record<string, string[]> = {
     '/events/lecture/h1.jpeg',
   ],
   sport: [
+    '/events/sport/macabia.jpeg',
+    '/events/sport/macabia%20-2.jpeg',
+    '/events/sport/Basketball%2011.6.26-1.jpeg',
+    '/events/sport/Football%2011.6.26%20-1.jpeg',
+    '/events/sport/Football%2011.6.26%20-2.jpeg',
+    '/events/sport/Football%2011.6.26%20-3.jpeg',
     '/events/sport/Rmember%20Amit%2017.jpeg',
     '/events/sport/Rmember%20Amit%2033.jpeg',
     '/events/sport/Rmember%20Amit%2034.jpeg',

@@ -14,6 +14,58 @@ interface GalleryModalProps {
   zoomable?: boolean;
 }
 
+function getImageTitle(src: string): string {
+  if (!src) return '';
+  try {
+    const decoded = decodeURIComponent(src);
+    const filenameWithExt = decoded.substring(decoded.lastIndexOf('/') + 1);
+    const extIndex = filenameWithExt.lastIndexOf('.');
+    const filename = extIndex !== -1 ? filenameWithExt.substring(0, extIndex) : filenameWithExt;
+
+    // Check only the 5 new sport images:
+    if (filename === 'Basketball 11.6.26-1') {
+      return 'משחק כדורסל 11.6.26';
+    }
+    if (
+      filename === 'Football 11.6.26 -1' ||
+      filename === 'Football 11.6.26 -2' ||
+      filename === 'Football 11.6.26 -3'
+    ) {
+      return 'משחק כדורגל 11.6.26';
+    }
+    if (filename === 'macabia' || filename === 'macabia -2') {
+      return 'מכביה 2026';
+    }
+    
+    return '';
+  } catch (e) {
+    return '';
+  }
+}
+
+const captionStyle: React.CSSProperties = {
+  position: 'absolute',
+  bottom: '24px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  background: 'rgba(0, 0, 0, 0.75)',
+  backdropFilter: 'blur(8px)',
+  WebkitBackdropFilter: 'blur(8px)',
+  color: '#ffffff',
+  padding: '8px 24px',
+  textAlign: 'center',
+  fontSize: '1.1rem',
+  fontWeight: '500',
+  borderRadius: '20px',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+  boxSizing: 'border-box',
+  fontFamily: 'var(--font-main), Rubik, sans-serif',
+  textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+  pointerEvents: 'none',
+  zIndex: 10,
+  maxWidth: '90%',
+};
+
 export default function GalleryModal({
   isOpen,
   images,
@@ -80,6 +132,7 @@ export default function GalleryModal({
   };
 
   const showNav = images.length > 1;
+  const caption = getImageTitle(images[currentIndex]);
 
   if (!isOpen) return null;
 
@@ -99,7 +152,7 @@ export default function GalleryModal({
             <ChevronRight />
           </button>
         )}
-        <div className="image-container">
+        <div className="image-container" style={{ position: 'relative' }}>
           <Image
             ref={imgRef}
             id="gallery-img"
@@ -112,6 +165,11 @@ export default function GalleryModal({
             onClick={handleImgClick}
             onLoad={syncZoomable}
           />
+          {caption && (
+            <div className="gallery-image-caption" style={captionStyle}>
+              {caption}
+            </div>
+          )}
         </div>
         {showNav && (
           <button className="nav-btn next-btn" onClick={(e) => { e.stopPropagation(); onNext(); }}>
