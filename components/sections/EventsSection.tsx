@@ -3,10 +3,12 @@
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import GalleryModal from '@/components/GalleryModal';
-import VideoModal from '@/components/VideoModal';
 import './EventsSection.css';
 
 const galleryData: Record<string, string[]> = {
+  invitation: [
+    '/events/Memorial%20evening/Memorial%20evening%202/invitation.jpeg',
+  ],
   scouts: [
     '/events/scouts/zofim%201.jpeg',
     '/events/scouts/zofim%202.jpeg',
@@ -100,7 +102,6 @@ const eventCards = [
 
 export default function EventsSection() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const openGallery = (category: string) => { setActiveCategory(category); setCurrentIndex(0); };
@@ -119,24 +120,23 @@ export default function EventsSection() {
           <a
             href="#"
             className="event-gallery-card featured-event-card"
-            onClick={(e) => { e.preventDefault(); setIsVideoModalOpen(true); }}
+            onClick={(e) => { e.preventDefault(); openGallery('invitation'); }}
           >
             <div className="event-gallery-img-wrap">
               <Image 
-                src="/events/memorial day 2026.jpeg" 
-                alt="שרים וזוכרים - יום הזיכרון תשפ&quot;ו" 
+                src="/events/Memorial%20evening/Memorial%20evening%202/invitation.jpeg" 
+                alt="אזכרה לציון שנתיים לנפילתו של עמית פרידמן ז&quot;ל יום חמישי 27.8.26" 
                 fill 
                 sizes="(max-width: 900px) 100vw, 400px" 
                 className="event-gallery-img" 
               />
-              <div className="play-overlay">
-                <div className="play-icon-circle">
-                  <div className="play-triangle"></div>
-                </div>
-              </div>
             </div>
             <div className="event-gallery-label featured-label">
-              <span>שרים וזוכרים<br />יום הזיכרון תשפ&quot;ו</span>
+              <span>
+                אזכרה לציון שנתיים לנפילתו<br />
+                של עמית פרידמן ז&quot;ל<br />
+                יום חמישי 27.8.26
+              </span>
             </div>
           </a>
         </div>
@@ -164,11 +164,6 @@ export default function EventsSection() {
         onClose={closeGallery}
         onNext={handleNext}
         onPrev={handlePrev}
-      />
-      <VideoModal
-        isOpen={isVideoModalOpen}
-        videoUrl="https://www.youtube.com/watch?v=LeBBFsKYUTw"
-        onClose={() => setIsVideoModalOpen(false)}
       />
     </section>
   );
